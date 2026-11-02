@@ -1,0 +1,40 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Scripts\python.exe
+rootdir: C:\Users\Mehrnoosh\Documents\supply-chain-agent
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.3
+collecting ... collected 31 items
+
+tests/evaluation/test_escalation.py::test_categories_match_the_plan PASSED [  3%]
+tests/evaluation/test_escalation.py::test_saved_choices_are_valid_categories PASSED [  6%]
+tests/evaluation/test_escalation.py::test_every_test_case_was_scored PASSED [  9%]
+tests/evaluation/test_escalation.py::test_probabilities_cover_all_categories_and_sum_to_one PASSED [ 12%]
+tests/evaluation/test_escalation.py::test_choice_is_the_most_likely_category PASSED [ 16%]
+tests/evaluation/test_escalation.py::test_reference_rules PASSED         [ 19%]
+tests/evaluation/test_escalation.py::test_future_margin_excludes_the_review_day PASSED [ 22%]
+tests/evaluation/test_escalation.py::test_request_state_has_no_hidden_or_identifying_data PASSED [ 25%]
+tests/evaluation/test_escalation.py::test_request_guard_rejects_forbidden_terms PASSED [ 29%]
+tests/evaluation/test_escalation.py::test_stock_comparison_is_computed_in_code PASSED [ 32%]
+tests/evaluation/test_escalation.py::test_value_band_hides_raw_price PASSED [ 35%]
+tests/evaluation/test_escalation.py::test_visible_columns_exclude_outcomes PASSED [ 38%]
+tests/evaluation/test_escalation.py::test_failed_jev_call_is_an_error_not_a_category PASSED [ 41%]
+tests/evaluation/test_escalation.py::test_sending_to_jev_is_turned_off PASSED [ 45%]
+tests/evaluation/test_escalation.py::test_classify_keeps_case_order PASSED [ 48%]
+tests/evaluation/test_escalation.py::test_policy_returns_valid_categories_for_any_case PASSED [ 51%]
+tests/evaluation/test_escalation.py::test_policy_empty_with_no_order_recommends_reorder PASSED [ 54%]
+tests/evaluation/test_escalation.py::test_policy_order_on_the_way_recommends_expedite PASSED [ 58%]
+tests/evaluation/test_escalation.py::test_policy_low_risk_monitors PASSED [ 61%]
+tests/evaluation/test_escalation.py::test_policy_critical_high_value_goes_to_a_person PASSED [ 64%]
+tests/evaluation/test_escalation.py::test_policy_conflicting_models_go_to_a_person PASSED [ 67%]
+tests/evaluation/test_escalation.py::test_override_high_risk_cannot_stay_on_monitor PASSED [ 70%]
+tests/evaluation/test_escalation.py::test_override_reorder_with_order_on_the_way_becomes_expedite PASSED [ 74%]
+tests/evaluation/test_escalation.py::test_override_expedite_with_no_order_becomes_reorder PASSED [ 77%]
+tests/evaluation/test_escalation.py::test_override_leaves_consistent_choices_alone PASSED [ 80%]
+tests/evaluation/test_escalation.py::test_every_action_needs_approval PASSED [ 83%]
+tests/evaluation/test_escalation.py::test_saved_actions_are_flagged_for_approval PASSED [ 87%]
+tests/evaluation/test_escalation.py::test_saved_metrics_recompute PASSED [ 90%]
+tests/evaluation/test_escalation.py::test_spend_stayed_within_limit PASSED [ 93%]
+tests/evaluation/test_escalation.py::test_policy_thresholds_came_from_validation PASSED [ 96%]
+tests/evaluation/test_escalation.py::test_edge_cases_were_recorded PASSED [100%]
+
+============================= 31 passed in 2.72s ==============================

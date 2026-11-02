@@ -1,0 +1,12 @@
+{
+  "macro_f1_jev_minus_policy": [
+    -0.0851,
+    -0.0628,
+    -0.0384
+  ],
+  "critical_recall_jev_minus_policy": [
+    -0.2177,
+    -0.1478,
+    -0.0563
+  ]
+}

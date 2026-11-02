@@ -1,0 +1,4 @@
+model,macro_f1,accuracy,critical_recall,critical_acted_on,any_stockout_acted_on,false_alarm_share,recall_monitor,recall_reorder_recommendation,recall_expedite_recommendation,recall_human_review
+jev,0.42399,0.8775,0.35,0.9,0.65896,0.0832,0.9168,0.08,0.55469,0.35
+jev_with_overrides,0.42399,0.8775,0.35,0.9,0.65896,0.0832,0.9168,0.08,0.55469,0.35
+policy_baseline,0.46773,0.88,0.4,0.85,0.67052,0.08484,0.91516,0.16,0.59375,0.4

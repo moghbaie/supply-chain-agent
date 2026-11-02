@@ -1,0 +1,23 @@
+settings {'severe_margin': 24.0, 'value_edges': (2.008316169205059, 4.490476913949669)} | cases 102000
+split                     test  validation  val_pct  test_pct
+reference                                                    
+expedite_recommendation   2196        5462     7.28      8.13
+human_review               276         665     0.89      1.02
+monitor                  24267       68251    91.00     89.88
+reorder_recommendation     261         622     0.83      0.97
+reference            expedite_recommendation  human_review  monitor  reorder_recommendation
+scenario                                                                                   
+baseline                                1682           210    31910                     198
+lean_policy                             4020           444    29050                     486
+supplier_disruption                     1956           287    31558                     199
+missing visible % {'days_to_next_due': 41.34}
+                         stockout_risk  cover_days  days_to_next_due  open_pos  ordered_today  future_lost_margin
+reference                                                                                                        
+expedite_recommendation           0.44        6.55              7.32      1.57          25.47                5.68
+human_review                      0.66        5.12              8.44      1.56          79.45               55.14
+monitor                           0.04       94.53              7.69      0.69          10.96                0.00
+reorder_recommendation            0.09       28.08               NaN      0.00           0.00                4.59
+label agrees with monitor: True
+future margin missing on labeled rows: 0
+value band {'low': 39598, 'high': 31263, 'medium': 31139}
+models disagree by 0.3+: % 0.82

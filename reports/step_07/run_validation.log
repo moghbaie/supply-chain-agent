@@ -1,0 +1,80 @@
+policy thresholds fitted on all validation rows: act 0.10, critical 0.90, macro-F1 0.4958
+example request state:
+ {"item": {"stock": {"units_on_hand": 8, "days_of_stock_at_forecast_demand": 29.7, "units_on_order": 0, "open_orders": 0, "order_placed_at_this_review": false}, "forecast_next_14_days": {"expected_units": 3.8, "high_estimate_units": 15.0}, "inbound": {"days_until_next_promised_delivery": null, "units_promised_within_14_days": 0.0, "units_overdue": 0.0, "most_days_overdue": 0.0, "stock_lasts_until_next_delivery": null}, "supplier_late_delivery_percent": {"long_run": 5.0, "last_30_days": 6.0}, "stockout_chance_percent_next_14_days": {"primary_model": 1.0, "second_model": 2.0}, "sales_value_band": "low"}}
+question: Which outcome fits this item's weekly inventory review, using `item`? | criteria: {"monitor": "Stock looks sufficient for the next 14 days, so no action is needed.", "reorder_recommendation": "A stockout looks likely in the next 14 days and no order is on the way.", "expedite_recommendation": "A stockout looks likely in the next 14 days and an order is on the way but may arrive too late.", "human_review": "A stockout looks likely in the next 14 days and would be costly, or the signals conflict, so a person should decide."}
+
+validation: rows 2,000, reference {'monitor': 1827, 'expedite_recommendation': 128, 'reorder_recommendation': 25, 'human_review': 20}
+  500 done, 8s
+  1000 done, 14s
+  1500 done, 20s
+  2000 done, 27s
+tokens this run 1,372,223, total 1,372,223, about $0.0576 of $5.0
+Jev: 2,000 requests in 27s, mean input tokens 686
+
+jev: predicted counts {'monitor': 1734, 'reorder_recommendation': 6, 'expedite_recommendation': 143, 'human_review': 117}
+confusion (rows reference, columns predicted):
+                          monitor  reorder_  expedite  human_re
+monitor                     1675         4        61        87
+reorder_recommendation        20         2         0         3
+expedite_recommendation       37         0        71        20
+human_review                   2         0        11         7
+
+jev_with_overrides: predicted counts {'monitor': 1734, 'reorder_recommendation': 6, 'expedite_recommendation': 143, 'human_review': 117}
+confusion (rows reference, columns predicted):
+                          monitor  reorder_  expedite  human_re
+monitor                     1675         4        61        87
+reorder_recommendation        20         2         0         3
+expedite_recommendation       37         0        71        20
+human_review                   2         0        11         7
+
+policy_baseline: predicted counts {'monitor': 1729, 'reorder_recommendation': 13, 'expedite_recommendation': 222, 'human_review': 36}
+confusion (rows reference, columns predicted):
+                          monitor  reorder_  expedite  human_re
+monitor                     1672         8       138         9
+reorder_recommendation        21         4         0         0
+expedite_recommendation       33         0        76        19
+human_review                   3         1         8         8
+
+VALIDATION METRICS
+ model                              jev  jev_with_overrides  policy_baseline
+macro_f1                        0.4240              0.4240           0.4677
+accuracy                        0.8775              0.8775           0.8800
+critical_recall                 0.3500              0.3500           0.4000
+critical_acted_on               0.9000              0.9000           0.8500
+any_stockout_acted_on           0.6590              0.6590           0.6705
+false_alarm_share               0.0832              0.0832           0.0848
+recall_monitor                  0.9168              0.9168           0.9152
+recall_reorder_recommendation   0.0800              0.0800           0.1600
+recall_expedite_recommendation  0.5547              0.5547           0.5938
+recall_human_review             0.3500              0.3500           0.4000
+
+override reasons: {'': 2000}
+tokens this run 343,046, total 1,715,269, about $0.0720 of $5.0
+
+OPTION ORDER CHECK (500 cases): same choice 96.80% | macro-F1 original 0.3945, reversed 0.4628
+counts original {'monitor': 437, 'expedite_recommendation': 34, 'human_review': 28, 'reorder_recommendation': 1} | reversed {'monitor': 440, 'expedite_recommendation': 35, 'human_review': 22, 'reorder_recommendation': 3}
+tokens this run 68,590, total 1,783,859, about $0.0749 of $5.0
+repeat stability, 100 cases, same choice %: 99.0
+
+20 CLASSIFIED CASES (validation, 12 stockouts and 8 others)
+    origin  on_hand  on_order  cover_days  days_to_next_due  open_pos  units_overdue  fc_mean_14  stockout_risk value_band               reference                     jev            jev_override                  policy
+2015-07-06       11       108        3.46              19.0       2.0           48.0       44.53           0.81     medium expedite_recommendation expedite_recommendation expedite_recommendation            human_review
+2015-06-08        6        44        2.93               NaN       1.0           44.0       28.62           0.13     medium expedite_recommendation expedite_recommendation expedite_recommendation expedite_recommendation
+2015-05-18        0        76        0.00               3.0       2.0            0.0       31.59           0.76       high expedite_recommendation            human_review            human_review expedite_recommendation
+2015-06-29        0       168        0.00               2.0       2.0            0.0      211.34           0.96       high expedite_recommendation expedite_recommendation expedite_recommendation            human_review
+2015-10-19        7        24        8.12               6.0       2.0           12.0       12.07           0.03        low expedite_recommendation                 monitor                 monitor                 monitor
+2015-03-02        3        60        1.70               3.0       2.0            0.0       24.72           0.41       high expedite_recommendation expedite_recommendation expedite_recommendation expedite_recommendation
+2015-05-11        6        48        3.31              12.0       2.0           20.0       25.38           0.35       high expedite_recommendation expedite_recommendation expedite_recommendation            human_review
+2015-10-05       15        16       13.68              12.0       1.0            0.0       15.35           0.10       high expedite_recommendation                 monitor                 monitor expedite_recommendation
+2015-09-07        0         6        0.00               1.0       1.0            0.0       13.65           0.55        low expedite_recommendation expedite_recommendation expedite_recommendation expedite_recommendation
+2015-01-19      139         0       13.78               NaN       0.0            0.0      141.18           0.42       high  reorder_recommendation            human_review            human_review  reorder_recommendation
+2015-06-22       14        14       15.31              13.0       1.0            0.0       12.80           0.10     medium expedite_recommendation                 monitor                 monitor                 monitor
+2015-01-19        8        20        7.99              11.0       2.0            0.0       14.02           0.44     medium expedite_recommendation expedite_recommendation expedite_recommendation expedite_recommendation
+2015-04-20        0       540        0.00              11.0       2.0            0.0      233.20           0.99       high                 monitor expedite_recommendation expedite_recommendation            human_review
+2015-06-01        0         6        0.00              12.0       2.0            0.0        1.22           0.97        low                 monitor expedite_recommendation expedite_recommendation            human_review
+2015-05-18        0        66        0.00               4.0       2.0            0.0       27.30           0.91       high                 monitor            human_review            human_review            human_review
+2015-03-23        0       138        0.00               1.0       2.0            0.0       48.21           0.87     medium                 monitor expedite_recommendation expedite_recommendation expedite_recommendation
+2015-11-30        0        36        0.00              12.0       2.0           22.0       13.65           0.86        low                 monitor expedite_recommendation expedite_recommendation expedite_recommendation
+2015-03-23        0        84        0.00              13.0       2.0           42.0       37.37           0.85       high                 monitor expedite_recommendation expedite_recommendation expedite_recommendation
+2015-04-27        0        40        0.00               4.0       2.0            0.0       11.31           0.81       high                 monitor            human_review            human_review expedite_recommendation
+2015-04-27        0       156        0.00               1.0       2.0            0.0       96.68           0.77       high                 monitor            human_review            human_review expedite_recommendation

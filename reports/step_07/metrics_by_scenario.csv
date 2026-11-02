@@ -1,0 +1,7 @@
+scenario,model,macro_f1,critical_recall,human_review_cases,true_critical
+baseline,jev,0.42627,0.1791,444,67
+baseline,policy,0.47363,0.34328,99,67
+supplier_disruption,jev,0.43574,0.30851,483,94
+supplier_disruption,policy,0.48513,0.35106,143,94
+lean_policy,jev,0.41854,0.2087,849,115
+lean_policy,policy,0.49852,0.43478,164,115

@@ -1,0 +1,19 @@
+{
+  "severe_margin": 24.0,
+  "value_edges": [
+    2.008316169205059,
+    4.490476913949669
+  ],
+  "policy_thresholds": {
+    "act": 0.1,
+    "critical": 0.9
+  },
+  "model": "jev-1.14.0",
+  "instructions": "Which outcome fits this item's weekly inventory review, using `item`?",
+  "criteria": {
+    "monitor": "Stock looks sufficient for the next 14 days, so no action is needed.",
+    "reorder_recommendation": "A stockout looks likely in the next 14 days and no order is on the way.",
+    "expedite_recommendation": "A stockout looks likely in the next 14 days and an order is on the way but may arrive too late.",
+    "human_review": "A stockout looks likely in the next 14 days and would be costly, or the signals conflict, so a person should decide."
+  }
+}

@@ -1,0 +1,32 @@
+Jev minus policy on test, series bootstrap [2.5%, median, 97.5%]: {"macro_f1_jev_minus_policy": [-0.0851, -0.0628, -0.0384], "critical_recall_jev_minus_policy": [-0.2177, -0.1478, -0.0563]}
+
+BY SCENARIO
+            scenario  model  macro_f1  critical_recall  human_review_cases  true_critical
+           baseline    jev    0.4263           0.1791                 444             67
+           baseline policy    0.4736           0.3433                  99             67
+supplier_disruption    jev    0.4357           0.3085                 483             94
+supplier_disruption policy    0.4851           0.3511                 143             94
+        lean_policy    jev    0.4185           0.2087                 849            115
+        lean_policy policy    0.4985           0.4348                 164            115
+
+REVIEW WORKLOAD on test
+jev     sent to a person or recommendation 4,410 (16.33%) | human review 1,776 | precision of any action 45.56%
+policy  sent to a person or recommendation 4,687 (17.36%) | human review 406 | precision of any action 43.91%
+
+CONFLICTING SIGNALS: models differ by 0.3+ on 297 test cases, reference {'expedite_recommendation': 130, 'monitor': 120, 'human_review': 34, 'reorder_recommendation': 13}
+{'jev': {'human_review': 163, 'expedite_recommendation': 128, 'reorder_recommendation': 5, 'monitor': 1}, 'policy': {'human_review': 245, 'monitor': 52}}
+late-supplier and low-risk conflict, recent late rate 50%+ with stockout risk under 10%: {'jev': {'monitor': 707, 'human_review': 49, 'expedite_recommendation': 21}, 'policy': {'monitor': 777}}
+
+HAND-BUILT EDGE CASES (synthetic)
+                                                 jev  jev_top_probability             jev_override override_reason                   policy
+healthy_stock                               monitor                 0.99                  monitor                                  monitor
+empty_no_order_high_risk     reorder_recommendation                 1.00   reorder_recommendation                   reorder_recommendation
+empty_order_late_high_risk  expedite_recommendation                 0.88  expedite_recommendation                  expedite_recommendation
+high_value_high_risk        expedite_recommendation                 0.49  expedite_recommendation                             human_review
+models_conflict              reorder_recommendation                 0.59   reorder_recommendation                             human_review
+risk_low_but_cover_low       reorder_recommendation                 0.81   reorder_recommendation                                  monitor
+risk_high_but_cover_high               human_review                 0.54             human_review                   reorder_recommendation
+order_overdue               expedite_recommendation                 0.86  expedite_recommendation                  expedite_recommendation
+disrupted_supplier          expedite_recommendation                 0.74  expedite_recommendation                  expedite_recommendation
+zero_demand_no_stock                        monitor                 0.46                  monitor                                  monitor
+total Jev spend about $0.9111 of $5.00, 21,692,527 tokens
