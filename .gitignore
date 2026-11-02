@@ -1,0 +1,17 @@
+.env.secrets
+.venv/
+__pycache__/
+data/raw/
+data/processed/
+data/simulated/
+*.safetensors
+*.gguf
+checkpoints/
+*.pt
+*.pth
+.pytest_cache/
+# Raw dataset rows: Kaggle terms may limit redistribution
+reports/step_02/**/*_preview.csv
+reports/step_02/*_inspection.log
+# Throwaway training output from the Step 1 smoke test
+reports/step_01/soup_tiny/output/

@@ -1,0 +1,4 @@
+{
+  "airllm": {"repo": "https://github.com/lyogavin/airllm", "commit": "b0b1a7efc033360e1d9e799f14287b8d4fe154bc", "license_file": "Apache-2.0", "installed": "airllm==4.0.0 from PyPI"},
+  "soup": {"repo": "https://github.com/MakazhanAlpamys/Soup", "commit": "433de4d7b1e1022113299ceb20e40ae66ef77eeb", "license_file": "Apache-2.0", "installed": "soup-cli==0.77.1 from PyPI"}
+}

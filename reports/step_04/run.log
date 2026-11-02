@@ -1,0 +1,148 @@
+origins: validation 48 (2015-01-05 to 2015-11-30), test 16 (2016-01-04 to 2016-04-18)
+variants already finished: [('123M', 'none'), ('28M', 'calendar'), ('28M', 'none'), ('5M', 'calendar'), ('5M', 'none')]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<?, ?it/s]
+  209M/none: date 1/12, 18s
+  209M/none: date 2/12, 35s
+  209M/none: date 3/12, 54s
+  209M/none: date 4/12, 75s
+  209M/none: date 5/12, 97s
+  209M/none: date 6/12, 119s
+  209M/none: date 7/12, 142s
+  209M/none: date 8/12, 165s
+  209M/none: date 9/12, 188s
+  209M/none: date 10/12, 209s
+  209M/none: date 11/12, 232s
+  209M/none: date 12/12, 255s
+{'size': '209M', 'covariates': 'none', 'wape_median_pct': 62.94605104558082, 'wape_mean_pct': 69.0477851669726, 'bias_median_pct': -22.495588736370717, 'bias_mean_pct': 1.9959141277014991, 'pinball_per_unit': 0.6136242622071411, 'coverage_80_pct': 85.37619047619047, 'seconds': 255.45070815086365}
+
+VALIDATION SELECTION
+ size covariates  wape_median_pct  wape_mean_pct  bias_median_pct  bias_mean_pct  pinball_per_unit  coverage_80_pct  seconds
+  5M       none           63.827         69.548          -21.902          1.945             0.623           85.428    8.767
+  5M   calendar           64.036         69.589          -23.520          1.174             0.625           83.141  115.854
+ 28M       none           63.508         69.373          -22.022          2.070             0.618           84.890   39.517
+ 28M   calendar           63.532         68.920          -23.706          0.324             0.619           84.381  457.256
+123M       none           63.099         69.031          -22.723          1.275             0.614           86.615  142.705
+209M       none           62.946         69.048          -22.496          1.996             0.614           85.376  255.451
+
+chosen: Timestral-28M covariates=none (pinball 0.6185, best 0.6136)
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<?, ?it/s]
+LightGBM (train targets through 2014): 1,399,097 rows, 71s
+LightGBM (train targets through 2015): 2,125,947 rows, 99s
+  validation: date 1/48
+  validation: date 2/48
+  validation: date 3/48
+  validation: date 4/48
+  validation: date 5/48
+  validation: date 6/48
+  validation: date 7/48
+  validation: date 8/48
+  validation: date 9/48
+  validation: date 10/48
+  validation: date 11/48
+  validation: date 12/48
+  validation: date 13/48
+  validation: date 14/48
+  validation: date 15/48
+  validation: date 16/48
+  validation: date 17/48
+  validation: date 18/48
+  validation: date 19/48
+  validation: date 20/48
+  validation: date 21/48
+  validation: date 22/48
+  validation: date 23/48
+  validation: date 24/48
+  validation: date 25/48
+  validation: date 26/48
+  validation: date 27/48
+  validation: date 28/48
+  validation: date 29/48
+  validation: date 30/48
+  validation: date 31/48
+  validation: date 32/48
+  validation: date 33/48
+  validation: date 34/48
+  validation: date 35/48
+  validation: date 36/48
+  validation: date 37/48
+  validation: date 38/48
+  validation: date 39/48
+  validation: date 40/48
+  validation: date 41/48
+  validation: date 42/48
+  validation: date 43/48
+  validation: date 44/48
+  validation: date 45/48
+  validation: date 46/48
+  validation: date 47/48
+  validation: date 48/48
+
+VALIDATION (all weekly origins)
+     period          model       days  wape_median_pct  wape_mean_pct  bias_median_pct  bias_mean_pct  pinball_per_unit  coverage_80_pct  wape_cum14_pct  wape_cum28_pct  seconds
+validation seasonal_naive        all           68.765         85.448          -23.064         -0.016             0.669           89.940          36.494          36.345    2.042
+validation seasonal_naive  days_1_14           67.582         83.532          -23.073         -0.034             0.654           90.331             NaN             NaN      NaN
+validation seasonal_naive days_15_28           69.948         87.366          -23.055          0.002             0.684           89.549             NaN             NaN      NaN
+validation       lightgbm        all           65.777         71.538          -23.498         -0.091             0.639           88.175          31.443          29.249   14.141
+validation       lightgbm  days_1_14           63.990         69.637          -23.727         -0.613             0.623           88.407             NaN             NaN      NaN
+validation       lightgbm days_15_28           67.565         73.441          -23.270          0.430             0.654           87.943             NaN             NaN      NaN
+validation      timestral        all           63.479         69.308          -21.912          2.163             0.616           84.888          28.098          26.277  160.840
+validation      timestral  days_1_14           61.478         67.061          -21.453          1.505             0.598           85.321             NaN             NaN      NaN
+validation      timestral days_15_28           65.480         71.557          -22.370          2.822             0.634           84.455             NaN             NaN      NaN
+  test: date 1/16
+  test: date 2/16
+  test: date 3/16
+  test: date 4/16
+  test: date 5/16
+  test: date 6/16
+  test: date 7/16
+  test: date 8/16
+  test: date 9/16
+  test: date 10/16
+  test: date 11/16
+  test: date 12/16
+  test: date 13/16
+  test: date 14/16
+  test: date 15/16
+  test: date 16/16
+
+TEST
+ period          model       days  wape_median_pct  wape_mean_pct  bias_median_pct  bias_mean_pct  pinball_per_unit  coverage_80_pct  wape_cum14_pct  wape_cum28_pct  seconds
+  test seasonal_naive        all           64.702         80.411          -24.658         -0.383             0.627           89.421          33.841          32.722    0.749
+  test seasonal_naive  days_1_14           63.782         79.049          -24.489         -0.160             0.616           89.884             NaN             NaN      NaN
+  test seasonal_naive days_15_28           65.618         81.767          -24.826         -0.605             0.639           88.957             NaN             NaN      NaN
+  test       lightgbm        all           61.202         66.239          -23.802         -1.552             0.592           87.861          28.032          25.762    4.717
+  test       lightgbm  days_1_14           59.928         64.806          -23.818         -1.859             0.580           88.111             NaN             NaN      NaN
+  test       lightgbm days_15_28           62.471         67.665          -23.788         -1.246             0.604           87.612             NaN             NaN      NaN
+  test      timestral        all           60.109         64.877          -22.328         -0.168             0.580           84.422          25.553          23.347   61.665
+  test      timestral  days_1_14           58.708         63.259          -21.684         -0.502             0.566           84.857             NaN             NaN      NaN
+  test      timestral days_15_28           61.504         66.488          -22.968          0.164             0.593           83.988             NaN             NaN      NaN
+
+TEST by category
+          model  category  wape_median_pct  wape_mean_pct  bias_median_pct  bias_mean_pct  pinball_per_unit  coverage_80_pct
+      lightgbm     FOODS           57.210         59.980          -19.689         -1.660             0.550           86.724
+seasonal_naive     FOODS           61.303         74.463          -21.675         -0.056             0.591           87.322
+     timestral     FOODS           55.947         58.992          -18.790         -0.378             0.536           83.130
+      lightgbm   HOBBIES           88.336        105.212          -48.936          2.891             0.872           88.891
+seasonal_naive   HOBBIES           87.918        121.371          -52.825         -1.756             0.875           92.239
+     timestral   HOBBIES           87.353        102.273          -52.500         -1.536             0.866           87.058
+      lightgbm HOUSEHOLD           63.185         70.434          -26.708         -2.630             0.614           88.795
+seasonal_naive HOUSEHOLD           66.356         83.202          -23.730         -0.803             0.645           90.611
+     timestral HOUSEHOLD           62.493         68.593          -22.215          0.790             0.604           84.635
+
+Timestral vs baselines, pinball ratio on test (below 1 favors Timestral), series bootstrap:
+ {
+ "seasonal_naive": {
+  "pinball_ratio": 0.9242311199657758,
+  "ci95_low": 0.8992330379341148,
+  "ci95_high": 0.9478502071294784,
+  "series_where_timestral_better_pct": 55.800000000000004
+ },
+ "lightgbm": {
+  "pinball_ratio": 0.9789605345905265,
+  "ci95_low": 0.9702094790332809,
+  "ci95_high": 0.9873141812437123,
+  "series_where_timestral_better_pct": 47.8
+ }
+}
+{'test.parquet': '10.7 MB', 'validation.parquet': '13.0 MB'}
+peak VRAM MB: 983

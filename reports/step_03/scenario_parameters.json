@@ -1,0 +1,50 @@
+{
+  "baseline": {
+    "policy": {
+      "z": 1.28,
+      "review_weekday": 0,
+      "cover_days": 14,
+      "window_days": 56
+    },
+    "disrupted_suppliers": []
+  },
+  "lean_policy": {
+    "policy": {
+      "z": 0.5,
+      "review_weekday": 0,
+      "cover_days": 7,
+      "window_days": 56
+    },
+    "disrupted_suppliers": []
+  },
+  "supplier_disruption": {
+    "policy": {
+      "z": 1.28,
+      "review_weekday": 0,
+      "cover_days": 14,
+      "window_days": 56
+    },
+    "disrupted_suppliers": [
+      "SUP_02",
+      "SUP_07",
+      "SUP_11"
+    ],
+    "disrupted_supplier_count": 3,
+    "delay_prob": 0.8,
+    "mean_delay_multiplier": 3.0,
+    "windows": [
+      [
+        "2014-03-01",
+        "2014-04-30"
+      ],
+      [
+        "2015-06-01",
+        "2015-07-31"
+      ],
+      [
+        "2016-02-01",
+        "2016-03-16"
+      ]
+    ]
+  }
+}

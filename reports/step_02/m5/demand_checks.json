@@ -1,0 +1,20 @@
+{
+  "series": 30490,
+  "items": 3049,
+  "stores": 10,
+  "sales_days": 1941,
+  "sales_first": "2011-01-29",
+  "sales_last": "2016-05-22",
+  "calendar_days_without_sales": 28,
+  "validation_is_prefix_of_evaluation": true,
+  "zero_share_all_pct": 68.0,
+  "zero_share_after_first_sale_pct": 59.53,
+  "series_never_sold": 0,
+  "sales_before_first_price_units": 0,
+  "days_with_no_price_share_pct": 20.78,
+  "suspect_runs": 331722,
+  "suspect_series": 28818,
+  "suspect_days": 8729473,
+  "suspect_share_of_post_launch_zero_days_pct": 31.34,
+  "christmas_days_zero_share_pct": 99.96
+}

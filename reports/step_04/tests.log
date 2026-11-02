@@ -1,0 +1,34 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Scripts\python.exe
+rootdir: C:\Users\Mehrnoosh\Documents\supply-chain-agent
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.3
+collecting ... collected 25 items
+
+tests/evaluation/test_forecasting.py::test_context_ends_at_origin PASSED [  4%]
+tests/evaluation/test_forecasting.py::test_context_marks_prelaunch_and_closed_days_missing PASSED [  8%]
+tests/evaluation/test_forecasting.py::test_timestral_ignores_future_demand PASSED [ 12%]
+tests/evaluation/test_forecasting.py::test_seasonal_naive_ignores_future_demand PASSED [ 16%]
+tests/evaluation/test_forecasting.py::test_gbm_features_ignore_future_demand PASSED [ 20%]
+tests/evaluation/test_forecasting.py::test_gbm_uses_only_price_known_at_origin PASSED [ 24%]
+tests/evaluation/test_forecasting.py::test_gbm_training_ignores_data_after_cutoff PASSED [ 28%]
+tests/evaluation/test_forecasting.py::test_training_origins_finish_before_cutoff PASSED [ 32%]
+tests/evaluation/test_forecasting.py::test_validation_and_test_targets_do_not_overlap PASSED [ 36%]
+tests/evaluation/test_forecasting.py::test_actuals_align_with_horizon PASSED [ 40%]
+tests/evaluation/test_forecasting.py::test_saved_actuals_match_m5_dates PASSED [ 44%]
+tests/evaluation/test_forecasting.py::test_saved_forecasts_are_complete PASSED [ 48%]
+tests/evaluation/test_forecasting.py::test_seasonal_index_matches_target_weekday PASSED [ 52%]
+tests/evaluation/test_forecasting.py::test_timestral_shape_and_levels PASSED [ 56%]
+tests/evaluation/test_forecasting.py::test_timestral_quantiles_ordered_and_nonnegative PASSED [ 60%]
+tests/evaluation/test_forecasting.py::test_saved_intervals_valid PASSED  [ 64%]
+tests/evaluation/test_forecasting.py::test_mean_stays_inside_forecast_range PASSED [ 68%]
+tests/evaluation/test_forecasting.py::test_inference_is_stable_across_repeats PASSED [ 72%]
+tests/evaluation/test_forecasting.py::test_inference_barely_changes_with_batch_size PASSED [ 76%]
+tests/evaluation/test_forecasting.py::test_mean_from_quantiles_on_symmetric_values PASSED [ 80%]
+tests/evaluation/test_forecasting.py::test_metrics_on_known_values PASSED [ 84%]
+tests/evaluation/test_forecasting.py::test_metrics_skip_unobserved_days PASSED [ 88%]
+tests/evaluation/test_forecasting.py::test_pinball_penalizes_each_side_by_level PASSED [ 92%]
+tests/evaluation/test_forecasting.py::test_timestral_beats_baselines_on_test_pinball PASSED [ 96%]
+tests/evaluation/test_forecasting.py::test_chosen_variant_follows_selection_rule PASSED [100%]
+
+============================= 25 passed in 39.49s =============================

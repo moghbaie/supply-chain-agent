@@ -1,0 +1,43 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Scripts\python.exe
+rootdir: C:\Users\Mehrnoosh\Documents\supply-chain-agent
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.3
+collecting ... collected 34 items
+
+tests/unit/test_step02_data.py::test_unique_key[olist_customers_dataset:customer_id] PASSED [  2%]
+tests/unit/test_step02_data.py::test_unique_key[olist_orders_dataset:order_id] PASSED [  5%]
+tests/unit/test_step02_data.py::test_unique_key[olist_order_items_dataset:order_id+order_item_id] PASSED [  8%]
+tests/unit/test_step02_data.py::test_unique_key[olist_order_payments_dataset:order_id+payment_sequential] PASSED [ 11%]
+tests/unit/test_step02_data.py::test_unique_key[olist_order_reviews_dataset:review_id+order_id] PASSED [ 14%]
+tests/unit/test_step02_data.py::test_unique_key[olist_products_dataset:product_id] PASSED [ 17%]
+tests/unit/test_step02_data.py::test_unique_key[olist_sellers_dataset:seller_id] PASSED [ 20%]
+tests/unit/test_step02_data.py::test_unique_key[product_category_name_translation:product_category_name] PASSED [ 23%]
+tests/unit/test_step02_data.py::test_unique_key[calendar:d] PASSED       [ 26%]
+tests/unit/test_step02_data.py::test_unique_key[calendar:date] PASSED    [ 29%]
+tests/unit/test_step02_data.py::test_unique_key[sell_prices:store_id+item_id+wm_yr_wk] PASSED [ 32%]
+tests/unit/test_step02_data.py::test_unique_key[sales_train_evaluation:id] PASSED [ 35%]
+tests/unit/test_step02_data.py::test_unique_key[sales_train_evaluation:item_id+store_id] PASSED [ 38%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_orders_dataset.customer_id] PASSED [ 41%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_order_items_dataset.order_id] PASSED [ 44%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_order_items_dataset.product_id] PASSED [ 47%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_order_items_dataset.seller_id] PASSED [ 50%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_order_payments_dataset.order_id] PASSED [ 52%]
+tests/unit/test_step02_data.py::test_olist_foreign_key[olist_order_reviews_dataset.order_id] PASSED [ 55%]
+tests/unit/test_step02_data.py::test_m5_price_weeks_exist_in_calendar PASSED [ 58%]
+tests/unit/test_step02_data.py::test_m5_every_series_has_price PASSED    [ 61%]
+tests/unit/test_step02_data.py::test_m5_sales_days_exist_in_calendar PASSED [ 64%]
+tests/unit/test_step02_data.py::test_m5_calendar_is_consecutive PASSED   [ 67%]
+tests/unit/test_step02_data.py::test_m5_sales_complete_and_nonnegative PASSED [ 70%]
+tests/unit/test_step02_data.py::test_m5_required_fields_complete PASSED  [ 73%]
+tests/unit/test_step02_data.py::test_m5_no_sales_before_first_price PASSED [ 76%]
+tests/unit/test_step02_data.py::test_olist_required_fields_complete PASSED [ 79%]
+tests/unit/test_step02_data.py::test_olist_strict_chronology PASSED      [ 82%]
+tests/unit/test_step02_data.py::test_olist_documented_chronology_exceptions PASSED [ 85%]
+tests/unit/test_step02_data.py::test_olist_documented_delivered_without_date PASSED [ 88%]
+tests/unit/test_step02_data.py::test_datasets_stay_separate PASSED       [ 91%]
+tests/unit/test_step02_data.py::test_no_real_inventory_or_inbound_fields[m5] PASSED [ 94%]
+tests/unit/test_step02_data.py::test_no_real_inventory_or_inbound_fields[olist] PASSED [ 97%]
+tests/unit/test_step02_data.py::test_manifest_checksums_match PASSED     [100%]
+
+============================= 34 passed in 26.40s =============================

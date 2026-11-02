@@ -1,0 +1,50 @@
+# All inventory, supplier and cost values are synthetic. Only demand comes from M5 sales.
+seed: 42
+selection:
+  series_count: 500
+  max_zero_gap_days: 56        # applied to data through gap_check_end only, to avoid selecting on the future
+  gap_check_end: "2014-12-31"
+  latest_first_sale: "2012-11-01"
+dates:
+  simulation_start: "2013-01-01"
+  burn_in_end: "2013-03-31"
+  train_end: "2014-12-31"
+  validation_end: "2015-12-31"
+  simulation_end: "2016-05-22"
+labels:
+  stockout_horizon_days: 14
+costs:
+  holding_rate_per_year: 0.25
+  margin_rate: 0.30
+  shipping_rate_of_price: 0.05
+  expedite_shipping_multiplier: 2.0   # defined for Step 10; no policy here expedites
+  expedite_fixed_fee: 25.0
+pack_size:
+  FOODS: 6
+  HOUSEHOLD: 4
+  HOBBIES: 2
+suppliers:
+  count: 12
+  tiers:
+    reliable: {share: 0.34, delay_prob: 0.05, mean_delay_days: 2.0}
+    standard: {share: 0.33, delay_prob: 0.15, mean_delay_days: 4.0}
+    unreliable: {share: 0.33, delay_prob: 0.35, mean_delay_days: 7.0}
+  promised_lead_days_min: 5
+  promised_lead_days_max: 21
+policy:
+  z: 1.28
+  review_weekday: 0     # Monday
+  cover_days: 14
+  window_days: 56
+scenarios:
+  baseline: {}
+  lean_policy:
+    policy: {z: 0.50, cover_days: 7}
+  supplier_disruption:
+    disrupted_supplier_count: 3
+    delay_prob: 0.80
+    mean_delay_multiplier: 3.0
+    windows:
+      - ["2014-03-01", "2014-04-30"]
+      - ["2015-06-01", "2015-07-31"]
+      - ["2016-02-01", "2016-03-16"]

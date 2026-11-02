@@ -1,0 +1,7 @@
+same 5,000 validation rows as the TabPFN probe, positive rate 0.088
+constant             PR-AUC 0.0880 | Brier 0.08026 | ROC-AUC 0.5000 | 0.1s
+cover_rule           PR-AUC 0.4702 | Brier 0.05813 | ROC-AUC 0.8596 | 0.0s
+logistic             PR-AUC 0.5193 | Brier 0.05787 | ROC-AUC 0.8725 | 0.1s
+lightgbm_full_135k   PR-AUC 0.6342 | Brier 0.04886 | ROC-AUC 0.9051 | 3.2s
+lightgbm_1k          PR-AUC 0.5421 | Brier 0.05760 | ROC-AUC 0.8758 | 0.3s
+lightgbm_10k         PR-AUC 0.5791 | Brier 0.05439 | ROC-AUC 0.8861 | 1.2s

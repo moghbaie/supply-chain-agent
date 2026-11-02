@@ -1,0 +1,142 @@
+baseline: 81,000 rows, 28s
+lean_policy: 81,000 rows, 55s
+supplier_disruption: 81,000 rows, 81s
+
+FEATURE SCHEMA
+on_hand                  int64
+on_order                 int64
+position                 int64
+reorder_point            int64
+order_up_to              int64
+ordered_today            int64
+price                  float64
+fc_mean_7              float64
+fc_mean_14             float64
+fc_mean_28             float64
+fc_q10_sum_14          float32
+fc_q90_sum_14          float32
+fc_q90_max_14          float32
+cover_days             float64
+position_cover_days    float64
+projected_14           float64
+projected_14_q90       float64
+open_pos               float64
+units_due_14           float64
+units_overdue          float64
+days_overdue_max       float64
+days_to_next_due       float64
+promised_lead_days       int64
+supplier_late_rate     float64
+supplier_mean_delay    float64
+supplier_pos_seen        int64
+sales_mean_28          float64
+sales_zero_share_28    float64
+sold_out_days_28         int64
+cat_code                  int8
+
+SPLITS
+                  min        max  nunique    rows
+split                                            
+purged     2014-12-22 2015-12-28        4    6000
+test       2016-01-04 2016-05-02       18   27000
+train      2013-04-01 2014-12-15       90  135000
+validation 2015-01-05 2015-12-14       50   75000
+
+CLASS BALANCE (share with a stockout in the next 14 days)
+split                purged   test  train  validation
+scenario                                             
+baseline               5.30   6.27   6.21        6.10
+lean_policy           12.00  15.46  14.44       14.24
+supplier_disruption    5.55   8.64   6.57        6.66
+labels missing: 0
+
+MISSING VALUES (features)
+days_to_next_due    39.88
+
+FEATURE DISTRIBUTIONS (train)
+                       mean     std      min     50%      max
+on_hand               37.30   81.69     0.00   17.00  3074.00
+on_order              31.63   84.70     0.00    8.00  4098.00
+position              68.92  137.69     2.00   31.00  4790.00
+reorder_point         49.09   99.14     1.00   21.00  3196.00
+order_up_to           73.74  147.51     2.00   32.00  4788.00
+ordered_today         13.71   47.26     0.00    0.00  2286.00
+price                  4.25    3.36     0.20    3.42    30.98
+fc_mean_7             14.79   29.71     0.16    6.23   830.66
+fc_mean_14            29.77   59.14     0.45   12.59  1584.12
+fc_mean_28            59.93  117.72     1.02   25.44  2984.35
+fc_q10_sum_14          5.62   26.55     0.00    0.00   864.43
+fc_q90_sum_14         61.80   98.15     0.01   33.08  2410.29
+fc_q90_max_14          5.16    8.69     0.00    2.60   215.66
+cover_days            26.07   31.36     0.00   20.51  1669.08
+position_cover_days   40.57   30.04     5.65   35.63  1669.08
+projected_14          31.74   75.19  -728.26   13.87  3098.84
+projected_14_q90      -0.30   58.53 -1628.06   -3.60  2491.45
+open_pos               0.78    0.71     0.00    1.00     4.00
+units_due_14          24.21   65.59     0.00    6.00  3144.00
+units_overdue          1.47   13.06     0.00    0.00   810.00
+days_overdue_max       0.15    0.97     0.00    0.00    27.00
+days_to_next_due       7.73    4.94     0.00    6.00    21.00
+promised_lead_days    12.38    5.52     5.00   13.00    21.00
+supplier_late_rate     0.17    0.12     0.02    0.14     0.54
+supplier_mean_delay    0.97    1.11     0.04    0.56     7.83
+supplier_pos_seen    371.24  119.11    96.00  358.00   710.00
+sales_mean_28          1.99    4.01     0.00    0.82   117.64
+sales_zero_share_28    0.49    0.28     0.00    0.50     1.00
+sold_out_days_28       0.90    2.44     0.00    0.00    27.00
+cat_code               0.88    0.89     0.00    1.00     2.00
+
+20 ROWS (baseline train, stockouts and non-stockouts)
+    origin               id  on_hand  on_order  fc_mean_14  fc_q90_sum_14  cover_days  projected_14  units_due_14  units_overdue  days_to_next_due  supplier_late_rate  label
+2013-04-01 FOODS_1_002_CA_4        5        12        4.14      13.700000       16.92         12.86          12.0            0.0              12.0                0.12    1.0
+2013-04-01 FOODS_1_010_WI_2        4        12        8.54      22.799999        6.56          7.46          12.0            0.0               6.0                0.13    1.0
+2013-04-01 FOODS_1_016_CA_4        3        30        8.92      27.120001        4.71         24.08          30.0            0.0               8.0                0.32    1.0
+2013-04-01 FOODS_1_018_TX_3       84       120       69.05     147.039993       17.03        134.95         120.0            0.0              12.0                0.31    1.0
+2013-04-01 FOODS_1_018_WI_1        0       372      218.23     398.339996        0.00        -14.23         204.0          168.0               5.0                0.31    1.0
+2013-04-01 FOODS_1_120_WI_1        0        66       56.89     120.580002        0.00          9.11          66.0            0.0               2.0                0.17    1.0
+2013-04-01 FOODS_1_185_TX_3       11         0        7.19      21.270000       21.42          3.81           0.0            0.0               NaN                0.04    1.0
+2013-04-01 FOODS_2_164_TX_2        0       192       66.36     128.220001        0.00         29.64          96.0           96.0              13.0                0.13    1.0
+2013-04-01 FOODS_2_342_CA_3       50         0       27.37      68.449997       25.57         22.63           0.0            0.0               NaN                0.13    1.0
+2013-04-01 FOODS_3_076_CA_1       12        84       55.75     113.320000        3.01        -13.75          30.0            0.0              11.0                0.04    1.0
+2013-04-01 FOODS_1_002_TX_3       14        12        5.42      17.270000       36.17          8.58           0.0            0.0              19.0                0.12    0.0
+2013-04-01 FOODS_1_006_TX_2       22         0        8.83      28.260000       34.87         13.17           0.0            0.0               NaN                0.36    0.0
+2013-04-01 FOODS_1_006_WI_2       14        48       17.51      47.049999       11.19         44.49          48.0            0.0               0.0                0.36    0.0
+2013-04-01 FOODS_1_034_CA_3        8        12        4.96      17.260000       22.60         15.04          12.0            0.0               2.0                0.17    0.0
+2013-04-01 FOODS_1_041_CA_3       21        78       31.62      64.650002        9.30         31.38          42.0            0.0               4.0                0.04    0.0
+2013-04-01 FOODS_1_042_WI_2      161       126       90.80     192.940002       24.82         70.20           0.0            0.0              21.0                0.36    0.0
+2013-04-01 FOODS_1_081_TX_1       12        12        7.58      20.580000       22.17         16.42          12.0            0.0               1.0                0.32    0.0
+2013-04-01 FOODS_1_085_WI_1      266       198      148.56     273.049988       25.07        315.44         198.0            0.0              12.0                0.31    0.0
+2013-04-01 FOODS_1_105_CA_3       27        24       12.77      38.860001       29.60         38.23          24.0            0.0              12.0                0.12    0.0
+2013-04-01 FOODS_1_110_CA_4       61         0       21.51      61.270000       39.70         39.49           0.0            0.0               NaN                0.13    0.0
+
+LABEL RATE BY SIMPLE RISK BANDS (train, all scenarios)
+                         size   mean
+projected_14                        
+(-1000000000.0, -10.0]   1553  0.489
+(-10.0, -2.0]            1458  0.354
+(-2.0, 0.0]              1042  0.313
+(0.0, 2.0]               2804  0.210
+(2.0, 10.0]             43751  0.077
+(10.0, 50.0]            64241  0.076
+(50.0, 1000000000.0]    20151  0.090
+                       size   mean
+cover_days                        
+(-1.0, 3.0]            6848  0.636
+(3.0, 7.0]             7666  0.307
+(7.0, 14.0]           25295  0.122
+(14.0, 21.0]          29659  0.054
+(21.0, 28.0]          23296  0.018
+(28.0, 56.0]          33302  0.011
+(56.0, 1000000000.0]   8934  0.004
+
+correlation with label, top features:
+cover_days          0.362
+open_pos            0.262
+on_order            0.236
+sold_out_days_28    0.210
+units_due_14        0.205
+on_hand             0.197
+projected_14_q90    0.190
+ordered_today       0.176
+fc_q90_sum_14       0.131
+sales_mean_28       0.131

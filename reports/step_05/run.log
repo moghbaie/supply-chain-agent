@@ -1,0 +1,164 @@
+rows: train 135,000, validation 75,000, test 27,000, purged 6,000
+  validation constant: 0.0900 PR-AUC, 0.0s
+  validation cover_rule: 0.4769 PR-AUC, 0.0s
+  validation logistic: 0.5182 PR-AUC, 0.1s
+  validation lightgbm: 0.6639 PR-AUC, 2.6s
+  validation tabpfn: 0.6419 PR-AUC, 986.6s
+
+VALIDATION overall
+                rows  positive_pct  pr_auc  roc_auc   brier  log_loss     ece  mean_predicted_pct  precision_top5_pct  recall_top5_pct  seconds
+constant    75000.0        8.9987  0.0900   0.5000  0.0819    0.3025  0.0306              9.0726              7.4667           4.1488      0.0
+cover_rule  75000.0        8.9987  0.4769   0.8729  0.0590    0.2091  0.0037              8.8048             64.9333          36.0794      0.0
+logistic    75000.0        8.9987  0.5182   0.8850  0.0586    0.2068  0.0131              8.8362             66.5067          36.9536      0.1
+lightgbm    75000.0        8.9987  0.6639   0.9214  0.0481    0.1694  0.0036              8.6813             77.0667          42.8212      2.6
+tabpfn      75000.0        8.9987  0.6419   0.9081  0.0502    0.1826  0.0155              7.4778             75.1733          41.7692    986.6
+
+TabPFN stability across training samples (same 5,000 validation rows)
+  train_sample_seed  pr_auc  brier    ece
+                 1  0.6153 0.0499 0.0074
+                 2  0.6195 0.0495 0.0074
+                42  0.6306 0.0495 0.0128
+  test constant: 0.1012 PR-AUC, 0.0s
+  test cover_rule: 0.4976 PR-AUC, 0.0s
+  test logistic: 0.5315 PR-AUC, 0.2s
+  test lightgbm: 0.6847 PR-AUC, 4.8s
+  test tabpfn: 0.6491 PR-AUC, 32458.8s
+
+TEST overall
+                rows  positive_pct  pr_auc  roc_auc   brier  log_loss     ece  mean_predicted_pct  precision_top5_pct  recall_top5_pct  seconds
+constant    27000.0       10.1222  0.1012   0.5000  0.0911    0.3284  0.0328              9.0462              5.0370           2.4881      0.0
+cover_rule  27000.0       10.1222  0.4976   0.8730  0.0647    0.2252  0.0081              9.3445             68.0000          33.5895      0.0
+logistic    27000.0       10.1222  0.5315   0.8843  0.0651    0.2251  0.0178              9.2211             69.1852          34.1749      0.2
+lightgbm    27000.0       10.1222  0.6847   0.9218  0.0524    0.1825  0.0077              9.4007             81.4815          40.2488      4.8
+tabpfn      27000.0       10.1222  0.6491   0.9103  0.0560    0.1970  0.0185              8.2713             77.3333          38.1998  32458.8
+
+TEST by scenario
+            scenario      model  positive_pct  pr_auc  roc_auc  brier    ece  mean_predicted_pct  recall_top5_pct
+           baseline cover_rule        6.2667  0.4592   0.8821 0.0423 0.0061              6.8691          44.1489
+           baseline   logistic        6.2667  0.4919   0.8918 0.0421 0.0126              6.4785          47.1631
+           baseline   lightgbm        6.2667  0.6667   0.9311 0.0333 0.0043              6.3181          54.0780
+           baseline     tabpfn        6.2667  0.6210   0.9171 0.0357 0.0068              5.6488          52.1277
+        lean_policy cover_rule       15.4556  0.5051   0.8324 0.0979 0.0238             13.0752          21.8548
+        lean_policy   logistic       15.4556  0.5511   0.8493 0.0973 0.0265             13.5314          21.9986
+        lean_policy   lightgbm       15.4556  0.6976   0.8959 0.0784 0.0119             14.3624          29.3314
+        lean_policy     tabpfn       15.4556  0.6700   0.8866 0.0825 0.0272             12.7695          27.8936
+supplier_disruption cover_rule        8.6444  0.5169   0.8917 0.0539 0.0085              8.0893          39.9743
+supplier_disruption   logistic        8.6444  0.5290   0.8953 0.0560 0.0208              7.6533          39.8458
+supplier_disruption   lightgbm        8.6444  0.6740   0.9284 0.0455 0.0117              7.5217          44.6015
+supplier_disruption     tabpfn        8.6444  0.6344   0.9142 0.0498 0.0226              6.3956          41.7738
+
+TabPFN minus rival on test, series bootstrap (PR-AUC above 0 and Brier below 0 favor TabPFN)
+ {
+ "cover_rule": {
+  "pr_auc": {
+   "point": 0.15134658659438935,
+   "ci95_low": 0.13623789767713795,
+   "ci95_high": 0.1655673514861904
+  },
+  "brier": {
+   "point": -0.0086915012167075,
+   "ci95_low": -0.010270436178802047,
+   "ci95_high": -0.007174010215736631
+  }
+ },
+ "logistic": {
+  "pr_auc": {
+   "point": 0.11751510718977892,
+   "ci95_low": 0.09935286653285155,
+   "ci95_high": 0.13438732194503347
+  },
+  "brier": {
+   "point": -0.009168940258778948,
+   "ci95_low": -0.010797682452308674,
+   "ci95_high": -0.007656730001619877
+  }
+ },
+ "lightgbm": {
+  "pr_auc": {
+   "point": -0.035615396147243204,
+   "ci95_low": -0.046201095424401935,
+   "ci95_high": -0.025638702376360713
+  },
+  "brier": {
+   "point": 0.0035491308082396937,
+   "ci95_low": 0.0025864665933435097,
+   "ci95_high": 0.004617706999747575
+  }
+ }
+}
+
+RELIABILITY on test
+cover_rule 
+  bin  rows  predicted  observed
+   1  2700      0.003     0.002
+   2  2700      0.008     0.008
+   3  2700      0.011     0.012
+   4  2700      0.016     0.017
+   5  2700      0.023     0.034
+   6  2700      0.040     0.045
+   7  2700      0.064     0.077
+   8  2700      0.094     0.096
+   9  2700      0.166     0.192
+  10  2700      0.509     0.530
+lightgbm 
+  bin  rows  predicted  observed
+   1  2700      0.001     0.000
+   2  2700      0.003     0.004
+   3  2700      0.005     0.004
+   4  2700      0.007     0.010
+   5  2700      0.012     0.012
+   6  2700      0.020     0.027
+   7  2700      0.036     0.050
+   8  2700      0.072     0.087
+   9  2700      0.181     0.200
+  10  2700      0.603     0.619
+tabpfn 
+  bin  rows  predicted  observed
+   1  2700      0.001     0.005
+   2  2700      0.003     0.004
+   3  2700      0.005     0.006
+   4  2700      0.008     0.012
+   5  2700      0.012     0.015
+   6  2700      0.018     0.026
+   7  2700      0.028     0.051
+   8  2700      0.053     0.096
+   9  2700      0.141     0.193
+  10  2700      0.557     0.605
+
+20 PREDICTIONS (test, baseline, 10 highest and 10 spread across the rest)
+    origin                   id  on_hand  on_order  fc_mean_14  cover_days  units_overdue  tabpfn  lightgbm  cover_rule  label
+2016-04-18 HOUSEHOLD_1_272_CA_3        0       120     137.937       0.000            0.0   0.993     0.987       0.680    1.0
+2016-04-04     FOODS_3_526_WI_3        0       126      58.118       0.000            0.0   0.993     0.972       0.680    1.0
+2016-04-04     FOODS_3_526_CA_3        0       144      84.345       0.000            0.0   0.993     0.963       0.680    1.0
+2016-03-07     FOODS_3_526_WI_3        0        72      24.726       0.000            0.0   0.987     0.960       0.680    1.0
+2016-01-25     FOODS_3_526_CA_3        0        54      40.107       0.000            0.0   0.987     0.971       0.680    1.0
+2016-02-15     FOODS_3_263_TX_3        0       186     115.081       0.000            0.0   0.985     0.958       0.680    1.0
+2016-01-18   HOBBIES_1_209_TX_3        0        58      19.314       0.000            0.0   0.984     0.955       0.680    1.0
+2016-05-02   HOBBIES_2_036_CA_3        0        90      24.277       0.000            0.0   0.983     0.964       0.680    1.0
+2016-02-01     FOODS_1_161_WI_2        0       138      69.536       0.000            0.0   0.982     0.978       0.680    1.0
+2016-02-01     FOODS_3_572_TX_2        0        84      62.684       0.000            0.0   0.982     0.972       0.680    1.0
+2016-03-14     FOODS_3_809_TX_1        0        36      29.844       0.000            0.0   0.981     0.972       0.680    1.0
+2016-03-28     FOODS_3_476_CA_1       37        66      68.191       7.596            0.0   0.101     0.233       0.192    0.0
+2016-04-11 HOUSEHOLD_1_207_TX_1       12         0       7.682      21.870            0.0   0.033     0.028       0.025    0.0
+2016-02-15     FOODS_3_234_CA_4       60        54      40.876      20.550            0.0   0.018     0.058       0.036    0.0
+2016-05-02   HOBBIES_1_390_CA_2        8         0       3.045      36.782            0.0   0.012     0.017       0.010    0.0
+2016-05-02     FOODS_3_694_CA_3      211       294     265.700      11.118            0.0   0.008     0.007       0.113    0.0
+2016-03-07 HOUSEHOLD_1_479_CA_4       16         0       5.614      39.897            0.0   0.005     0.003       0.010    0.0
+2016-02-22     FOODS_3_226_CA_3      148         0      89.059      23.266            0.0   0.003     0.004       0.023    0.0
+2016-02-29     FOODS_2_342_CA_3      100       120      68.703      20.378            0.0   0.002     0.005       0.036    0.0
+2016-05-02     FOODS_3_546_WI_3      124         0      11.260     154.177            0.0   0.000     0.001       0.004    0.0
+
+LightGBM feature importance, top 12 (share of gain %)
+ cover_days             47.39
+days_to_next_due        9.67
+on_hand                 5.11
+projected_14_q90        3.88
+projected_14            2.64
+position_cover_days     2.40
+price                   2.22
+supplier_late_rate      2.13
+supplier_mean_delay     2.00
+supplier_pos_seen       1.97
+promised_lead_days      1.92
+units_overdue           1.88
+peak VRAM MB: 1257

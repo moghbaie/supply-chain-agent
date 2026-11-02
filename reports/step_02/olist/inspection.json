@@ -1,0 +1,299 @@
+{
+  "tables": {
+    "olist_customers_dataset": {
+      "rows": 99441,
+      "columns": 5,
+      "dtypes": {
+        "str": 4,
+        "int64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "customer_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    },
+    "olist_geolocation_dataset": {
+      "rows": 1000163,
+      "columns": 5,
+      "dtypes": {
+        "float64": 2,
+        "str": 2,
+        "int64": 1
+      },
+      "exact_duplicate_rows": 261831,
+      "key": null,
+      "key_duplicates": null,
+      "missing": {},
+      "dates": {}
+    },
+    "olist_order_items_dataset": {
+      "rows": 112650,
+      "columns": 7,
+      "dtypes": {
+        "str": 4,
+        "float64": 2,
+        "int64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "order_id",
+        "order_item_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {
+        "shipping_limit_date": {
+          "min": "2016-09-19 00:15:34",
+          "max": "2020-04-09 22:35:08",
+          "unparsed_nonnull": 0
+        }
+      }
+    },
+    "olist_order_payments_dataset": {
+      "rows": 103886,
+      "columns": 5,
+      "dtypes": {
+        "str": 2,
+        "int64": 2,
+        "float64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "order_id",
+        "payment_sequential"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    },
+    "olist_order_reviews_dataset": {
+      "rows": 99224,
+      "columns": 7,
+      "dtypes": {
+        "str": 6,
+        "int64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "review_id",
+        "order_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {
+        "review_comment_title": {
+          "count": 87656,
+          "pct": 88.34
+        },
+        "review_comment_message": {
+          "count": 58247,
+          "pct": 58.7
+        }
+      },
+      "dates": {
+        "review_creation_date": {
+          "min": "2016-10-02 00:00:00",
+          "max": "2018-08-31 00:00:00",
+          "unparsed_nonnull": 0
+        },
+        "review_answer_timestamp": {
+          "min": "2016-10-07 18:32:28",
+          "max": "2018-10-29 12:27:35",
+          "unparsed_nonnull": 0
+        }
+      }
+    },
+    "olist_orders_dataset": {
+      "rows": 99441,
+      "columns": 8,
+      "dtypes": {
+        "str": 8
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "order_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {
+        "order_approved_at": {
+          "count": 160,
+          "pct": 0.16
+        },
+        "order_delivered_carrier_date": {
+          "count": 1783,
+          "pct": 1.79
+        },
+        "order_delivered_customer_date": {
+          "count": 2965,
+          "pct": 2.98
+        }
+      },
+      "dates": {
+        "order_purchase_timestamp": {
+          "min": "2016-09-04 21:15:19",
+          "max": "2018-10-17 17:30:18",
+          "unparsed_nonnull": 0
+        },
+        "order_delivered_carrier_date": {
+          "min": "2016-10-08 10:34:01",
+          "max": "2018-09-11 19:48:28",
+          "unparsed_nonnull": 0
+        },
+        "order_delivered_customer_date": {
+          "min": "2016-10-11 13:46:32",
+          "max": "2018-10-17 13:22:46",
+          "unparsed_nonnull": 0
+        },
+        "order_estimated_delivery_date": {
+          "min": "2016-09-30 00:00:00",
+          "max": "2018-11-12 00:00:00",
+          "unparsed_nonnull": 0
+        }
+      }
+    },
+    "olist_products_dataset": {
+      "rows": 32951,
+      "columns": 9,
+      "dtypes": {
+        "float64": 7,
+        "str": 2
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "product_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {
+        "product_category_name": {
+          "count": 610,
+          "pct": 1.85
+        },
+        "product_name_lenght": {
+          "count": 610,
+          "pct": 1.85
+        },
+        "product_description_lenght": {
+          "count": 610,
+          "pct": 1.85
+        },
+        "product_photos_qty": {
+          "count": 610,
+          "pct": 1.85
+        },
+        "product_weight_g": {
+          "count": 2,
+          "pct": 0.01
+        },
+        "product_length_cm": {
+          "count": 2,
+          "pct": 0.01
+        },
+        "product_height_cm": {
+          "count": 2,
+          "pct": 0.01
+        },
+        "product_width_cm": {
+          "count": 2,
+          "pct": 0.01
+        }
+      },
+      "dates": {}
+    },
+    "olist_sellers_dataset": {
+      "rows": 3095,
+      "columns": 4,
+      "dtypes": {
+        "str": 3,
+        "int64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "seller_id"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    },
+    "product_category_name_translation": {
+      "rows": 71,
+      "columns": 2,
+      "dtypes": {
+        "str": 2
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "product_category_name"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    }
+  },
+  "foreign_keys": [
+    {
+      "child": "olist_orders_dataset.customer_id",
+      "parent": "olist_customers_dataset.customer_id",
+      "unique_values": 99441,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_order_items_dataset.order_id",
+      "parent": "olist_orders_dataset.order_id",
+      "unique_values": 98666,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_order_items_dataset.product_id",
+      "parent": "olist_products_dataset.product_id",
+      "unique_values": 32951,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_order_items_dataset.seller_id",
+      "parent": "olist_sellers_dataset.seller_id",
+      "unique_values": 3095,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_order_payments_dataset.order_id",
+      "parent": "olist_orders_dataset.order_id",
+      "unique_values": 99440,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_order_reviews_dataset.order_id",
+      "parent": "olist_orders_dataset.order_id",
+      "unique_values": 98673,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "olist_products_dataset.product_category_name",
+      "parent": "product_category_name_translation.product_category_name",
+      "unique_values": 73,
+      "unmatched_unique": 2,
+      "row_coverage_pct": 99.96
+    },
+    {
+      "child": "olist_customers_dataset.customer_zip_code_prefix",
+      "parent": "olist_geolocation_dataset.geolocation_zip_code_prefix",
+      "unique_values": 14994,
+      "unmatched_unique": 157,
+      "row_coverage_pct": 99.72
+    },
+    {
+      "child": "olist_sellers_dataset.seller_zip_code_prefix",
+      "parent": "olist_geolocation_dataset.geolocation_zip_code_prefix",
+      "unique_values": 2246,
+      "unmatched_unique": 7,
+      "row_coverage_pct": 99.774
+    }
+  ]
+}

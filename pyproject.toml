@@ -1,0 +1,27 @@
+[project]
+name = "supply-chain-agent"
+version = "0.1.0"
+description = "Supply chain reasoning agent"
+requires-python = "==3.12.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "scikit-learn",
+    "matplotlib",
+    "python-dotenv",
+    "pytest",
+    "transformers",
+    "peft",
+    "trl",
+    "datasets",
+    "accelerate",
+    "tabpfn",
+    "kumoai",
+    "kaggle",
+    "six",
+    "pyyaml",
+    "lightgbm",
+    "timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+    "soup-cli",
+]

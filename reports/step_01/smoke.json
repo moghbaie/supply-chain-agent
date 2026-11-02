@@ -1,0 +1,39 @@
+{
+  "model": "hf-internal-testing/tiny-random-LlamaForCausalLM",
+  "device": "cuda",
+  "seed_same_repeatable": true,
+  "seed_different_differs": true,
+  "load_generate_seconds": 2.05,
+  "generated_tokens": [
+    1,
+    337,
+    2098,
+    1298,
+    31178,
+    21063,
+    24180,
+    5930,
+    21336
+  ],
+  "lora_trainable_params": 512,
+  "total_params": 1032784,
+  "lora_losses": [
+    10.4392,
+    10.4114,
+    10.3739,
+    10.3303,
+    10.2911
+  ],
+  "peak_vram_mb": 21.7,
+  "airllm_output": [
+    [
+      1,
+      337,
+      2098,
+      1298,
+      31178,
+      21063,
+      24180
+    ]
+  ]
+}

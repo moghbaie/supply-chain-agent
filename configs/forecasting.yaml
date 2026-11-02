@@ -1,0 +1,23 @@
+seed: 42
+horizon_days: 28
+report_levels: [0.1, 0.5, 0.9]
+validation: {first_target: "2015-01-01", last_target: "2015-12-31"}
+test: {first_target: "2016-01-01", last_target: "2016-05-22"}
+selection:
+  every_nth_validation_origin: 4
+  sizes: ["5M", "28M", "123M", "209M"]
+  # Calendar variants for 123M and 209M were dropped: at 5M and 28M calendar inputs ran 11-13x slower with no gain.
+  variants:
+    - ["5M", "none"]
+    - ["5M", "calendar"]
+    - ["28M", "none"]
+    - ["28M", "calendar"]
+    - ["123M", "none"]
+    - ["209M", "none"]
+  tolerance_pct: 1.0      # smallest model within this much of the best validation pinball loss
+batch_size: 64
+lightgbm:
+  train_first_origin: "2013-01-07"
+  num_boost_round: 300
+  params: {learning_rate: 0.05, num_leaves: 63, min_data_in_leaf: 100, feature_fraction: 0.8, bagging_fraction: 0.8, bagging_freq: 1, verbosity: -1}
+empirical_window_days: 56

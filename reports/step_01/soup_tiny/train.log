@@ -1,0 +1,66 @@
+Loading config from reports\step_01\soup_tiny\soup.yaml...
+┌────────────────────────────── Training Setup ───────────────────────────────┐
+│ Device:  NVIDIA GeForce GTX 1650 with Max-Q Design                          │
+│ Memory:  4.0 GB                                                             │
+│ Model:   hf-internal-testing/tiny-random-LlamaForCausalLM                   │
+│ Task:    sft                                                                │
+│ Backend: transformers                                                       │
+│ LoRA:    r=4, alpha=8                                                       │
+│ Quant:   none                                                               │
+│ Seed:    42 (unset default)                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+Loading dataset...
+Loaded: 7 train samples
+Run ID: run_20261101_221112_11eedb3d
+Setting up model + trainer...
+W1101 22:11:17.097000 50364 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading tokenizer: hf-internal-testing/tiny-random-LlamaForCausalLM
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got -1. This may result in unexpected behavior.
+Loading model: hf-internal-testing/tiny-random-LlamaForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] The following generation flags are not valid and may be ignored: ['pad_token_id']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Loading weights:   0%|          | 0/21 [00:00<?, ?it/s]Loading weights: 100%|██████████| 21/21 [00:00<00:00, 3594.68it/s]
+LoRA applied: 512 trainable / 1,032,784 total (0.05%)
+Map:   0%|          | 0/7 [00:00<?, ? examples/s][transformers] return_assistant_tokens_mask==True but chat template does not contain `{% generation %}` keyword.
+Map: 100%|██████████| 7/7 [00:00<00:00, 246.12 examples/s]
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<?, ? examples/s]
+Map:   0%|          | 0/7 [00:00<?, ? examples/s]Map: 100%|██████████| 7/7 [00:00<00:00, 487.13 examples/s]
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<?, ? examples/s]
+Truncating train dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Truncating train dataset: 100%|██████████| 7/7 [00:00<?, ? examples/s]
+Dropping fully masked examples from train dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Dropping fully masked examples from train dataset: 100%|██████████| 7/7 [00:00<00:00, 6727.80 examples/s]
+Truncating eval dataset:   0%|          | 0/1 [00:00<?, ? examples/s]Truncating eval dataset: 100%|██████████| 1/1 [00:00<?, ? examples/s]
+Dropping fully masked examples from eval dataset:   0%|          | 0/1 [00:00<?, ? examples/s]Dropping fully masked examples from eval dataset: 100%|██████████| 1/1 [00:00<00:00, 131.24 examples/s]
+Rewind log: reports\step_01\soup_tiny\output\rewind.jsonl
+Base revision: 9fb191250dd56d0ba7ec9785a025ed29c03d5998 (bound Hub commit)
+Training started!
+
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 2, 'bos_token_id': 1}.
+  0%|          | 0/1 [00:00<?, ?it/s]C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Lib\site-packages\soup_cli\trainer\rewind_hf.py:338: FutureWarning: `return_outputs=True`, and the logits it passes to `compute_metrics` and `preprocess_logits_for_metrics`, are deprecated and will be removed in v2.0.0. The fused LM head does not build the logits, so they are recomputed with an extra forward pass.
+  loss, outputs = super().compute_loss(
+100%|██████████| 1/1 [00:00<00:00,  1.90it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+  0%|          | 0/1 [00:00<?, ?it/s][A                                             
+                                     [A100%|██████████| 1/1 [00:00<00:00,  1.90it/s]
+100%|██████████| 1/1 [00:00<00:00, 999.83it/s][A
+                                              [A                                             100%|██████████| 1/1 [00:00<00:00,  1.90it/s]100%|██████████| 1/1 [00:00<00:00,  1.42it/s]
+{'eval_loss': '10.38', 'eval_runtime': '0.0141', 'eval_samples_per_second': '71.07', 'eval_steps_per_second': '71.07', 'eval_entropy': '10.37', 'eval_mean_token_accuracy': '0', 'eval_num_tokens': '175', 'epoch': '1'}
+{'train_runtime': '0.7003', 'train_samples_per_second': '9.996', 'train_steps_per_second': '1.428', 'train_loss': '10.39', 'epoch': '1'}
+┌────── Soup Training: hf-internal-testing/tiny-random-LlamaForCausalLM ──────┐
+│ Epoch 1.0/1   100%                                                          │
+│ Step:  1/1                                                                  │
+│ Loss:  -    LR: 0.00e+00                                                    │
+│ Val loss: 10.3783                                                           │
+│ Speed: 1.43 it/s                                                            │
+│ GPU peak: 0.1/4.0 GB                                                        │
+└───────────────── NVIDIA GeForce GTX 1650 with Max-Q Design ─────────────────┘┌──────────────────────────── Training Complete! ─────────────────────────────┐
+│ Loss: 10.3895                                                               │
+│ Duration: 0m                                                                │
+│ Output: reports\step_01\soup_tiny\output                                    │
+│ Run ID: run_20261101_221112_11eedb3d                                        │
+│                                                                             │
+│ Quick test:  soup chat --model reports\step_01\soup_tiny\output             │
+│ Push to HF:  soup push --model reports\step_01\soup_tiny\output             │
+│ Merge LoRA:  soup merge --adapter reports\step_01\soup_tiny\output          │
+│ Export GGUF: soup export --model reports\step_01\soup_tiny\output           │
+│ Run details: soup runs show run_20261101_221112_11eedb3d                    │
+└─────────────────────────────────────────────────────────────────────────────┘

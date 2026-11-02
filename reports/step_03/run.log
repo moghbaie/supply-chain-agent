@@ -1,0 +1,147 @@
+SELECTION funnel: {'all_series': 30490, 'launched_in_time': 21389, 'eligible': 7857} | selected: 500 | items: 419
+state_id    CA   TX   WI  All
+cat_id                       
+FOODS       95   70   65  230
+HOBBIES     42   29   28   99
+HOUSEHOLD   72   51   48  171
+All        209  150  141  500
+mean daily units, all series: 1.131 | eligible: 2.227 | selected: 2.234
+selected series with a 56+ day zero gap after 2014: 103 of 500
+closure dates: 5 | closed store-days: 24 | stores closed per date: {6: 3, 3: 2} | examples: ['2011-12-25', '2012-12-25', '2013-12-25', '2014-12-25', '2015-12-25']
+prices: unlisted weeks carried forward: 0 | missing during simulation: 0
+
+SUPPLIERS (synthetic)
+ supplier_id       tier  promised_lead_days  delay_prob  mean_delay_days
+     SUP_00   reliable                  18        0.05              2.0
+     SUP_01   standard                   9        0.15              4.0
+     SUP_02   standard                  19        0.15              4.0
+     SUP_03 unreliable                  21        0.35              7.0
+     SUP_04 unreliable                  12        0.35              7.0
+     SUP_05   reliable                   5        0.05              2.0
+     SUP_06   reliable                  17        0.05              2.0
+     SUP_07   reliable                   6        0.05              2.0
+     SUP_08 unreliable                   8        0.35              7.0
+     SUP_09   standard                   5        0.15              4.0
+     SUP_10   standard                  13        0.15              4.0
+     SUP_11 unreliable                  15        0.35              7.0
+series per supplier: {'SUP_00': 54, 'SUP_01': 42, 'SUP_02': 46, 'SUP_03': 35, 'SUP_04': 32, 'SUP_05': 44, 'SUP_06': 46, 'SUP_07': 54, 'SUP_08': 34, 'SUP_09': 36, 'SUP_10': 43, 'SUP_11': 34}
+
+scenario baseline: 619,000 daily rows, 25,953 purchase orders, 6.7s
+
+scenario lean_policy: 619,000 daily rows, 38,537 purchase orders, 7.0s
+
+scenario supplier_disruption: 619,000 daily rows, 25,899 purchase orders, 6.5s
+
+SCENARIO PARAMETERS
+ {"baseline": {"policy": {"z": 1.28, "review_weekday": 0, "cover_days": 14, "window_days": 56}, "disrupted_suppliers": []}, "lean_policy": {"policy": {"z": 0.5, "review_weekday": 0, "cover_d
+
+20 INVENTORY RECORDS (baseline, one series around its first training stockout)
+      date               id  on_hand_start  received  demand  sales  unmet  on_hand_end  on_order_end  reorder_point  ordered  stockout_day  stockout_next_14d   split
+2013-03-27 FOODS_1_002_CA_4              4         6       0      0      0           10            12             12        0         False                1.0 burn_in
+2013-03-28 FOODS_1_002_CA_4             10         0       0      0      0           10            12             12        0         False                1.0 burn_in
+2013-03-29 FOODS_1_002_CA_4             10         0       5      5      0            5            12             12        0         False                1.0 burn_in
+2013-03-30 FOODS_1_002_CA_4              5         0       0      0      0            5            12             12        0         False                1.0 burn_in
+2013-03-31 FOODS_1_002_CA_4              5         0       0      0      0            5            12             12        0         False                1.0 burn_in
+2013-04-01 FOODS_1_002_CA_4              5         0       0      0      0            5            12             16        0         False                1.0   train
+2013-04-02 FOODS_1_002_CA_4              5         0       1      1      0            4            12             16        0         False                1.0   train
+2013-04-03 FOODS_1_002_CA_4              4         0       1      1      0            3            12             16        0         False                1.0   train
+2013-04-04 FOODS_1_002_CA_4              3         0       0      0      0            3            12             16        0         False                1.0   train
+2013-04-05 FOODS_1_002_CA_4              3         0       0      0      0            3            12             16        0         False                1.0   train
+2013-04-06 FOODS_1_002_CA_4              3         0       2      2      0            1            12             16        0         False                1.0   train
+2013-04-07 FOODS_1_002_CA_4              1         0       1      1      0            0            12             16        0         False                1.0   train
+2013-04-08 FOODS_1_002_CA_4              0         0       1      0      1            0            24             17       12          True                1.0   train
+2013-04-09 FOODS_1_002_CA_4              0         0       0      0      0            0            24             17        0         False                1.0   train
+2013-04-10 FOODS_1_002_CA_4              0         0       1      0      1            0            24             17        0          True                1.0   train
+2013-04-11 FOODS_1_002_CA_4              0         0       3      0      3            0            24             17        0          True                0.0   train
+2013-04-12 FOODS_1_002_CA_4              0         0       0      0      0            0            24             17        0         False                0.0   train
+2013-04-13 FOODS_1_002_CA_4              0        12       1      1      0           11            12             17        0         False                0.0   train
+2013-04-14 FOODS_1_002_CA_4             11         0       0      0      0           11            12             17        0         False                0.0   train
+2013-04-15 FOODS_1_002_CA_4             11         0       1      1      0           10            12             18        0         False                0.0   train
+
+10 PURCHASE ORDERS (supplier_disruption)
+              id supplier_id order_date  quantity  promised_lead_days promised_date  delay_days receipt_date  actual_lead_days   status
+FOODS_1_161_WI_2      SUP_07 2014-10-06       108                   6    2014-10-12           0   2014-10-12                 6 received
+FOODS_1_161_WI_2      SUP_07 2014-10-27       102                   6    2014-11-02           0   2014-11-02                 6 received
+FOODS_1_161_WI_2      SUP_07 2014-11-17        72                   6    2014-11-23           0   2014-11-23                 6 received
+FOODS_1_161_WI_2      SUP_07 2014-12-08        90                   6    2014-12-14           0   2014-12-14                 6 received
+FOODS_1_161_WI_2      SUP_07 2014-12-15        78                   6    2014-12-21           0   2014-12-21                 6 received
+FOODS_1_161_WI_2      SUP_07 2015-01-05       144                   6    2015-01-11           0   2015-01-11                 6 received
+FOODS_1_161_WI_2      SUP_07 2015-02-16        84                   6    2015-02-22           0   2015-02-22                 6 received
+FOODS_1_161_WI_2      SUP_07 2015-03-09        78                   6    2015-03-15           0   2015-03-15                 6 received
+FOODS_1_161_WI_2      SUP_07 2015-03-23        84                   6    2015-03-29           0   2015-03-29                 6 received
+FOODS_1_161_WI_2      SUP_07 2015-04-06       114                   6    2015-04-12           0   2015-04-12                 6 received
+
+LEAD TIMES by scenario (received POs)
+                       count   mean   std  min  25%   50%   75%   max
+scenario                                                             
+baseline             25730.0  13.08  6.16  5.0  6.0  13.0  18.0  37.0
+lean_policy          38239.0  13.00  6.14  5.0  6.0  13.0  18.0  38.0
+supplier_disruption  25669.0  13.36  6.60  5.0  6.0  13.0  18.0  50.0
+share delayed: {'baseline': 0.1595, 'lean_policy': 0.1591, 'supplier_disruption': 0.1814}
+by tier, baseline: {'reliable': 11.56, 'standard': 12.38, 'unreliable': 16.34}
+open POs at end: {'baseline': 223, 'lean_policy': 298, 'supplier_disruption': 230}
+
+STOCKOUTS by scenario and split
+                                  days  demand  unmet  fill_rate_pct  stockout_days  stockout_day_pct  label_rate_pct  on_hand
+scenario            split                                                                                                     
+baseline            train       319523  658533  20610          96.87           3960              1.24            6.18    41.67
+                    validation  182355  336502  12578          96.26           2290              1.26            6.09    40.28
+                    test         71500  139036   4564          96.72            920              1.29            6.31    39.33
+lean_policy         train       319523  658533  42698          93.52           8984              2.81           14.44    27.54
+                    validation  182355  336502  25756          92.35           5252              2.88           14.06    27.27
+                    test         71500  139036   9093          93.46           2197              3.07           15.72    26.64
+supplier_disruption train       319523  658533  21523          96.73           4291              1.34            6.55    41.56
+                    validation  182355  336502  13889          95.87           2579              1.41            6.64    39.85
+                    test         71500  139036   6157          95.57           1330              1.86            8.64    38.71
+
+label rate by category, baseline train: {'FOODS': 0.0803, 'HOBBIES': 0.0464, 'HOUSEHOLD': 0.0458}
+per-series stockout-day rate, baseline train: {'count': 500.0, 'mean': 0.0124, 'std': 0.0163, 'min': 0.0, '25%': 0.0016, '50%': 0.0062, '75%': 0.0172, 'max': 0.0969} | series with none: 99
+
+COSTS (synthetic parameters)
+                      holding_cost  lost_margin  shipping_cost
+scenario                                                     
+baseline                  44946.0      27780.0       148082.0
+lean_policy               30318.0      58219.0       143107.0
+supplier_disruption       44594.0      29969.0       147734.0
+
+conservation residual: 0 | min on hand: 0 | demand != sales + unmet: 0 | closed-day rows: 1866 | closed-day demand + receipts: 0
+
+runtime 37.4s | output: {'inventory_daily.parquet': '13.7 MB', 'purchase_orders.parquet': '1.0 MB', 'receipts.parquet': '0.7 MB', 'series.parquet': '0.0 MB', 'suppliers.parquet': '0.0 MB'}
+Store units on Dec 25 (all items):
+          2011  2012  2013  2014  2015
+store_id                              
+CA_1         0     0     0     0     0
+CA_2         7     2     2     6     2
+CA_3         1     4     3     0     4
+CA_4         0     0     0     0     0
+TX_1         0     0     1     0     1
+TX_2         0     0    11     7     0
+TX_3         2     2     1     6     3
+WI_1         0     0     1     0     2
+WI_2         3     3     0     0     1
+WI_3         0     0     1     1     1
+typical store day (median units): 3240
+
+disrupted suppliers: ['SUP_02', 'SUP_07', 'SUP_11'] | series affected: 134
+    window            scenario  fill_pct  stockout_day_pct  pos_placed  share_delayed  mean_delay
+2014-03-01            baseline     96.29              1.49         359          0.184        0.96
+2014-03-01 supplier_disruption     86.58              5.13         344          0.791        9.18
+2015-06-01            baseline     96.23              1.24         333          0.153        0.87
+2015-06-01 supplier_disruption     87.54              4.64         315          0.800        9.38
+2016-02-01            baseline     95.64              1.48         281          0.149        0.95
+2016-02-01 supplier_disruption     86.90              4.89         260          0.823        9.85
+
+selected vs all series, units/day quartiles (all time):
+            count  mean   std   min   25%   50%   75%     max
+all       30490.0  1.13  2.73  0.01  0.19  0.45  1.07  130.79
+selected    500.0  2.00  3.55  0.07  0.38  0.87  1.92   41.35
+zero-day share, all: 0.68 | selected: 0.518
+
+series with a later 56+ day gap, 2015-16: fill 94.23 | mean on hand 42.2 | other series on hand 39.4
+burn_in: 2013-01-01 to 2013-03-31 | label null 0
+train: 2013-04-01 to 2014-12-31 | label null 0
+validation: 2015-01-01 to 2015-12-31 | label null 0
+test: 2016-01-01 to 2016-05-22 | label null 7000
+train rows whose 14-day label looks into validation: 7000 | test rows with no label: 7000
+stockout episodes, baseline train: 1596
+orders that arrived before an earlier order: {'baseline': 51, 'lean_policy': 296, 'supplier_disruption': 85}

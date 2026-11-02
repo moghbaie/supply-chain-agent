@@ -1,0 +1,24 @@
+{
+  "chronology_violations": {
+    "approved_before_purchase": 0,
+    "carrier_before_purchase": 166,
+    "carrier_before_approved": 1359,
+    "customer_before_carrier": 23,
+    "customer_before_purchase": 0,
+    "estimated_before_purchase": 0
+  },
+  "delivered_rows": 96470,
+  "late_rate_pct": 6.77,
+  "delivery_days": {
+    "count": 96470.0,
+    "mean": 12.56,
+    "std": 9.55,
+    "min": 0.53,
+    "25%": 6.77,
+    "50%": 10.22,
+    "75%": 15.72,
+    "max": 209.63
+  },
+  "shipping_limit_after_last_purchase": 4,
+  "orders_multi_seller": 1278
+}

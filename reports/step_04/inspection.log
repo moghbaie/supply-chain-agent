@@ -1,0 +1,76 @@
+saved test rows per model: {'lightgbm': 224000, 'seasonal_naive': 224000, 'timestral': 224000}
+
+10 SKUS, forecast date 2016-04-18, Timestral, spread from slowest to fastest seller
+                 sku     period  actual  pred_mean  error_pct  day_in_80_range_pct
+    FOODS_2_218_TX_1  days 1-14       0        0.2       21.3                100.0
+    FOODS_2_218_TX_1 days 15-28       0        0.3       30.7                100.0
+  HOBBIES_2_049_CA_1  days 1-14       1        1.8       79.8                 93.0
+  HOBBIES_2_049_CA_1 days 15-28       0        2.0      195.7                100.0
+HOUSEHOLD_2_424_CA_1  days 1-14       6        4.7      -22.4                 93.0
+HOUSEHOLD_2_424_CA_1 days 15-28       5        4.7       -6.4                100.0
+    FOODS_1_174_WI_3  days 1-14       2        3.0       52.1                 93.0
+    FOODS_1_174_WI_3 days 15-28       7        3.3      -53.3                 93.0
+HOUSEHOLD_1_034_CA_1  days 1-14      12        9.4      -22.0                 64.0
+HOUSEHOLD_1_034_CA_1 days 15-28      14        9.6      -31.6                 86.0
+HOUSEHOLD_2_239_CA_2  days 1-14       0       11.8     1184.6                100.0
+HOUSEHOLD_2_239_CA_2 days 15-28       6       15.1      151.1                100.0
+HOUSEHOLD_1_301_CA_3  days 1-14      11       17.3       57.3                 71.0
+HOUSEHOLD_1_301_CA_3 days 15-28      19       17.8       -6.3                 93.0
+HOUSEHOLD_1_194_CA_3  days 1-14      32       29.9       -6.6                 64.0
+HOUSEHOLD_1_194_CA_3 days 15-28      24       28.5       18.9                 79.0
+  HOBBIES_1_398_CA_3  days 1-14     108       40.3      -62.7                 71.0
+  HOBBIES_1_398_CA_3 days 15-28      55       40.1      -27.1                 71.0
+HOUSEHOLD_1_110_WI_2  days 1-14     405      340.3      -16.0                 93.0
+HOUSEHOLD_1_110_WI_2 days 15-28     343      317.2       -7.5                 79.0
+
+daily detail, HOUSEHOLD_1_301_CA_3:
+ horizon  actual  mean  q10  q50  q90
+       1     0.0  1.15 0.02 0.97 2.71
+       2     1.0  1.17 0.00 0.97 2.83
+       3     1.0  1.21 0.00 0.99 2.89
+       4     1.0  1.22 0.00 1.00 2.88
+       5     3.0  1.25 0.00 1.01 2.94
+       6     0.0  1.25 0.01 1.01 2.93
+       7     0.0  1.26 0.00 1.02 2.97
+       8     3.0  1.25 0.00 1.02 2.89
+       9     0.0  1.25 0.00 1.02 2.90
+      10     0.0  1.25 0.00 1.02 2.91
+      11     0.0  1.25 0.00 1.02 2.92
+      12     1.0  1.26 0.00 1.03 2.91
+      13     1.0  1.26 0.00 1.03 2.94
+      14     0.0  1.27 0.00 1.02 2.99
+      15     3.0  1.28 0.00 1.03 3.01
+      16     1.0  1.29 0.00 1.02 3.05
+      17     1.0  1.28 0.00 1.02 3.01
+      18     0.0  1.28 0.00 1.02 3.00
+      19     1.0  1.28 0.00 1.02 2.98
+      20     1.0  1.29 0.00 1.02 3.03
+      21     3.0  1.28 0.00 1.01 3.00
+      22     1.0  1.27 0.00 1.01 2.98
+      23     2.0  1.26 0.00 1.01 2.93
+      24     1.0  1.27 0.00 1.01 2.96
+      25     2.0  1.27 0.00 1.01 2.96
+      26     1.0  1.26 0.00 1.00 2.93
+      27     2.0  1.26 0.00 1.01 2.92
+      28     0.0  1.26 0.01 1.00 2.93
+
+ACCURACY BY VOLUME GROUP (test, pinball per unit; ratio below 1 favors Timestral)
+  group  series  units_per_day  share_of_units_pct  seasonal_naive_pinball  lightgbm_pinball  timestral_pinball  ratio_vs_lightgbm
+slowest     125           0.20                 2.5                   1.230             1.212              1.216              1.003
+ second     125           0.56                 7.2                   0.992             0.970              0.968              0.998
+  third     125           1.28                16.4                   0.800             0.777              0.773              0.995
+fastest     125           5.79                74.0                   0.533             0.494              0.478              0.968
+
+INTERVAL CHECK (test, share of days)
+seasonal_naive  below q10   1.7% | above q90   8.9% | mean width   3.50 | actual zero 50.0%
+lightgbm        below q10   2.0% | above q90  10.2% | mean width   3.92 | actual zero 50.0%
+timestral       below q10   5.6% | above q90  10.0% | mean width   3.70 | actual zero 50.0%
+
+ACCURACY BY HORIZON DAY (Timestral, test)
+         wape_mean_pct  bias_mean_pct
+horizon                              
+1                63.96           3.84
+7                65.21           3.42
+14               67.12           3.98
+21               67.56           4.20
+28               68.42           3.56

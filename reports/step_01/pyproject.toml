@@ -1,0 +1,24 @@
+[project]
+name = "supply-chain-agent"
+version = "0.1.0"
+description = "Supply chain reasoning agent"
+requires-python = "==3.12.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "scikit-learn",
+    "matplotlib",
+    "python-dotenv",
+    "pytest",
+    "transformers",
+    "peft",
+    "trl",
+    "datasets",
+    "accelerate",
+    "tabpfn",
+    "kumoai",
+    "kaggle",
+    "six",
+    "soup-cli",
+]

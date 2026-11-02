@@ -1,0 +1,6 @@
+validation sample 5,000, positive rate 0.0880
+{'train_rows': 1000, 'members': 1, 'fit_s': 0.7, 'predict_s': 20.1, 'ms_per_row': 4.03, 'peak_vram_mb': 951, 'pr_auc': 0.6035, 'brier': 0.05158}
+{'train_rows': 1000, 'members': 2, 'fit_s': 0.1, 'predict_s': 27.4, 'ms_per_row': 5.48, 'peak_vram_mb': 951, 'pr_auc': 0.6129, 'brier': 0.05042}
+{'train_rows': 3000, 'members': 1, 'fit_s': 0.1, 'predict_s': 45.1, 'ms_per_row': 9.02, 'peak_vram_mb': 1257, 'pr_auc': 0.6195, 'brier': 0.05011}
+{'train_rows': 3000, 'members': 2, 'fit_s': 0.1, 'predict_s': 60.5, 'ms_per_row': 12.11, 'peak_vram_mb': 1257, 'pr_auc': 0.6306, 'brier': 0.04946}
+{'train_rows': 10000, 'members': 1, 'fit_s': 0.3, 'predict_s': 181.2, 'ms_per_row': 36.24, 'peak_vram_mb': 569, 'pr_auc': 0.6265, 'brier': 0.04897}

@@ -1,0 +1,33 @@
+origins: 162 (2013-04-01 to 2016-05-02) | model: {'size': '28M', 'covariates': 'none'}
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<?, ?it/s]
+baseline: unobserved share of simulation days 2.20%
+  baseline: date 20/162, 31s
+  baseline: date 40/162, 71s
+  baseline: date 60/162, 121s
+  baseline: date 80/162, 176s
+  baseline: date 100/162, 233s
+  baseline: date 120/162, 295s
+  baseline: date 140/162, 369s
+  baseline: date 160/162, 446s
+  baseline: date 162/162, 454s
+lean_policy: unobserved share of simulation days 5.36%
+  lean_policy: date 20/162, 37s
+  lean_policy: date 40/162, 81s
+  lean_policy: date 60/162, 131s
+  lean_policy: date 80/162, 186s
+  lean_policy: date 100/162, 243s
+  lean_policy: date 120/162, 305s
+  lean_policy: date 140/162, 379s
+  lean_policy: date 160/162, 455s
+  lean_policy: date 162/162, 463s
+supplier_disruption: unobserved share of simulation days 2.51%
+  supplier_disruption: date 20/162, 37s
+  supplier_disruption: date 40/162, 81s
+  supplier_disruption: date 60/162, 132s
+  supplier_disruption: date 80/162, 188s
+  supplier_disruption: date 100/162, 245s
+  supplier_disruption: date 120/162, 308s
+  supplier_disruption: date 140/162, 382s
+  supplier_disruption: date 160/162, 459s
+  supplier_disruption: date 162/162, 467s
+done

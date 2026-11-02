@@ -1,0 +1,17 @@
+base: hf-internal-testing/tiny-random-LlamaForCausalLM
+task: sft
+backend: transformers
+data:
+  train: reports/step_01/soup_tiny/train.jsonl
+  format: alpaca
+  max_length: 64
+training:
+  epochs: 1
+  lr: 1e-3
+  batch_size: 2
+  lora:
+    r: 4
+    alpha: 8
+    target_modules: [q_proj, v_proj]
+  quantization: none
+output: reports/step_01/soup_tiny/output

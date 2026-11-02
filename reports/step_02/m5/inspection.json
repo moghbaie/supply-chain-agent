@@ -1,0 +1,126 @@
+{
+  "tables": {
+    "calendar": {
+      "rows": 1969,
+      "columns": 14,
+      "dtypes": {
+        "str": 7,
+        "int64": 7
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "d"
+      ],
+      "key_duplicates": 0,
+      "missing": {
+        "event_name_1": {
+          "count": 1807,
+          "pct": 91.77
+        },
+        "event_type_1": {
+          "count": 1807,
+          "pct": 91.77
+        },
+        "event_name_2": {
+          "count": 1964,
+          "pct": 99.75
+        },
+        "event_type_2": {
+          "count": 1964,
+          "pct": 99.75
+        }
+      },
+      "dates": {
+        "date": {
+          "min": "2011-01-29 00:00:00",
+          "max": "2016-06-19 00:00:00",
+          "unparsed_nonnull": 0
+        }
+      }
+    },
+    "sales_train_evaluation": {
+      "rows": 30490,
+      "columns": 1947,
+      "dtypes": {
+        "int64": 1941,
+        "str": 6
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "id"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    },
+    "sales_train_validation": {
+      "rows": 30490,
+      "columns": 1919,
+      "dtypes": {
+        "int64": 1913,
+        "str": 6
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "id"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    },
+    "sample_submission": {
+      "rows": 60980,
+      "columns": 29,
+      "dtypes": {
+        "int64": 28,
+        "str": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": null,
+      "key_duplicates": null,
+      "missing": {},
+      "dates": {}
+    },
+    "sell_prices": {
+      "rows": 6841121,
+      "columns": 4,
+      "dtypes": {
+        "str": 2,
+        "int64": 1,
+        "float64": 1
+      },
+      "exact_duplicate_rows": 0,
+      "key": [
+        "store_id",
+        "item_id",
+        "wm_yr_wk"
+      ],
+      "key_duplicates": 0,
+      "missing": {},
+      "dates": {}
+    }
+  },
+  "foreign_keys": [
+    {
+      "child": "sell_prices.wm_yr_wk",
+      "parent": "calendar.wm_yr_wk",
+      "unique_values": 282,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "sales_train_evaluation.item_id",
+      "parent": "sell_prices.item_id",
+      "unique_values": 3049,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    },
+    {
+      "child": "sales_train_evaluation.store_id",
+      "parent": "sell_prices.store_id",
+      "unique_values": 10,
+      "unmatched_unique": 0,
+      "row_coverage_pct": 100.0
+    }
+  ]
+}

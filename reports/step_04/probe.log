@@ -1,0 +1,7 @@
+context shape: (500, 1494) | observed share: 0.898 | actual units: 25384
+5M/cuda/batch64 {'series': 500, 'seconds': 0.9, 'ms_per_series': 1.8, 'peak_vram_mb': 69, 'shape': [500, 1, 28, 21], 'wape_median_pct': 66.07, 'wape_mean_pct': 72.65, 'bias_mean_pct': 8.55, 'bias_median_pct': -19.42}
+5M/cpu/batch64 {'series': 500, 'seconds': 2.7, 'ms_per_series': 5.4, 'peak_vram_mb': None, 'shape': [500, 1, 28, 21], 'wape_median_pct': 66.07, 'wape_mean_pct': 72.65, 'bias_mean_pct': 8.55, 'bias_median_pct': -19.42}
+28M/cuda/batch64 {'series': 500, 'seconds': 2.6, 'ms_per_series': 5.2, 'peak_vram_mb': 191, 'shape': [500, 1, 28, 21], 'wape_median_pct': 65.67, 'wape_mean_pct': 72.27, 'bias_mean_pct': 8.46, 'bias_median_pct': -19.94}
+28M/cpu/batch64 {'series': 500, 'seconds': 13.3, 'ms_per_series': 26.6, 'peak_vram_mb': None, 'shape': [500, 1, 28, 21], 'wape_median_pct': 65.67, 'wape_mean_pct': 72.27, 'bias_mean_pct': 8.46, 'bias_median_pct': -19.94}
+123M/cuda/batch64 {'series': 500, 'seconds': 9.2, 'ms_per_series': 18.3, 'peak_vram_mb': 603, 'shape': [500, 1, 28, 21], 'wape_median_pct': 65.52, 'wape_mean_pct': 72.01, 'bias_mean_pct': 7.64, 'bias_median_pct': -20.61}
+209M/cuda/batch64 {'series': 500, 'seconds': 17.1, 'ms_per_series': 34.2, 'peak_vram_mb': 960, 'shape': [500, 1, 28, 21], 'wape_median_pct': 65.27, 'wape_mean_pct': 72.18, 'bias_mean_pct': 8.82, 'bias_median_pct': -20.11}

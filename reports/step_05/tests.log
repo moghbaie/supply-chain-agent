@@ -1,0 +1,37 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Scripts\python.exe
+rootdir: C:\Users\Mehrnoosh\Documents\supply-chain-agent
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.3
+collecting ... collected 28 items
+
+tests/evaluation/test_stockout.py::test_label_matches_unmet_in_next_14_days PASSED [  3%]
+tests/evaluation/test_stockout.py::test_label_ignores_stockout_on_the_review_day PASSED [  7%]
+tests/evaluation/test_stockout.py::test_labels_are_binary_and_complete PASSED [ 10%]
+tests/evaluation/test_stockout.py::test_features_exclude_hidden_information PASSED [ 14%]
+tests/evaluation/test_stockout.py::test_features_ignore_everything_after_the_origin PASSED [ 17%]
+tests/evaluation/test_stockout.py::test_open_order_features_on_known_case PASSED [ 21%]
+tests/evaluation/test_stockout.py::test_supplier_history_uses_only_receipts_before_origin PASSED [ 25%]
+tests/evaluation/test_stockout.py::test_scenario_panel_marks_sold_out_days_and_uses_no_unmet PASSED [ 28%]
+tests/evaluation/test_stockout.py::test_splits_keep_whole_label_windows_inside_their_period PASSED [ 32%]
+tests/evaluation/test_stockout.py::test_burn_in_is_excluded PASSED       [ 35%]
+tests/evaluation/test_stockout.py::test_split_function_purges_boundary_origins PASSED [ 39%]
+tests/evaluation/test_stockout.py::test_predictions_never_use_purged_rows PASSED [ 42%]
+tests/evaluation/test_stockout.py::test_rows_unique_and_complete PASSED  [ 46%]
+tests/evaluation/test_stockout.py::test_only_documented_feature_has_missing_values PASSED [ 50%]
+tests/evaluation/test_stockout.py::test_next_due_missing_only_without_upcoming_orders PASSED [ 53%]
+tests/evaluation/test_stockout.py::test_no_infinite_feature_values PASSED [ 57%]
+tests/evaluation/test_stockout.py::test_tabpfn_handles_missing_values_and_is_reproducible PASSED [ 60%]
+tests/evaluation/test_stockout.py::test_class_imbalance_is_present_and_within_expected_range PASSED [ 64%]
+tests/evaluation/test_stockout.py::test_training_sample_preserves_positive_rate_roughly PASSED [ 67%]
+tests/evaluation/test_stockout.py::test_all_saved_probabilities_valid PASSED [ 71%]
+tests/evaluation/test_stockout.py::test_saved_predictions_have_all_rows PASSED [ 75%]
+tests/evaluation/test_stockout.py::test_saved_metrics_recompute_from_predictions PASSED [ 78%]
+tests/evaluation/test_stockout.py::test_tabpfn_beats_simple_baselines_on_test PASSED [ 82%]
+tests/evaluation/test_stockout.py::test_tabpfn_calibration_within_acceptable_gap PASSED [ 85%]
+tests/evaluation/test_stockout.py::test_calibration_metric_on_known_values PASSED [ 89%]
+tests/evaluation/test_stockout.py::test_constant_baseline_has_no_skill PASSED [ 92%]
+tests/evaluation/test_stockout.py::test_cover_rule_risk_never_rises_with_more_cover PASSED [ 96%]
+tests/evaluation/test_stockout.py::test_logistic_handles_extreme_values PASSED [100%]
+
+============================= 28 passed in 13.32s =============================

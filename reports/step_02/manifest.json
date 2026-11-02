@@ -1,0 +1,62 @@
+{
+  "m5": {
+    "calendar.csv": {
+      "bytes": 103469,
+      "sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+    },
+    "sales_train_evaluation.csv": {
+      "bytes": 121736518,
+      "sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0"
+    },
+    "sales_train_validation.csv": {
+      "bytes": 120007726,
+      "sha256": "f368e66ed1dbecb48b2cc8fc589bf68b3deddbbb36bf5c88b4d6d0a09b9b6724"
+    },
+    "sample_submission.csv": {
+      "bytes": 5228786,
+      "sha256": "eb7597afbec367475ef25dc6dbbc009b8faa47fa2107252c72a029e3cdf72343"
+    },
+    "sell_prices.csv": {
+      "bytes": 203395785,
+      "sha256": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+    }
+  },
+  "olist": {
+    "olist_customers_dataset.csv": {
+      "bytes": 9033957,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+    },
+    "olist_geolocation_dataset.csv": {
+      "bytes": 61273883,
+      "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6"
+    },
+    "olist_order_items_dataset.csv": {
+      "bytes": 15438671,
+      "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279"
+    },
+    "olist_order_payments_dataset.csv": {
+      "bytes": 5777138,
+      "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0"
+    },
+    "olist_order_reviews_dataset.csv": {
+      "bytes": 14451670,
+      "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7"
+    },
+    "olist_orders_dataset.csv": {
+      "bytes": 17654914,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+    },
+    "olist_products_dataset.csv": {
+      "bytes": 2379446,
+      "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc"
+    },
+    "olist_sellers_dataset.csv": {
+      "bytes": 174703,
+      "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e"
+    },
+    "product_category_name_translation.csv": {
+      "bytes": 2613,
+      "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+    }
+  }
+}

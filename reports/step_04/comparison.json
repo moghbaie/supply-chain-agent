@@ -1,0 +1,14 @@
+{
+  "seasonal_naive": {
+    "pinball_ratio": 0.9242311199657758,
+    "ci95_low": 0.8992330379341148,
+    "ci95_high": 0.9478502071294784,
+    "series_where_timestral_better_pct": 55.800000000000004
+  },
+  "lightgbm": {
+    "pinball_ratio": 0.9789605345905265,
+    "ci95_low": 0.9702094790332809,
+    "ci95_high": 0.9873141812437123,
+    "series_where_timestral_better_pct": 47.8
+  }
+}
