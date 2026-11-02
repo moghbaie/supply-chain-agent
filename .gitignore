@@ -15,3 +15,8 @@ reports/step_02/**/*_preview.csv
 reports/step_02/*_inspection.log
 # Throwaway training output from the Step 1 smoke test
 reports/step_01/soup_tiny/output/
+# Individual Olist rows from Step 6
+reports/step_06/kumo_olist_predictions_preview.csv
+reports/step_06/kumo_olist_run.log
+reports/step_06/kumo_olist_probe.log
+reports/step_06/baselines.log

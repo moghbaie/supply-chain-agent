@@ -1,0 +1,32 @@
+{
+  "instance table (order)": [
+    "order_id",
+    "customer_id",
+    "order_purchase_timestamp",
+    "order_estimated_delivery_date",
+    "label for context rows only"
+  ],
+  "customers": [
+    "customer_id",
+    "customer_state"
+  ],
+  "items": [
+    "order_id",
+    "order_item_id",
+    "seller_id",
+    "product_id",
+    "price",
+    "freight_value"
+  ],
+  "sellers": [
+    "seller_id",
+    "seller_state"
+  ],
+  "products": [
+    "product_id",
+    "category",
+    "weight",
+    "dimensions",
+    "photos"
+  ]
+}

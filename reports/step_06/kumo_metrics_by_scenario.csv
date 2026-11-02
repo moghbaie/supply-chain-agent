@@ -1,0 +1,10 @@
+scenario,model,rows,positive_pct,pr_auc,roc_auc,brier,ece
+baseline,supplier_rule,869,15.30495,0.2917,0.73619,0.11547,0.02981
+baseline,lightgbm,869,15.30495,0.30103,0.74064,0.11681,0.03486
+baseline,kumo,869,15.30495,0.32151,0.71715,0.11972,0.04345
+lean_policy,supplier_rule,1300,15.84615,0.3126,0.74516,0.11682,0.02108
+lean_policy,lightgbm,1300,15.84615,0.31527,0.73835,0.11972,0.03822
+lean_policy,kumo,1300,15.84615,0.30107,0.72027,0.12192,0.03358
+supplier_disruption,supplier_rule,831,21.41998,0.32457,0.68734,0.15761,0.05987
+supplier_disruption,lightgbm,831,21.41998,0.38379,0.71923,0.1553,0.06701
+supplier_disruption,kumo,831,21.41998,0.36567,0.72613,0.15336,0.04634

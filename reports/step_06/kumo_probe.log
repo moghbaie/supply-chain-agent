@@ -1,0 +1,8 @@
+bytes 100486 | context 100 | predict 5 | past deliveries ctx 1500
+sample context row [0, 0, '2013-09-02T00:00:00.000000Z', False]
+sample order [0, 0, 6, 32.0, 17.0, 2]
+sample delivery [0, 0, 0, '2013-08-29T00:00:00.000000Z', 264.0, 0.0]
+forbidden terms in payload: none
+HTTP 200
+{"id": "pred_025556252c38", "model": "kumo-relational", "predictions": [{"id": "100", "row_index": 0, "prediction": false, "probabilities": {"false": 0.9302051067352295, "true": 0.0697949230670929}, "metadata": {"backend_status": "driver"}}, {"id": "101", "row_index": 1, "prediction": false, "probabilities": {"false": 0.9263036847114563, "true": 0.07369627058506012}, "metadata": {"backend_status": "driver"}}, {"id": "102", "row_index": 2, "prediction": false, "probabilities": {"false": 0.531209409236908, "true": 0.4687906503677368}, "metadata": {"backend_status": "driver"}}, {"id": "103", "row_index": 3, "prediction": false, "probabilities": {"false": 0.8745065331459045, "true": 0.1254934519
+truth [0, 0, 0, 0, 0]

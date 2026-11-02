@@ -1,0 +1,79 @@
+
+validation: context 1,000 (latest order 2014-12-22, latest receipt 2014-12-31), scoring 2,000, positive 16.55%
+  validation batch 0: 1.49 MB, 2.9s, mean 0.198
+  validation batch 1: 1.49 MB, 3.1s, mean 0.162
+  validation batch 2: 1.49 MB, 2.9s, mean 0.197
+  validation batch 3: 1.49 MB, 3.1s, mean 0.127
+                 rows  positive_pct  pr_auc  roc_auc   brier     ece  mean_predicted_pct  recall_top5_pct
+constant       2000.0         16.55  0.1655   0.5000  0.1381  0.0219             16.3050           6.0423
+supplier_rule  2000.0         16.55  0.2902   0.7128  0.1248  0.0144             16.2928           8.1571
+lightgbm       2000.0         16.55  0.3290   0.7251  0.1253  0.0278             15.4849          11.4804
+kumo           2000.0         16.55  0.3006   0.6894  0.1292  0.0253             17.1045          13.8973
+
+test: context 1,000 (latest order 2015-12-21, latest receipt 2015-12-29), scoring 3,000, positive 17.23%
+  test batch 0: 1.49 MB, 2.9s, mean 0.165
+  test batch 1: 1.49 MB, 3.1s, mean 0.199
+  test batch 2: 1.49 MB, 2.9s, mean 0.197
+  test batch 3: 1.49 MB, 3.1s, mean 0.199
+  test batch 4: 1.49 MB, 2.9s, mean 0.175
+  test batch 5: 1.49 MB, 3.1s, mean 0.170
+                 rows  positive_pct  pr_auc  roc_auc   brier     ece  mean_predicted_pct  recall_top5_pct
+constant       3000.0       17.2333  0.1723   0.5000  0.1427  0.0413             16.5067           4.4487
+supplier_rule  3000.0       17.2333  0.3115   0.7295  0.1277  0.0161             16.9182          10.4449
+lightgbm       3000.0       17.2333  0.3355   0.7346  0.1287  0.0351             18.7995          10.8317
+kumo           3000.0       17.2333  0.3250   0.7239  0.1300  0.0249             18.4215          11.2186
+
+TEST by scenario (scenario used for scoring only, never sent)
+           scenario         model  rows  positive_pct  pr_auc  roc_auc  brier    ece
+           baseline supplier_rule   869       15.3049  0.2917   0.7362 0.1155 0.0298
+           baseline      lightgbm   869       15.3049  0.3010   0.7406 0.1168 0.0349
+           baseline          kumo   869       15.3049  0.3215   0.7171 0.1197 0.0434
+        lean_policy supplier_rule  1300       15.8462  0.3126   0.7452 0.1168 0.0211
+        lean_policy      lightgbm  1300       15.8462  0.3153   0.7383 0.1197 0.0382
+        lean_policy          kumo  1300       15.8462  0.3011   0.7203 0.1219 0.0336
+supplier_disruption supplier_rule   831       21.4200  0.3246   0.6873 0.1576 0.0599
+supplier_disruption      lightgbm   831       21.4200  0.3838   0.7192 0.1553 0.0670
+supplier_disruption          kumo   831       21.4200  0.3657   0.7261 0.1534 0.0463
+
+Kumo minus rival on test, series bootstrap [2.5%, median, 97.5%]; PR-AUC above 0 and Brier below 0 favor Kumo:
+ {"supplier_rule": {"pr_auc": [-0.003, 0.0142, 0.032], "brier": [0.0006, 0.00229, 0.00405]}, "lightgbm": {"pr_auc": [-0.0404, -0.0122, 0.0179], "brier": [-0.00137, 0.00141, 0.00398]}}
+
+UNSEEN ENTITIES: test orders for items with no received order history: 0
+suppliers in test not in context: []
+
+20 PREDICTIONS (test)
+order_date supplier_id  quantity  promised_lead_days  supplier_late_rate  supplier_recent_late_rate  kumo  lightgbm  supplier_rule  delayed  delay_days
+2016-04-25      SUP_11        54                  15               0.483                      0.704 0.430     0.543          0.378        1           5
+2016-03-14      SUP_03         4                  21               0.351                      0.400 0.352     0.366          0.344        0           0
+2016-03-28      SUP_03        24                  21               0.362                      0.455 0.331     0.311          0.344        1           7
+2016-01-25      SUP_03        54                  21               0.381                      0.282 0.311     0.393          0.344        0           0
+2016-03-07      SUP_04         4                  12               0.312                      0.276 0.277     0.314          0.340        1           5
+2016-02-01      SUP_04        24                  12               0.349                      0.250 0.247     0.313          0.344        1           5
+2016-02-08      SUP_02        12                  19               0.207                      0.102 0.219     0.158          0.279        1           9
+2016-01-25      SUP_09        32                   5               0.125                      0.060 0.203     0.108          0.156        0           0
+2016-02-29      SUP_09        18                   5               0.143                      0.078 0.184     0.148          0.156        0           0
+2016-05-09      SUP_09        28                   5               0.149                      0.090 0.167     0.170          0.156        0           0
+2016-02-22      SUP_07        12                   6               0.041                      0.000 0.153     0.070          0.051        0           0
+2016-03-21      SUP_10        12                  13               0.159                      0.151 0.138     0.120          0.156        1           6
+2016-05-16      SUP_09        12                   5               0.147                      0.110 0.129     0.134          0.156        0           0
+2016-04-11      SUP_02         6                  19               0.142                      0.179 0.119     0.163          0.156        0           0
+2016-02-01      SUP_07        12                   6               0.047                      0.017 0.107     0.063          0.051        0           0
+2016-04-25      SUP_07       270                   6               0.227                      0.082 0.097     0.114          0.279        0           0
+2016-01-11      SUP_07        16                   6               0.047                      0.025 0.091     0.085          0.051        0           0
+2016-05-09      SUP_10        24                  13               0.166                      0.106 0.083     0.140          0.156        0           0
+2016-05-09      SUP_07         4                   6               0.041                      0.031 0.073     0.042          0.051        0           0
+2016-04-11      SUP_00        18                  18               0.045                      0.053 0.047     0.036          0.051        0           0
+
+RELIABILITY, Kumo, test
+  bin  rows  predicted  observed
+   1   300      0.069     0.053
+   2   300      0.090     0.053
+   3   300      0.104     0.077
+   4   300      0.125     0.100
+   5   300      0.146     0.083
+   6   300      0.175     0.163
+   7   300      0.208     0.203
+   8   300      0.254     0.257
+   9   300      0.312     0.340
+  10   300      0.360     0.393
+usage: {'validation': {'calls': 4, 'bytes': 5958445, 'seconds': 12.107471942901611}, 'test': {'calls': 6, 'bytes': 8938516, 'seconds': 18.005281686782837}}
