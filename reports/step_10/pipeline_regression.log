@@ -1,0 +1,106 @@
+GPU in use after loading 0.69 GB
+baseline: 3,000 cases over 6 reviews in 398s, peak GPU 1.26 GB
+matched rows 3,000
+                   column  rows_not_close  largest_gap
+                  on_hand               0       0.0000
+                 on_order               0       0.0000
+            reorder_point               0       0.0000
+              order_up_to               0       0.0000
+            ordered_today               0       0.0000
+                    price               0       0.0000
+                fc_mean_7               0       0.0000
+               fc_mean_14               0       0.0000
+               fc_mean_28               0       0.0000
+            fc_q10_sum_14               0       0.0000
+            fc_q90_sum_14               0       0.0000
+            fc_q90_max_14               0       0.0000
+               cover_days               0       0.0000
+                 open_pos               0       0.0000
+             units_due_14               0       0.0000
+            units_overdue               0       0.0000
+         days_overdue_max               0       0.0000
+         days_to_next_due               0       0.0000
+       supplier_late_rate               0       0.0000
+      supplier_mean_delay               0       0.0000
+        supplier_pos_seen               0       0.0000
+            sales_mean_28               0       0.0000
+      sales_zero_share_28               0       0.0000
+         sold_out_days_28               0       0.0000
+supplier_recent_late_rate               0       0.0000
+            stockout_risk               0       0.0005
+   stockout_risk_lightgbm               0       0.0000
+                p_monitor               2       0.0052
+ p_reorder_recommendation               1       0.0057
+p_expedite_recommendation               1       0.0036
+           p_human_review               0       0.0008
+UltraBERT category same on 3,000 of 3,000; value band same on 3,000
+lean_policy: 3,000 cases over 6 reviews in 397s, peak GPU 1.26 GB
+matched rows 3,000
+                   column  rows_not_close  largest_gap
+                  on_hand               0       0.0000
+                 on_order               0       0.0000
+            reorder_point               0       0.0000
+              order_up_to               0       0.0000
+            ordered_today               0       0.0000
+                    price               0       0.0000
+                fc_mean_7               0       0.0000
+               fc_mean_14               0       0.0000
+               fc_mean_28               0       0.0000
+            fc_q10_sum_14               0       0.0000
+            fc_q90_sum_14               0       0.0000
+            fc_q90_max_14               0       0.0000
+               cover_days               0       0.0000
+                 open_pos               0       0.0000
+             units_due_14               0       0.0000
+            units_overdue               0       0.0000
+         days_overdue_max               0       0.0000
+         days_to_next_due               0       0.0000
+       supplier_late_rate               0       0.0000
+      supplier_mean_delay               0       0.0000
+        supplier_pos_seen               0       0.0000
+            sales_mean_28               0       0.0000
+      sales_zero_share_28               0       0.0000
+         sold_out_days_28               0       0.0000
+supplier_recent_late_rate               0       0.0000
+            stockout_risk               0       0.0005
+   stockout_risk_lightgbm               0       0.0000
+                p_monitor               8       0.0077
+ p_reorder_recommendation               0       0.0002
+p_expedite_recommendation               6       0.0117
+           p_human_review               4       0.0146
+UltraBERT category same on 3,000 of 3,000; value band same on 3,000
+supplier_disruption: 3,000 cases over 6 reviews in 395s, peak GPU 1.26 GB
+matched rows 3,000
+                   column  rows_not_close  largest_gap
+                  on_hand               0       0.0000
+                 on_order               0       0.0000
+            reorder_point               0       0.0000
+              order_up_to               0       0.0000
+            ordered_today               0       0.0000
+                    price               0       0.0000
+                fc_mean_7               0       0.0000
+               fc_mean_14               0       0.0000
+               fc_mean_28               0       0.0000
+            fc_q10_sum_14               0       0.0000
+            fc_q90_sum_14               0       0.0000
+            fc_q90_max_14               0       0.0000
+               cover_days               0       0.0000
+                 open_pos               0       0.0000
+             units_due_14               0       0.0000
+            units_overdue               0       0.0000
+         days_overdue_max               0       0.0000
+         days_to_next_due               0       0.0000
+       supplier_late_rate               0       0.0000
+      supplier_mean_delay               0       0.0000
+        supplier_pos_seen               0       0.0000
+            sales_mean_28               0       0.0000
+      sales_zero_share_28               0       0.0000
+         sold_out_days_28               0       0.0000
+supplier_recent_late_rate               0       0.0000
+            stockout_risk               0       0.0004
+   stockout_risk_lightgbm               0       0.0000
+                p_monitor               3       0.0109
+ p_reorder_recommendation               0       0.0002
+p_expedite_recommendation               3       0.0108
+           p_human_review               2       0.0022
+UltraBERT category same on 3,000 of 3,000; value band same on 3,000

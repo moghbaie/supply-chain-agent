@@ -1,0 +1,17 @@
+# Step 10 replay settings, fixed before any replay ran and not tuned on the test period.
+# All inventory, supplier and cost values are synthetic. Only demand comes from M5 sales.
+seed: 42
+start: "2016-01-01"
+expedite:
+  remaining_time_fraction: 0.5        # assumption: paying to expedite halves the time left until the order arrives
+  weak_remaining_time_fraction: 0.75  # sensitivity run for the same assumption
+llm_sample:
+  cases_per_category: 25
+variants:
+  reorder_point: {levels: reorder_point}
+  forecast_driven: {levels: forecast}
+  policy_layer: {levels: reorder_point, decide: policy}
+  agent: {levels: reorder_point, decide: ultrabert}
+  agent_conflict: {levels: reorder_point, decide: ultrabert, conflict_rule: true}
+  agent_conflict_decline_review: {levels: reorder_point, decide: ultrabert, conflict_rule: true, person: decline_review}
+  agent_conflict_weak_expedite: {levels: reorder_point, decide: ultrabert, conflict_rule: true, expedite: weak}

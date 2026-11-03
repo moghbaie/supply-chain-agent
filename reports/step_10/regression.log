@@ -1,0 +1,36 @@
+
+baseline: 500 series, 143 days 2016-01-01 to 2016-05-22; open orders at start 246; start on hand 21,650; policy Policy(z=1.28, review_weekday=0, cover_days=14, window_days=56)
+  on_hand_start: 0 of 71,500 rows differ
+  received: 0 of 71,500 rows differ
+  sales: 0 of 71,500 rows differ
+  unmet: 0 of 71,500 rows differ
+  on_hand_end: 0 of 71,500 rows differ
+  on_order_end: 0 of 71,500 rows differ
+  reorder_point: 0 of 71,500 rows differ
+  order_up_to: 0 of 71,500 rows differ
+  ordered: 0 of 71,500 rows differ
+  with the replay's own delay draws: unmet 4,566 against saved 4,564; ordered 132,616 against 132,520
+
+lean_policy: 500 series, 143 days 2016-01-01 to 2016-05-22; open orders at start 349; start on hand 14,976; policy Policy(z=0.5, review_weekday=0, cover_days=7, window_days=56)
+  on_hand_start: 0 of 71,500 rows differ
+  received: 0 of 71,500 rows differ
+  sales: 0 of 71,500 rows differ
+  unmet: 0 of 71,500 rows differ
+  on_hand_end: 0 of 71,500 rows differ
+  on_order_end: 0 of 71,500 rows differ
+  reorder_point: 0 of 71,500 rows differ
+  order_up_to: 0 of 71,500 rows differ
+  ordered: 0 of 71,500 rows differ
+  with the replay's own delay draws: unmet 9,134 against saved 9,093; ordered 127,580 against 127,440
+
+supplier_disruption: 500 series, 143 days 2016-01-01 to 2016-05-22; open orders at start 259; start on hand 21,738; policy Policy(z=1.28, review_weekday=0, cover_days=14, window_days=56)
+  on_hand_start: 0 of 71,500 rows differ
+  received: 0 of 71,500 rows differ
+  sales: 0 of 71,500 rows differ
+  unmet: 0 of 71,500 rows differ
+  on_hand_end: 0 of 71,500 rows differ
+  on_order_end: 0 of 71,500 rows differ
+  reorder_point: 0 of 71,500 rows differ
+  order_up_to: 0 of 71,500 rows differ
+  ordered: 0 of 71,500 rows differ
+  with the replay's own delay draws: unmet 6,035 against saved 6,157; ordered 131,790 against 131,100
