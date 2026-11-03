@@ -81,3 +81,7 @@ On supplier disruption, Kumo has the best Brier (0.1534) and ROC-AUC (0.7261) of
 - Kumo benchmark on Olist: met, on a 5,000-order test sample, with the limits above.
 
 ## STOP: Awaiting user approval to proceed
+
+## Decision after this step
+The user approved replacing Kumo with LightGBM as the agent's delay-risk model. This departs from the plan, which names Kumo for this step. LightGBM's PR-AUC was slightly higher on both datasets, with neither gap clear, and it runs locally.
+Sending to Kumo is now off in `src/supplier/kumo_client.py`, and `scripts/kumo_probe.py` stops before contacting Kumo. Saved Kumo results stay as a comparison.

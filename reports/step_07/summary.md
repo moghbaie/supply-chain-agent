@@ -118,3 +118,9 @@ Other observations:
 - **Disk:** the fine-tuned weights take 604 MB and stay out of git.
 
 Every choice other than monitor still needs a person's approval, whichever route produces it. **Fine-tuned UltraBERT is not adopted in place of the policy; that is a user decision.**
+
+## Decision after the UltraBERT comparison
+The user approved Step 7 and chose fine-tuned UltraBERT as the escalation classifier for the agent, in place of the policy. The policy thresholds and saved Jev answers stay as comparisons, and sending to Jev stays off.
+Known costs of this choice, from the test results above: false alarms of 20.5% against the policy's 10.8%, 2,585 more actions for people to check, and implausible reorder choices on two edge cases. Every choice other than monitor still needs a person's approval.
+No safety threshold was set in advance.
+The user later accepted critical recall of 0.41 as a known limit and chose to continue. `scripts/check_api_keys.py` no longer contacts Jev or Kumo.

@@ -11,6 +11,7 @@ import urllib.request
 import numpy as np
 import pandas as pd
 
+SENDING_ENABLED = False
 URL = "https://ai.api.nvidia.com/v1/structured-data/nvidia/kumo-relational/predictions"
 HISTORY_ROWS = 15
 ANCHOR = "__kumo_anchor_time"
@@ -89,6 +90,8 @@ def build_request(context_rows, predict_rows, history, supplier_numbers):
 
 def send(body, key, attempts=4):
     """Post a request and return (status, parsed or text), retrying only on rate limits and server errors."""
+    if not SENDING_ENABLED:
+        raise RuntimeError("Sending to Kumo is off; LightGBM is the delay-risk model and saved Kumo results stay as a comparison.")
     data = json.dumps(body).encode()
     for attempt in range(attempts):
         request = urllib.request.Request(URL, data=data, headers={"Authorization": f"Bearer {key}", "Accept": "application/json", "Content-Type": "application/json"})

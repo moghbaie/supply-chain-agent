@@ -1,4 +1,5 @@
-"""Run one Kumo prediction on small synthetic tables; the key comes from KUMO_API_KEY."""
+"""Run one Kumo prediction on small synthetic tables; the key comes from KUMO_API_KEY. Disabled, because sending to Kumo is off."""
+raise SystemExit("Sending to Kumo is off.")
 import os
 
 import numpy as np
