@@ -1,0 +1,28 @@
+train 8,000 (last origin 2015-09-14), mix {'monitor': 3978, 'expedite_recommendation': 3235, 'human_review': 411, 'reorder_recommendation': 376}
+dev 3,000 (first origin 2015-10-05), mix {'monitor': 2759, 'expedite_recommendation': 199, 'reorder_recommendation': 24, 'human_review': 18}
+class weights: {'monitor': np.float64(0.5), 'reorder_recommendation': np.float64(5.32), 'expedite_recommendation': np.float64(0.62), 'human_review': np.float64(4.87)}
+W1102 11:57:17.311000 59380 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/218 [00:00<?, ?it/s]Loading weights:  26%|##5       | 56/218 [00:00<00:00, 495.86it/s]Loading weights:  49%|####8     | 106/218 [00:00<00:00, 380.82it/s]Loading weights: 100%|##########| 218/218 [00:00<00:00, 655.93it/s]
+[transformers] [1mUltrabertForSequenceClassification LOAD REPORT[0m from: dmis-lab/UltraBERT-150M
+Key                 | Status     | 
+--------------------+------------+-
+head.linear1.weight | UNEXPECTED | 
+cls.weight          | UNEXPECTED | 
+head.linear2.weight | UNEXPECTED | 
+classifier.weight   | MISSING    | 
+classifier.bias     | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  epoch 0 batch 500, loss 0.865, 918s
+  epoch 0 batch 1000, loss 0.674, 1835s
+epoch 0: dev macro-F1 0.4013, 2027s, {'monitor': 1816, 'reorder_recommendation': 705, 'expedite_recommendation': 417, 'human_review': 62}
+  epoch 1 batch 500, loss 0.659, 944s
+  epoch 1 batch 1000, loss 0.639, 1895s
+epoch 1: dev macro-F1 0.4836, 2086s, {'monitor': 2303, 'expedite_recommendation': 408, 'reorder_recommendation': 266, 'human_review': 23}
+best epoch 1, dev macro-F1 0.4836, elapsed 4125s
+test fine-tuned scored in 1716s
+Loading weights:   0%|          | 0/218 [00:00<?, ?it/s]Loading weights:  17%|#6        | 37/218 [00:00<00:00, 294.92it/s]Loading weights:  31%|###       | 67/218 [00:00<00:00, 256.48it/s]Loading weights:  45%|####4     | 98/218 [00:00<00:00, 266.86it/s]Loading weights:  83%|########3 | 181/218 [00:00<00:00, 464.08it/s]Loading weights: 100%|##########| 218/218 [00:00<00:00, 463.70it/s]
+test zero-shot scored in 634s
+done, total 6475s

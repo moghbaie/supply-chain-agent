@@ -85,6 +85,7 @@ rpds-py==2026.9.1
 safetensors==0.8.0
 scikit-learn==1.9.1
 scipy==1.18.1
+sentence-transformers==6.2.0
 sentencepiece==0.2.2
 setuptools==78.1.0
 shellingham==1.5.4

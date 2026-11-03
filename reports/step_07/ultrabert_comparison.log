@@ -1,0 +1,95 @@
+test rows 27,000, probabilities (27000, 4), similarities (27000, 4)
+fine-tuned probability sums 1.0000 to 1.0000; similarity range 0.300 to 0.532
+
+TEST METRICS
+ model                              jev  policy_baseline  ultrabert_fine_tuned  ultrabert_fine_tuned_with_overrides  ultrabert_zero_shot  ultrabert_zero_shot_with_overrides
+macro_f1                        0.4284           0.4914                0.4922                               0.4922               0.1653                              0.1707
+accuracy                        0.8607           0.8648                0.7891                               0.7891               0.2883                              0.2915
+critical_recall                 0.2355           0.3841                0.4130                               0.4130               0.0000                              0.0000
+critical_acted_on               0.9348           0.8877                0.9565                               0.9565               0.9312                              0.9312
+any_stockout_acted_on           0.7351           0.7530                0.8383                               0.8383               0.9590                              0.9590
+false_alarm_share               0.0989           0.1083                0.2053                               0.2053               0.7731                              0.7731
+recall_monitor                  0.9011           0.8917                0.7947                               0.7947               0.2269                              0.2269
+recall_reorder_recommendation   0.1303           0.2261                0.8199                               0.8199               0.5862                              0.7471
+recall_expedite_recommendation  0.5806           0.7040                0.7705                               0.7705               0.9677                              0.9877
+recall_human_review             0.2355           0.3841                0.4130                               0.4130               0.0000                              0.0000
+
+PREDICTED COUNTS
+                                      monitor  reorder_recommendation  expedite_recommendation  human_review
+jev                                    22590                     128                     2506          1776
+policy_baseline                        22313                     255                     4026           406
+ultrabert_fine_tuned                   19728                    2563                     4457           252
+ultrabert_fine_tuned_with_overrides    19728                    2563                     4457           252
+ultrabert_zero_shot                     5619                    6291                    15088             2
+ultrabert_zero_shot_with_overrides      5619                    6838                    14541             2
+reference counts {'monitor': 24267, 'reorder_recommendation': 261, 'expedite_recommendation': 2196, 'human_review': 276}
+
+CONFUSION ultrabert_fine_tuned (rows reference, columns predicted)
+                          monitor  reorder_  expedite  human_re
+monitor                    19286      2330      2634        17
+reorder_recommendation        47       214         0         0
+expedite_recommendation      383         0      1692       121
+human_review                  12        19       131       114
+
+CONFUSION ultrabert_fine_tuned_override (rows reference, columns predicted)
+                          monitor  reorder_  expedite  human_re
+monitor                    19286      2330      2634        17
+reorder_recommendation        47       214         0         0
+expedite_recommendation      383         0      1692       121
+human_review                  12        19       131       114
+
+CONFUSION ultrabert_zero_shot (rows reference, columns predicted)
+                          monitor  reorder_  expedite  human_re
+monitor                     5507      6086     12672         2
+reorder_recommendation        66       153        42         0
+expedite_recommendation       27        44      2125         0
+human_review                  19         8       249         0
+
+override reasons, fine-tuned: {'': 27000}
+override reasons, zero-shot: {'': 26291, 'expedite with no open order': 628, 'reorder with an order on the way': 81}
+
+REVIEW WORKLOAD on test
+jev                                    action  4,410 (16.33%) | human review 1,776 | precision of any action 45.56%
+policy_baseline                        action  4,687 (17.36%) | human review   406 | precision of any action 43.91%
+ultrabert_fine_tuned                   action  7,272 (26.93%) | human review   252 | precision of any action 31.50%
+ultrabert_fine_tuned_with_overrides    action  7,272 (26.93%) | human review   252 | precision of any action 31.50%
+ultrabert_zero_shot                    action 21,381 (79.19%) | human review     2 | precision of any action 12.26%
+ultrabert_zero_shot_with_overrides     action 21,381 (79.19%) | human review     2 | precision of any action 12.26%
+
+CONFLICTING SIGNALS: 297 cases, reference {'expedite_recommendation': 130, 'monitor': 120, 'human_review': 34, 'reorder_recommendation': 13}
+{'jev': {'human_review': 163, 'expedite_recommendation': 128, 'reorder_recommendation': 5, 'monitor': 1}, 'policy': {'human_review': 245, 'monitor': 52}, 'ultrabert_fine_tuned': {'expedite_recommendation': 229, 'reorder_recommendation': 34, 'human_review': 31, 'monitor': 3}, 'ultrabert_zero_shot': {'expedite_recommendation': 259, 'reorder_recommendation': 20, 'monitor': 18}}
+
+BY SCENARIO
+            scenario                model  macro_f1  critical_recall  human_review_cases  true_critical
+           baseline ultrabert_fine_tuned    0.4871           0.4627                  67             67
+           baseline  ultrabert_zero_shot    0.1612           0.0000                   1             67
+supplier_disruption ultrabert_fine_tuned    0.4737           0.3298                  77             94
+supplier_disruption  ultrabert_zero_shot    0.1670           0.0000                   1             94
+        lean_policy ultrabert_fine_tuned    0.4945           0.4522                 108            115
+        lean_policy  ultrabert_zero_shot    0.1540           0.0000                   0            115
+
+fine-tuned minus policy: false alarm share [0.087, 0.0968, 0.1068], any stockout acted on [0.0691, 0.0851, 0.1017]
+
+SERIES BOOTSTRAP [2.5%, median, 97.5%]
+ultrabert_fine_tuned minus policy_baseline: macro-F1 [-0.0257, -0.0002, 0.0243], critical recall [-0.0805, 0.0252, 0.1179]
+ultrabert_fine_tuned minus jev: macro-F1 [0.0287, 0.0626, 0.0955], critical recall [0.0324, 0.1725, 0.2924]
+ultrabert_fine_tuned_with_overrides minus policy_baseline: macro-F1 [-0.0257, -0.0002, 0.0243], critical recall [-0.0805, 0.0252, 0.1179]
+ultrabert_fine_tuned_with_overrides minus jev: macro-F1 [0.0287, 0.0626, 0.0955], critical recall [0.0324, 0.1725, 0.2924]
+ultrabert_zero_shot minus policy_baseline: macro-F1 [-0.3503, -0.325, -0.2996], critical recall [-0.4375, -0.3843, -0.3242]
+ultrabert_zero_shot minus jev: macro-F1 [-0.2866, -0.2622, -0.242], critical recall [-0.2941, -0.2371, -0.1892]
+
+
+DETERMINISM: rescored 500 test cases, same choice %: 100.0 | largest probability change 0.000691831111907959
+
+HAND-BUILT EDGE CASES (synthetic, Jev column is the saved answer)
+                       case                     jev                  policy    ultrabert_fine_tuned  ultrabert_fine_tuned_top_probability     ultrabert_zero_shot
+             healthy_stock                 monitor                 monitor  reorder_recommendation                                 0.509  reorder_recommendation
+  empty_no_order_high_risk  reorder_recommendation  reorder_recommendation  reorder_recommendation                                 0.658  reorder_recommendation
+empty_order_late_high_risk expedite_recommendation expedite_recommendation expedite_recommendation                                 0.878 expedite_recommendation
+      high_value_high_risk expedite_recommendation            human_review expedite_recommendation                                 0.523 expedite_recommendation
+           models_conflict  reorder_recommendation            human_review  reorder_recommendation                                 0.781 expedite_recommendation
+    risk_low_but_cover_low  reorder_recommendation                 monitor  reorder_recommendation                                 0.633  reorder_recommendation
+  risk_high_but_cover_high            human_review  reorder_recommendation  reorder_recommendation                                 0.595  reorder_recommendation
+             order_overdue expedite_recommendation expedite_recommendation expedite_recommendation                                 0.895 expedite_recommendation
+        disrupted_supplier expedite_recommendation expedite_recommendation expedite_recommendation                                 0.844 expedite_recommendation
+      zero_demand_no_stock                 monitor                 monitor  reorder_recommendation                                 0.727  reorder_recommendation

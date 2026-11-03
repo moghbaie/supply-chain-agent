@@ -8,5 +8,75 @@
     -0.2177,
     -0.1478,
     -0.0563
+  ],
+  "false_alarm_share_ultrabert_fine_tuned_minus_policy_baseline": [
+    0.087,
+    0.0968,
+    0.1068
+  ],
+  "any_stockout_acted_on_ultrabert_fine_tuned_minus_policy_baseline": [
+    0.0691,
+    0.0851,
+    0.1017
+  ],
+  "macro_f1_ultrabert_fine_tuned_minus_policy_baseline": [
+    -0.0257,
+    -0.0002,
+    0.0243
+  ],
+  "critical_recall_ultrabert_fine_tuned_minus_policy_baseline": [
+    -0.0805,
+    0.0252,
+    0.1179
+  ],
+  "macro_f1_ultrabert_fine_tuned_minus_jev": [
+    0.0287,
+    0.0626,
+    0.0955
+  ],
+  "critical_recall_ultrabert_fine_tuned_minus_jev": [
+    0.0324,
+    0.1725,
+    0.2924
+  ],
+  "macro_f1_ultrabert_fine_tuned_with_overrides_minus_policy_baseline": [
+    -0.0257,
+    -0.0002,
+    0.0243
+  ],
+  "critical_recall_ultrabert_fine_tuned_with_overrides_minus_policy_baseline": [
+    -0.0805,
+    0.0252,
+    0.1179
+  ],
+  "macro_f1_ultrabert_fine_tuned_with_overrides_minus_jev": [
+    0.0287,
+    0.0626,
+    0.0955
+  ],
+  "critical_recall_ultrabert_fine_tuned_with_overrides_minus_jev": [
+    0.0324,
+    0.1725,
+    0.2924
+  ],
+  "macro_f1_ultrabert_zero_shot_minus_policy_baseline": [
+    -0.3503,
+    -0.325,
+    -0.2996
+  ],
+  "critical_recall_ultrabert_zero_shot_minus_policy_baseline": [
+    -0.4375,
+    -0.3843,
+    -0.3242
+  ],
+  "macro_f1_ultrabert_zero_shot_minus_jev": [
+    -0.2866,
+    -0.2622,
+    -0.242
+  ],
+  "critical_recall_ultrabert_zero_shot_minus_jev": [
+    -0.2941,
+    -0.2371,
+    -0.1892
   ]
 }

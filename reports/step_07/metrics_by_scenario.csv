@@ -5,3 +5,9 @@ supplier_disruption,jev,0.43574,0.30851,483,94
 supplier_disruption,policy,0.48513,0.35106,143,94
 lean_policy,jev,0.41854,0.2087,849,115
 lean_policy,policy,0.49852,0.43478,164,115
+baseline,ultrabert_fine_tuned,0.48708,0.46269,67,67
+baseline,ultrabert_zero_shot,0.16119,0.0,1,67
+supplier_disruption,ultrabert_fine_tuned,0.47368,0.32979,77,94
+supplier_disruption,ultrabert_zero_shot,0.16703,0.0,1,94
+lean_policy,ultrabert_fine_tuned,0.49451,0.45217,108,115
+lean_policy,ultrabert_zero_shot,0.15401,0.0,0,115

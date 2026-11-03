@@ -74,3 +74,47 @@ Overrides changed no real case: Jev's results with and without them are identica
 
 ## Decision after this step
 The user chose to keep both the policy and Jev but send no more data to Jev. Sending is now off in `src/escalation/jev.py`. The policy classifies new cases, and Jev is available only through its saved Step 7 answers.
+
+## Added option: UltraBERT
+The user asked to try UltraBERT (dmis-lab, Apache 2.0) as another option. It ran locally on the 4 GB GPU, so no case data left the machine. Jev and policy results are unchanged, and no Jev calls were made.
+Code: `src/escalation/ultrabert.py`, `scripts/run_ultrabert.py`, `scripts/compare_ultrabert.py`. Output: `ultrabert_comparison.log`.
+
+Two routes were tested, each reading the same facts Jev saw, written as a compact sentence:
+- **Fine-tuned** (`UltraBERT-150M`): trained on 8,000 cases from 2015 with origins up to 2015-09-14, half of them stockouts, with a weighted loss. Epoch chosen on 3,000 later 2015 cases: epoch 1 of 2, development macro-F1 0.4836. This took 69 minutes. Scores improved up to the last epoch, so more training was not ruled out.
+- **Zero-shot** (`UltraBERT-Embed-150M`): no training, picks the category description closest to the case. The descriptions are Jev's wording.
+
+All settings were fixed before the test cases were scored, and no result below was used to change them.
+
+| Measure (all 27,000 test cases) | Jev | Policy | Fine-tuned | Zero-shot |
+|---|---:|---:|---:|---:|
+| Macro-F1 | 0.4284 | 0.4914 | 0.4922 | 0.1653 |
+| Accuracy | 0.8607 | 0.8648 | 0.7891 | 0.2883 |
+| Critical recall | 0.2355 | 0.3841 | 0.4130 | 0.0000 |
+| Critical cases not left on monitor | 0.9348 | 0.8877 | 0.9565 | 0.9312 |
+| Any stockout acted on | 0.7351 | 0.7530 | 0.8383 | 0.9590 |
+| False alarms among monitor cases | 0.0989 | 0.1083 | 0.2053 | 0.7731 |
+| Recall: reorder | 0.1303 | 0.2261 | 0.8199 | 0.5862 |
+| Recall: expedite | 0.5806 | 0.7040 | 0.7705 | 0.9677 |
+| Cases with an action | 4,410 | 4,687 | 7,272 | 21,381 |
+| Precision of any action | 45.56% | 43.91% | 31.50% | 12.26% |
+| Human review cases | 1,776 | 406 | 252 | 2 |
+
+Series bootstrap [2.5%, median, 97.5%], fine-tuned minus each comparison:
+- Against policy, macro-F1: [-0.026, -0.000, 0.024]. Critical recall: [-0.081, 0.025, 0.118]. Neither is clearly different.
+- Against policy, false alarms: [0.087, 0.097, 0.107]. Any stockout acted on: [0.069, 0.085, 0.102]. Both are clearly higher.
+- Against Jev, macro-F1: [0.029, 0.063, 0.096]. Critical recall: [0.032, 0.173, 0.292]. Both are clearly higher.
+
+Zero-shot is clearly worse than both on macro-F1 and critical recall.
+
+**Reading:** fine-tuned UltraBERT beats Jev on these scores but does not beat the policy overall. It trades precision for coverage against the policy: 8.5 points more stockouts acted on for 9.7 points more false alarms, or 2,585 more actions for people to check. Macro-F1 hides this cost, because monitor is 90% of cases but one quarter of the score.
+
+Other observations:
+- **Implausible edge cases:** fine-tuned recommends reorder for healthy stock (50 days of cover, 2% risk, probability 0.51) and for zero demand with no stock (0.73). The half-stockout training mix and weighted loss probably push it toward action. That cause was not tested.
+- **Not comparable on training:** fine-tuned learned from 2015 outcomes and the policy's thresholds were fitted on them; Jev and zero-shot used no labels.
+- **Severe cases:** fine-tuned sends 47% of critical cases to expedite rather than human review, so it still misses most of them as critical.
+- **Overrides:** changed no fine-tuned choice. They changed 709 zero-shot choices, moving its macro-F1 to 0.1707.
+- **Repeatability:** rescoring 500 test cases gave the same choice on all of them.
+- **Tests:** 28 of 28 passed (`tests_ultrabert.log`). None calls an API.
+- **Disk:** the fine-tuned weights take 604 MB and stay out of git.
+
+Every choice other than monitor still needs a person's approval, whichever route produces it. **Fine-tuned UltraBERT is not adopted in place of the policy; that is a user decision.**

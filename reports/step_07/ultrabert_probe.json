@@ -1,0 +1,24 @@
+{
+  "embed": {
+    "ms_per_case": 61.23,
+    "peak_vram_mb": 1178,
+    "macro_f1": 0.1116,
+    "counts": {
+      "expedite_recommendation": 405,
+      "reorder_recommendation": 290,
+      "human_review": 163,
+      "monitor": 142
+    },
+    "similarity_range": [
+      0.389,
+      0.509
+    ]
+  },
+  "fine_tune_batch_32": {
+    "train_ms_per_case": 890.4,
+    "predict_ms_per_case": 385.03,
+    "peak_vram_mb": 9263,
+    "last_loss": 0.06,
+    "parameters_millions": 151.0
+  }
+}

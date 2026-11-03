@@ -1,0 +1,24 @@
+example text: {"item": {"stock": {"units_on_hand": 8, "days_of_stock_at_forecast_demand": 29.7, "units_on_order": 0, "open_orders": 0, "order_placed_at_this_review": false}, "forecast_next_14_days": {"expected_units": 3.8, "high_estimate_units": 15.0}, "inbound": {"days_until_next_promised_delivery": null, "units
+embed: max length 32768 | prompts ['query', 'document']
+embed {'ms_per_case': 61.23, 'peak_vram_mb': 1178, 'macro_f1': 0.1116, 'counts': {'expedite_recommendation': 405, 'reorder_recommendation': 290, 'human_review': 163, 'monitor': 142}, 'similarity_range': [0.389, 0.509]}
+tokens per case: mean 262.6 max 274
+[transformers] [1mUltrabertForSequenceClassification LOAD REPORT[0m from: dmis-lab/UltraBERT-150M
+Key                 | Status     | 
+--------------------+------------+-
+head.linear2.weight | UNEXPECTED | 
+head.linear1.weight | UNEXPECTED | 
+cls.weight          | UNEXPECTED | 
+classifier.weight   | MISSING    | 
+classifier.bias     | MISSING    | 
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+batch 32 {'train_ms_per_case': 890.4, 'predict_ms_per_case': 385.03, 'peak_vram_mb': 9263, 'last_loss': 0.06, 'parameters_millions': 151.0}
+sentence: On hand 8 units, 29.7 days cover. On order 0 in 0 orders, new order no. Forecast 4 units, high 15. Next delivery unknown days, 0 units due, 0 overdue by 0 days; no delivery date due. Supplier late 5% long run, 6% recent. Stockout chance 1% and 2%. Value low.
+reference {'monitor': 913, 'expedite_recommendation': 71, 'reorder_recommendation': 12, 'human_review': 4}
+tokens mean 94.5 max 105
+embed sentence: ms/case 28.3 peak MB 813 macro-F1 0.156 {'expedite_recommendation': 541, 'reorder_recommendation': 251, 'monitor': 207, 'human_review': 1}
+training-shape sample 20247
+  epoch 0 batch 30, loss 1.607, 55s
+fine-tune batch 8: train ms/case 227.6 peak MB 2936
+predict ms/case 66.1
