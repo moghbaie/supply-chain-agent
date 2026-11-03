@@ -1,0 +1,7 @@
+HuggingFaceTB/SmolLM3-3B: loaded in 14s, allocated 1.85 GB, footprint 1.80 GB, devices {'cuda:0'}
+input tokens 1046, output tokens 22, 21.9s, 1.0 tokens per second
+MODEL TEXT
+{'name': 'get_inventory_status', 'arguments': {'case_id': 'probe-0001'}}
+PARSED [[{"name": "get_inventory_status", "arguments": {"case_id": "probe-0001"}}], 0, 1]
+with saved prefix 2.8s, without 19.8s, same text True, prefix tokens 1029
+peak allocated 2.25 GB, peak reserved 2.43 GB of 4.00 GB

@@ -1,0 +1,7 @@
+W1102 22:04:58.348000 31480 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+dev: fit 46,722 orders, last receipt 2014-12-31; scored 36,196 orders, first order 2014-12-01, mean risk 0.1580, actual late 0.1703
+test: fit 72,607 orders, last receipt 2015-12-31; scored 10,311 orders, first order 2015-11-30, mean risk 0.1826, actual late 0.1744
+[transformers] [1mUltrabertForSequenceClassification LOAD REPORT[0m from: dmis-lab/UltraBERT-150M
+dev cases 40 {'expedite_recommendation': 10, 'reorder_recommendation': 10, 'monitor': 10, 'human_review': 10} origins 2015-10-05 2015-12-14
+test cases 200 {'expedite_recommendation': 50, 'monitor': 50, 'reorder_recommendation': 50, 'human_review': 50} origins 2016-01-04 2016-05-02 series 145
+all test cases {'monitor': 24267, 'expedite_recommendation': 2196, 'human_review': 276, 'reorder_recommendation': 261}

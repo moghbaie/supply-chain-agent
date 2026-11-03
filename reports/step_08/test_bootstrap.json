@@ -1,0 +1,102 @@
+{
+  "macro_f1_balanced|agent_final-ultrabert": [
+    -0.0293,
+    -0.008,
+    0.0042
+  ],
+  "macro_f1_real_mix|agent_final-ultrabert": [
+    -0.1127,
+    -0.0443,
+    0.0
+  ],
+  "critical_recall|agent_final-ultrabert": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "false_alarm_share|agent_final-ultrabert": [
+    0.0,
+    0.037,
+    0.1305
+  ],
+  "macro_f1_balanced|agent_final-ultrabert_with_overrides": [
+    -0.0293,
+    -0.008,
+    0.0042
+  ],
+  "macro_f1_real_mix|agent_final-ultrabert_with_overrides": [
+    -0.1127,
+    -0.0443,
+    0.0
+  ],
+  "critical_recall|agent_final-ultrabert_with_overrides": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "false_alarm_share|agent_final-ultrabert_with_overrides": [
+    0.0,
+    0.037,
+    0.1305
+  ],
+  "macro_f1_balanced|agent_final-policy": [
+    0.0665,
+    0.186,
+    0.307
+  ],
+  "macro_f1_real_mix|agent_final-policy": [
+    -0.2147,
+    -0.0969,
+    0.0907
+  ],
+  "critical_recall|agent_final-policy": [
+    -0.154,
+    0.087,
+    0.3182
+  ],
+  "false_alarm_share|agent_final-policy": [
+    0.0357,
+    0.1538,
+    0.3182
+  ],
+  "macro_f1_balanced|agent_final-jev_saved": [
+    0.165,
+    0.2873,
+    0.4235
+  ],
+  "macro_f1_real_mix|agent_final-jev_saved": [
+    -0.1449,
+    -0.0093,
+    0.1743
+  ],
+  "critical_recall|agent_final-jev_saved": [
+    -0.0953,
+    0.1176,
+    0.3751
+  ],
+  "false_alarm_share|agent_final-jev_saved": [
+    -0.0295,
+    0.16,
+    0.35
+  ],
+  "macro_f1_balanced|ultrabert-policy": [
+    0.0688,
+    0.1948,
+    0.312
+  ],
+  "macro_f1_real_mix|ultrabert-policy": [
+    -0.1704,
+    -0.0574,
+    0.1349
+  ],
+  "critical_recall|ultrabert-policy": [
+    -0.154,
+    0.087,
+    0.3182
+  ],
+  "false_alarm_share|ultrabert-policy": [
+    0.0,
+    0.1154,
+    0.2609
+  ]
+}

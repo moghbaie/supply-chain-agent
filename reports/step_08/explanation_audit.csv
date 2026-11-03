@@ -1,0 +1,101 @@
+case_id,final,problems,gap,max_risk
+test-0000,expedite_recommendation,,5.1,96.0
+test-0001,human_review,,0.0,0.2
+test-0002,monitor,says_no_open_orders_but_one_exists,0.3,1.2
+test-0003,reorder_recommendation,stockout_risk_number_not_from_either_model,0.8,3.9
+test-0004,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,18.9,82.9
+test-0005,reorder_recommendation,,2.2,27.6
+test-0006,expedite_recommendation,says_delayed_but_nothing_overdue,27.3,55.5
+test-0007,reorder_recommendation,,30.1,53.5
+test-0008,monitor,describes_an_open_order_that_does_not_exist,1.0,1.8
+test-0009,monitor,,3.0,3.7
+test-0010,expedite_recommendation,,10.2,30.8
+test-0011,reorder_recommendation,stockout_risk_number_not_from_either_model,1.2,4.1
+test-0012,reorder_recommendation,says_high_risk_but_both_models_under_20,6.6,15.9
+test-0013,expedite_recommendation,says_high_risk_but_both_models_under_20,1.4,13.2
+test-0014,reorder_recommendation,stockout_risk_number_not_from_either_model,3.1,7.9
+test-0015,monitor,,0.1,1.1
+test-0016,expedite_recommendation,,4.5,38.6
+test-0017,reorder_recommendation,,19.8,24.8
+test-0018,expedite_recommendation,says_delayed_but_nothing_overdue,39.8,65.4
+test-0019,expedite_recommendation,,13.9,65.6
+test-0020,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,8.2,93.6
+test-0021,monitor,,0.0,0.8
+test-0022,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,1.2,98.7
+test-0023,expedite_recommendation,says_delayed_but_nothing_overdue,0.5,90.5
+test-0024,human_review,,7.9,94.1
+test-0025,monitor,,0.7,2.1
+test-0026,expedite_recommendation,,22.1,41.0
+test-0027,expedite_recommendation,cites_no_numbers,8.6,55.7
+test-0028,human_review,,7.3,96.0
+test-0029,expedite_recommendation,,1.3,97.8
+test-0030,monitor,says_no_open_orders_but_one_exists,0.0,0.2
+test-0031,monitor,,2.3,4.7
+test-0032,expedite_recommendation,,22.7,87.4
+test-0033,expedite_recommendation,,14.9,66.4
+test-0034,reorder_recommendation,says_high_risk_but_both_models_under_20,1.1,4.0
+test-0035,expedite_recommendation,,13.4,45.2
+test-0036,reorder_recommendation,,1.9,3.2
+test-0037,monitor,,1.4,7.4
+test-0038,reorder_recommendation,says_high_risk_but_both_models_under_20,1.3,4.4
+test-0039,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,16.6,88.4
+test-0040,expedite_recommendation,stockout_risk_number_not_from_either_model,6.0,12.2
+test-0041,human_review,,0.4,1.0
+test-0042,expedite_recommendation,,7.0,23.0
+test-0043,monitor,,0.2,0.4
+test-0044,human_review,,0.7,95.8
+test-0045,reorder_recommendation,describes_an_open_order_that_does_not_exist,5.0,15.0
+test-0046,monitor,,0.5,0.8
+test-0047,monitor,,4.3,6.3
+test-0048,expedite_recommendation,,6.2,55.9
+test-0049,monitor,cites_no_numbers,7.4,11.3
+test-0050,expedite_recommendation,,17.0,31.1
+test-0051,reorder_recommendation,,3.3,47.6
+test-0052,monitor,,0.0,1.1
+test-0053,human_review,,3.3,77.4
+test-0054,reorder_recommendation,,32.6,36.5
+test-0055,expedite_recommendation,,19.6,61.6
+test-0056,expedite_recommendation,,15.3,82.7
+test-0057,expedite_recommendation,says_high_risk_but_both_models_under_20,2.0,17.2
+test-0058,reorder_recommendation,stockout_risk_number_not_from_either_model,1.2,3.9
+test-0059,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,7.3,96.0
+test-0060,reorder_recommendation,,2.4,10.1
+test-0061,expedite_recommendation,,11.6,40.6
+test-0062,monitor,,0.2,0.4
+test-0063,monitor,says_no_open_orders_but_one_exists,0.2,0.6
+test-0064,monitor,says_high_risk_but_both_models_under_20,0.7,1.5
+test-0065,expedite_recommendation,,0.3,96.2
+test-0066,monitor,,1.4,2.2
+test-0067,reorder_recommendation,,21.8,71.2
+test-0068,expedite_recommendation,cites_no_numbers,4.9,26.6
+test-0069,human_review,,3.3,95.7
+test-0070,expedite_recommendation,says_high_risk_but_both_models_under_20,3.9,18.8
+test-0071,expedite_recommendation,,23.9,83.4
+test-0072,reorder_recommendation,says_high_risk_but_both_models_under_20; stockout_risk_number_not_from_either_model,5.6,13.0
+test-0073,reorder_recommendation,,9.3,10.8
+test-0074,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,10.5,94.3
+test-0075,expedite_recommendation,cites_no_numbers,11.6,90.8
+test-0076,monitor,,0.1,0.3
+test-0077,expedite_recommendation,,21.3,50.0
+test-0078,expedite_recommendation,,17.2,65.8
+test-0079,expedite_recommendation,says_high_risk_but_both_models_under_20; cites_no_numbers,1.8,11.6
+test-0080,monitor,,0.1,1.1
+test-0081,expedite_recommendation,says_high_risk_but_both_models_under_20; cites_no_numbers,7.3,16.4
+test-0082,monitor,,0.5,1.0
+test-0083,reorder_recommendation,cites_no_numbers,0.2,2.4
+test-0084,reorder_recommendation,,0.6,4.1
+test-0085,expedite_recommendation,cites_no_numbers,3.5,44.1
+test-0086,reorder_recommendation,,0.0,5.5
+test-0087,reorder_recommendation,describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model,0.2,0.7
+test-0088,reorder_recommendation,stockout_risk_number_not_from_either_model,12.0,14.5
+test-0090,monitor,cites_no_numbers,0.2,0.4
+test-0091,expedite_recommendation,,13.0,22.4
+test-0092,human_review,says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers,0.4,93.1
+test-0093,reorder_recommendation,stockout_risk_number_not_from_either_model,2.6,8.7
+test-0094,monitor,,1.5,4.8
+test-0095,reorder_recommendation,,37.9,85.1
+test-0096,reorder_recommendation,,0.4,2.3
+test-0097,expedite_recommendation,,5.0,49.9
+test-0098,monitor,,0.4,0.5
+test-0110,reorder_recommendation,describes_an_open_order_that_does_not_exist,1.2,17.5
+test-0112,reorder_recommendation,stockout_risk_number_not_from_either_model,0.4,2.7

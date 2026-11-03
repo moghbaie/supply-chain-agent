@@ -1,0 +1,20 @@
+Qwen/Qwen3-4B-Instruct-2507: loaded in 18s, allocated 2.49 GB, footprint 2.42 GB, devices {'cuda:0'}
+input tokens 1004, output tokens 141, 45.6s, 3.1 tokens per second
+MODEL TEXT
+<tool_call>
+{"name": "get_inventory_status", "arguments": {"case_id": "probe-0001"}}
+</tool_call>
+<tool_call>
+{"name": "get_demand_forecast", "arguments": {"case_id": "probe-0001"}}
+</tool_call>
+<tool_call>
+{"name": "get_stockout_risk", "arguments": {"case_id": "probe-0001"}}
+</tool_call>
+<tool_call>
+{"name": "get_open_orders", "arguments": {"case_id": "probe-0001"}}
+</tool_call>
+<tool_call>
+{"name": "get_escalation_suggestion", "arguments": {"case_id": "probe-0001"}}
+</tool_call>
+PARSED [[{"name": "get_inventory_status", "arguments": {"case_id": "probe-0001"}}, {"name": "get_demand_forecast", "arguments": {"case_id": "probe-0001"}}, {"name": "get_stockout_risk", "arguments": {"case_id": "probe-0001"}}, {"name": "get_open_orders", "arguments": {"case_id": "probe-0001"}}, {"name": "get_escalation_suggestion", "arguments": {"case_id": "probe-0001"}}], 0]
+peak allocated 3.03 GB, peak reserved 3.08 GB of 4.00 GB

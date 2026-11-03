@@ -1,0 +1,32 @@
+# Written for this research project from the Step 7 rules. This is not a real company's policy.
+passages:
+  - id: category_monitor
+    title: Monitor
+    text: Choose monitor when stock looks sufficient for the next 14 days, so no action is needed.
+  - id: category_reorder
+    title: Reorder recommendation
+    text: Choose reorder_recommendation when a stockout looks likely in the next 14 days and no order is on the way.
+  - id: category_expedite
+    title: Expedite recommendation
+    text: Choose expedite_recommendation when a stockout looks likely in the next 14 days and an open order is on the way but may arrive too late.
+  - id: category_human_review
+    title: Human review
+    text: Choose human_review when a stockout looks likely in the next 14 days and would be costly, or when the evidence conflicts, so a person should decide.
+  - id: approval
+    title: Purchase approval
+    text: The agent only recommends. It cannot place, change or cancel a purchase order. Every category other than monitor needs a person's approval.
+  - id: conflicting_risk
+    title: Conflicting risk models
+    text: When the two stockout risk models differ by 30 percentage points or more, treat the evidence as conflicting and say so.
+  - id: high_risk
+    title: High stockout risk
+    text: A case with stockout risk of 80 percent or more must not be left on monitor. It goes to human review.
+  - id: order_consistency
+    title: Open orders and category
+    text: Reorder does not fit a case with an open order, and expedite does not fit a case with no open order.
+  - id: missing_evidence
+    title: Missing evidence
+    text: When a tool fails or a value is missing, say what is unknown. Do not guess the value. A case without the required evidence goes to human review.
+  - id: supplier_delay
+    title: Supplier delay
+    text: Delay risk is the estimated chance that an open order arrives after its promised date. A high delay risk with little stock cover supports expedite.
