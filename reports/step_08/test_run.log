@@ -1,0 +1,102 @@
+test: 100 chosen {'expedite_recommendation': 25, 'monitor': 25, 'reorder_recommendation': 25, 'human_review': 25}, 100 to run, hidden tools ()
+1/100 test-0000 submitted model=expedite_recommendation final=expedite_recommendation turns=7 tokens=9655+330 105.47s flags=[] elapsed=105s
+2/100 test-0001 submitted model=monitor final=human_review turns=7 tokens=9720+476 108.85s flags=['unsupported_numbers:20.0'] elapsed=214s
+3/100 test-0002 submitted model=monitor final=monitor turns=7 tokens=9677+384 94.59s flags=[] elapsed=309s
+4/100 test-0003 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9644+443 102.87s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=412s
+5/100 test-0004 submitted model=human_review final=human_review turns=7 tokens=9602+236 75.22s flags=[] elapsed=487s
+6/100 test-0005 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9612+404 97.09s flags=[] elapsed=584s
+7/100 test-0006 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+223 61.53s flags=[] elapsed=646s
+8/100 test-0007 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9542+379 93.9s flags=[] elapsed=740s
+9/100 test-0008 submitted model=monitor final=monitor turns=7 tokens=9591+374 91.98s flags=[] elapsed=832s
+10/100 test-0009 submitted model=monitor final=monitor turns=7 tokens=9749+534 117.58s flags=[] elapsed=949s
+11/100 test-0010 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+236 62.97s flags=[] elapsed=1012s
+12/100 test-0011 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9567+314 84.2s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=1096s
+13/100 test-0012 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9592+364 90.63s flags=[] elapsed=1187s
+14/100 test-0013 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+216 58.58s flags=[] elapsed=1246s
+15/100 test-0014 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9604+388 95.04s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=1341s
+16/100 test-0015 submitted model=monitor final=monitor turns=7 tokens=9598+388 94.02s flags=[] elapsed=1435s
+17/100 test-0016 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+220 59.57s flags=[] elapsed=1494s
+18/100 test-0017 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9604+388 94.34s flags=[] elapsed=1589s
+19/100 test-0018 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+220 59.78s flags=[] elapsed=1648s
+20/100 test-0019 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+292 72.36s flags=[] elapsed=1721s
+21/100 test-0020 submitted model=human_review final=human_review turns=6 tokens=7971+178 54.46s flags=[] elapsed=1775s
+22/100 test-0021 submitted model=monitor final=monitor turns=2 tokens=2611+225 38.79s flags=[] elapsed=1814s
+23/100 test-0022 submitted model=human_review final=human_review turns=6 tokens=7971+178 53.74s flags=[] elapsed=1868s
+24/100 test-0023 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+220 59.24s flags=[] elapsed=1927s
+25/100 test-0024 submitted model=human_review final=human_review turns=7 tokens=9766+396 95.74s flags=[] elapsed=2023s
+26/100 test-0025 submitted model=monitor final=monitor turns=7 tokens=9731+498 113.6s flags=[] elapsed=2136s
+27/100 test-0026 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+228 61.79s flags=[] elapsed=2198s
+28/100 test-0027 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+214 58.87s flags=[] elapsed=2257s
+29/100 test-0028 submitted model=human_review final=human_review turns=7 tokens=9792+448 110.26s flags=[] elapsed=2367s
+30/100 test-0029 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+272 67.23s flags=[] elapsed=2435s
+31/100 test-0030 submitted model=monitor final=monitor turns=7 tokens=9672+380 95.15s flags=[] elapsed=2530s
+32/100 test-0031 submitted model=monitor final=monitor turns=7 tokens=9643+322 86.5s flags=[] elapsed=2616s
+33/100 test-0032 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+226 60.93s flags=[] elapsed=2677s
+34/100 test-0033 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+220 59.0s flags=[] elapsed=2736s
+35/100 test-0034 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9647+474 107.3s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=2843s
+36/100 test-0035 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+218 62.83s flags=[] elapsed=2906s
+37/100 test-0036 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9573+326 85.57s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=2992s
+38/100 test-0037 submitted model=monitor final=monitor turns=7 tokens=9633+302 89.84s flags=[] elapsed=3082s
+39/100 test-0038 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9601+382 93.6s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=3175s
+40/100 test-0039 submitted model=human_review final=human_review turns=6 tokens=7915+178 54.11s flags=[] elapsed=3229s
+41/100 test-0040 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+204 59.66s flags=[] elapsed=3289s
+42/100 test-0041 submitted model=monitor final=human_review turns=7 tokens=9645+482 107.87s flags=['unsupported_numbers:100.0'] elapsed=3397s
+43/100 test-0042 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+265 66.62s flags=[] elapsed=3464s
+44/100 test-0043 submitted model=monitor final=monitor turns=7 tokens=9620+432 103.02s flags=[] elapsed=3567s
+45/100 test-0044 submitted model=human_review final=human_review turns=6 tokens=7915+213 64.85s flags=[] elapsed=3632s
+46/100 test-0045 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9578+336 88.75s flags=[] elapsed=3720s
+47/100 test-0046 submitted model=monitor final=monitor turns=7 tokens=9592+376 92.41s flags=[] elapsed=3813s
+48/100 test-0047 submitted model=monitor final=monitor turns=7 tokens=9666+368 94.61s flags=[] elapsed=3907s
+49/100 test-0048 submitted model=expedite_recommendation final=expedite_recommendation turns=7 tokens=9660+334 94.24s flags=[] elapsed=4002s
+50/100 test-0049 submitted model=monitor final=monitor turns=7 tokens=9705+278 79.94s flags=[] elapsed=4082s
+51/100 test-0050 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+215 60.1s flags=[] elapsed=4142s
+52/100 test-0051 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9594+368 91.18s flags=[] elapsed=4233s
+53/100 test-0052 submitted model=monitor final=monitor turns=7 tokens=9608+408 98.83s flags=[] elapsed=4332s
+54/100 test-0053 submitted model=human_review final=human_review turns=7 tokens=9774+412 99.46s flags=[] elapsed=4431s
+55/100 test-0054 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9611+402 96.45s flags=[] elapsed=4528s
+56/100 test-0055 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+298 70.07s flags=[] elapsed=4598s
+57/100 test-0056 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+243 63.16s flags=[] elapsed=4661s
+58/100 test-0057 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+238 64.18s flags=[] elapsed=4725s
+59/100 test-0058 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9626+432 99.29s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=4824s
+60/100 test-0059 submitted model=human_review final=human_review turns=6 tokens=8027+178 56.22s flags=[] elapsed=4881s
+61/100 test-0060 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9554+288 79.15s flags=[] elapsed=4960s
+62/100 test-0061 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+239 61.39s flags=[] elapsed=5021s
+63/100 test-0062 submitted model=monitor final=monitor turns=7 tokens=9624+428 99.92s flags=[] elapsed=5121s
+64/100 test-0063 submitted model=monitor final=monitor turns=7 tokens=9707+450 103.35s flags=[] elapsed=5224s
+65/100 test-0064 submitted model=monitor final=monitor turns=7 tokens=9730+490 111.96s flags=[] elapsed=5336s
+66/100 test-0065 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+244 63.15s flags=[] elapsed=5400s
+67/100 test-0066 submitted model=monitor final=monitor turns=7 tokens=9653+498 109.61s flags=[] elapsed=5509s
+68/100 test-0067 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9570+320 85.04s flags=[] elapsed=5594s
+69/100 test-0068 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+200 57.39s flags=[] elapsed=5652s
+70/100 test-0069 submitted model=human_review final=human_review turns=7 tokens=9789+442 103.81s flags=[] elapsed=5755s
+71/100 test-0070 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+241 62.72s flags=[] elapsed=5818s
+72/100 test-0071 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+244 63.53s flags=[] elapsed=5882s
+73/100 test-0072 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9623+415 100.48s flags=[] elapsed=5982s
+74/100 test-0073 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9615+410 97.51s flags=[] elapsed=6080s
+75/100 test-0074 submitted model=human_review final=human_review turns=7 tokens=9686+236 72.74s flags=[] elapsed=6152s
+76/100 test-0075 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+199 56.38s flags=[] elapsed=6209s
+77/100 test-0076 submitted model=monitor final=monitor turns=7 tokens=9550+292 80.89s flags=[] elapsed=6290s
+78/100 test-0077 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+224 59.03s flags=[] elapsed=6349s
+79/100 test-0078 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+223 59.96s flags=[] elapsed=6409s
+80/100 test-0079 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+202 56.52s flags=[] elapsed=6465s
+81/100 test-0080 submitted model=monitor final=monitor turns=7 tokens=9695+426 101.11s flags=[] elapsed=6566s
+82/100 test-0081 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+207 57.1s flags=[] elapsed=6624s
+83/100 test-0082 submitted model=monitor final=monitor turns=7 tokens=9611+414 97.52s flags=[] elapsed=6721s
+84/100 test-0083 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9563+306 83.36s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=6804s
+85/100 test-0084 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9619+418 97.84s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=6902s
+86/100 test-0085 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+203 57.65s flags=[] elapsed=6960s
+87/100 test-0086 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9622+424 98.46s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=7058s
+88/100 test-0087 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9592+364 93.37s flags=['unsupported_numbers:70.0', 'weak_evidence:action with both stockout risks under 10 percent'] elapsed=7152s
+89/100 test-0088 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9609+398 96.7s flags=[] elapsed=7248s
+90/100 test-0090 submitted model=monitor final=monitor turns=7 tokens=9552+296 82.73s flags=[] elapsed=7331s
+91/100 test-0091 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7918+239 61.44s flags=[] elapsed=7393s
+92/100 test-0092 submitted model=human_review final=human_review turns=6 tokens=7870+162 52.8s flags=[] elapsed=7445s
+93/100 test-0093 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9621+422 98.12s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=7544s
+94/100 test-0094 submitted model=monitor final=monitor turns=7 tokens=9674+378 93.0s flags=[] elapsed=7637s
+95/100 test-0095 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9576+332 88.07s flags=[] elapsed=7725s
+96/100 test-0096 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9584+348 88.54s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=7813s
+97/100 test-0097 submitted model=expedite_recommendation final=expedite_recommendation turns=6 tokens=7974+224 62.09s flags=[] elapsed=7875s
+98/100 test-0098 submitted model=monitor final=monitor turns=7 tokens=9573+326 84.84s flags=[] elapsed=7960s
+99/100 test-0110 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9596+372 92.08s flags=[] elapsed=8052s
+100/100 test-0112 submitted model=reorder_recommendation final=reorder_recommendation turns=7 tokens=9639+458 104.09s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=8156s
+done in 8156s, peak GPU 2.20 GB

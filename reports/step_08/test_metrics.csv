@@ -1,0 +1,7 @@
+method,macro_f1_balanced,accuracy_balanced,critical_recall,critical_acted_on,false_alarm_share,macro_f1_real_mix,actions_per_27000
+agent_final,0.6863,0.7,0.36,0.96,0.24,0.42471,8349.48
+agent_model_only,0.69474,0.71,0.36,0.96,0.2,0.47806,7368.36
+ultrabert,0.69474,0.71,0.36,0.96,0.2,0.47806,7368.36
+ultrabert_with_overrides,0.69474,0.71,0.36,0.96,0.2,0.47806,7368.36
+policy,0.50347,0.55,0.28,0.8,0.08,0.54645,4079.88
+jev_saved,0.39795,0.45,0.24,0.88,0.08,0.46209,4014.12

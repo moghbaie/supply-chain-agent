@@ -1,0 +1,6 @@
+dev: 4 chosen {'expedite_recommendation': 3, 'reorder_recommendation': 1}, 4 to run, hidden tools ('get_escalation_suggestion',)
+1/4 dev-0000 submitted model=reorder_recommendation final=expedite_recommendation turns=6 tokens=7430+368 89.38s flags=['override:reorder with an order on the way'] elapsed=89s
+2/4 dev-0001 submitted model=reorder_recommendation final=expedite_recommendation turns=6 tokens=7393+343 75.24s flags=['override:reorder with an order on the way'] elapsed=165s
+3/4 dev-0002 submitted model=reorder_recommendation final=expedite_recommendation turns=6 tokens=7296+228 119.1s flags=['unsupported_numbers:80.0', 'override:reorder with an order on the way'] elapsed=284s
+4/4 dev-0003 submitted model=reorder_recommendation final=reorder_recommendation turns=6 tokens=7267+328 167.62s flags=['weak_evidence:action with both stockout risks under 10 percent'] elapsed=451s
+done in 451s, peak GPU 2.43 GB

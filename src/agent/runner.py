@@ -22,6 +22,10 @@ Weigh the evidence yourself; the escalation suggestion is one input and can be w
 Reply only with tool calls, with no other text."""
 
 
+SYSTEM_NO_SUGGESTION = SYSTEM.replace(", get_open_orders and get_escalation_suggestion,", " and get_open_orders,").replace("Weigh the evidence yourself; the escalation suggestion is one input and can be wrong. Then call", "Weigh the evidence yourself. Then call")
+HIDDEN_SUGGESTION = ("get_escalation_suggestion",)
+
+
 def _read_call(chunk):
     """Read one call written as JSON or as a Python dictionary, without running anything."""
     try:
@@ -44,9 +48,9 @@ def parse_tool_calls(text):
     return calls, malformed, 0 if tagged else len(calls)
 
 
-def _check_submission(arguments, seen):
+def _check_submission(arguments, seen, required=REQUIRED_TOOLS):
     """Accept a recommendation only after the required evidence came back in an earlier turn."""
-    missing = sorted(REQUIRED_TOOLS - seen)
+    missing = sorted(required - seen)
     if missing:
         return {"ok": False, "error": "evidence missing, call these first and read the results: " + ", ".join(missing)}
     try:
@@ -55,7 +59,7 @@ def _check_submission(arguments, seen):
         return {"ok": False, "error": "invalid recommendation: " + "; ".join(f"{'.'.join(map(str, e['loc']))}: {e['msg']}" for e in error.errors())}
 
 
-def _finish(trace, submission):
+def _finish(trace, submission, required=REQUIRED_TOOLS):
     """Apply the checks in code. Without a valid submission the case goes to a person, and the model's answer stays empty."""
     risk = trace["evidence"].get("get_stockout_risk", {})
     orders = trace["evidence"].get("get_inventory_status", {}).get("open_orders")
@@ -64,14 +68,15 @@ def _finish(trace, submission):
         trace["review"] = {"final_category": "human_review", "approval_required": True, "order_placed": False, "flags": ["agent_failed:no valid recommendation"]}
         return trace
     trace["recommendation"] = submission
-    trace["review"] = review(submission["category"], submission["explanation"], trace["evidence"], [risk.get("tabpfn_risk_percent"), risk.get("lightgbm_risk_percent")], orders)
+    trace["review"] = review(submission["category"], submission["explanation"], trace["evidence"], [risk.get("tabpfn_risk_percent"), risk.get("lightgbm_risk_percent")], orders, required)
     return trace
 
 
-def run_case(llm, box, case_id, schemas=None, max_turns=MAX_TURNS):
+def run_case(llm, box, case_id, max_turns=MAX_TURNS, hidden=()):
     """Review one case and return a full trace. A run that does not finish goes to a person, flagged as failed."""
-    schemas = schemas or tool_schemas()
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": f"Review case_id {case_id}."}]
+    schemas = tool_schemas(hidden)
+    required = REQUIRED_TOOLS - set(hidden)
+    messages = [{"role": "system", "content": SYSTEM_NO_SUGGESTION if hidden else SYSTEM}, {"role": "user", "content": f"Review case_id {case_id}."}]
     trace = {"case_id": case_id, "turns": [], "tool_calls": [], "evidence": {}, "input_tokens": 0, "output_tokens": 0, "malformed_calls": 0, "untagged_calls": 0, "invalid_submissions": 0, "status": "failed"}
     started = time.time()
     submission = None
@@ -93,11 +98,13 @@ def run_case(llm, box, case_id, schemas=None, max_turns=MAX_TURNS):
         seen_before_turn = set(trace["evidence"])
         for call in calls:
             if call["name"] == "submit_recommendation":
-                result = _check_submission(call["arguments"], seen_before_turn)
+                result = _check_submission(call["arguments"], seen_before_turn, required)
                 if result["ok"]:
                     submission = result["recommendation"]
                 else:
                     trace["invalid_submissions"] += 1
+            elif call["name"] in hidden:
+                result = {"ok": False, "error": f"unknown tool {call['name']}."}
             else:
                 result = call_tool(box, call["name"], call["arguments"])
                 if result["ok"]:
@@ -108,4 +115,4 @@ def run_case(llm, box, case_id, schemas=None, max_turns=MAX_TURNS):
             trace["status"] = "submitted"
             break
     trace["seconds"] = round(time.time() - started, 2)
-    return _finish(trace, submission)
+    return _finish(trace, submission, required)

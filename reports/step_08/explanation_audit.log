@@ -1,0 +1,35 @@
+explanations 100; with at least one rule broken 42; distinct explanations 94
+problems
+cites_no_numbers                                     16
+stockout_risk_number_not_from_either_model           10
+says_high_risk_but_both_models_under_20              10
+says_it_conflicts_with_the_suggestion_it_followed     7
+describes_an_open_order_that_does_not_exist           4
+says_no_open_orders_but_one_exists                    3
+says_delayed_but_nothing_overdue                      3
+with a factual rule broken, leaving out cites_no_numbers: 35
+repeated word for word: {'The evidence conflicts with the escalation suggestion, indic': 7}
+
+BY FINAL CATEGORY
+                         any_problem      factual     
+                                sum size     sum size
+final                                                
+expedite_recommendation          13   34       9   34
+human_review                      7   14       7   14
+monitor                           7   24       5   24
+reorder_recommendation           15   28      14   28
+
+FINAL MONITOR WITH A FACTUAL ERROR (no person reviews these)
+   case_id                                      problems  max_risk
+test-0002          [says_no_open_orders_but_one_exists]       1.2
+test-0008 [describes_an_open_order_that_does_not_exist]       1.8
+test-0030          [says_no_open_orders_but_one_exists]       0.2
+test-0063          [says_no_open_orders_but_one_exists]       0.6
+test-0064     [says_high_risk_but_both_models_under_20]       1.5
+
+POLICY CONFLICT RULE: stockout models differ by 30 points or more
+  case_id                   final  gap  max_risk
+test-0007  reorder_recommendation 30.1      53.5
+test-0018 expedite_recommendation 39.8      65.4
+test-0054  reorder_recommendation 32.6      36.5
+test-0095  reorder_recommendation 37.9      85.1

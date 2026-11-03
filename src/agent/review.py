@@ -36,10 +36,10 @@ def unsupported_numbers(explanation, evidence):
     return missing
 
 
-def review(category, explanation, evidence, risks, open_orders):
+def review(category, explanation, evidence, risks, open_orders, required=REQUIRED_TOOLS):
     """Return the final category, whether a person must approve, and a flag for each problem found."""
     flags = []
-    missing_tools = sorted(REQUIRED_TOOLS - set(evidence))
+    missing_tools = sorted(required - set(evidence))
     if missing_tools:
         flags.append("missing_evidence:" + ",".join(missing_tools))
     bad_numbers = unsupported_numbers(explanation, evidence)

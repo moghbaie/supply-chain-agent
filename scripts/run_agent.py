@@ -1,5 +1,6 @@
 """Run the untuned agent on saved cases, one trace file per case, so an interrupted run resumes. Runs locally."""
 import argparse
+import ctypes
 import json
 import sys
 import time
@@ -12,13 +13,15 @@ import pandas as pd
 import torch
 
 from src.agent.llm import LocalLLM
-from src.agent.runner import run_case
+from src.agent.runner import HIDDEN_SUGGESTION, run_case
 from src.agent.tools import build_toolbox
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 parser = argparse.ArgumentParser()
 parser.add_argument("--cases", choices=["dev", "test"], required=True)
 parser.add_argument("--limit", type=int, default=None)
+parser.add_argument("--per-category", type=int, default=None)
+parser.add_argument("--hide-suggestion", action="store_true")
 parser.add_argument("--model", default="smollm")
 parser.add_argument("--name", default="smollm_untuned")
 args = parser.parse_args()
@@ -33,17 +36,22 @@ orders = pd.read_parquet("data/simulated/purchase_orders.parquet")
 box, keyed = build_toolbox(cases, orders, delay, prefix=args.cases)
 keyed[["case_id", "scenario", "id", "origin", "reference", "ultrabert"]].to_parquet(OUT / "key.parquet", index=False)
 chosen = keyed if args.limit is None else keyed.head(args.limit)
+if args.per_category:
+    chosen = chosen.groupby("reference", sort=False).head(args.per_category)
+hidden = HIDDEN_SUGGESTION if args.hide_suggestion else ()
 pending = [case_id for case_id in chosen.case_id if not (OUT / f"{case_id}.json").exists()]
-print(f"{args.cases}: {len(chosen)} chosen, {len(pending)} to run", flush=True)
+print(f"{args.cases}: {len(chosen)} chosen {chosen.reference.value_counts().to_dict()}, {len(pending)} to run, hidden tools {hidden}", flush=True)
 if not pending:
     sys.exit(0)
 
+# Keep Windows from sleeping while this process runs. This changes no setting and ends with the process.
+ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001)
 llm = LocalLLM(args.model)
 torch.cuda.reset_peak_memory_stats()
 started = time.time()
 for number, case_id in enumerate(pending, 1):
     try:
-        trace = run_case(llm, box, case_id)
+        trace = run_case(llm, box, case_id, hidden=hidden)
     except (torch.cuda.OutOfMemoryError, ValueError) as error:
         torch.cuda.empty_cache()
         trace = {"case_id": case_id, "status": "error", "error": f"{type(error).__name__}: {str(error)[:200]}", "turns": [], "tool_calls": [], "evidence": {}, "input_tokens": 0, "output_tokens": 0, "malformed_calls": 0, "invalid_submissions": 0, "seconds": None, "recommendation": None,

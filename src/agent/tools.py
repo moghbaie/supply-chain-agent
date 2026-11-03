@@ -109,10 +109,12 @@ TOOLS = {"get_inventory_status": (CaseRequest, "Get stock on hand, days of cover
          "submit_recommendation": (Recommendation, "Submit the final recommendation for a person to review. This places no order.")}
 
 
-def tool_schemas():
-    """Describe the tools in the format chat templates expect."""
+def tool_schemas(hidden=()):
+    """Describe the tools in the format chat templates expect, leaving out any hidden ones."""
     schemas = []
     for name, (model, description) in TOOLS.items():
+        if name in hidden:
+            continue
         parameters = model.model_json_schema()
         parameters.pop("title", None)
         for item in parameters["properties"].values():
