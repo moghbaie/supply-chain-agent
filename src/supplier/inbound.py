@@ -1,4 +1,5 @@
 """Build point-in-time tables for predicting synthetic inbound supplier delays at order time."""
+import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
@@ -7,6 +8,13 @@ from src.stockout.features import supplier_history
 FEATURES = ["quantity", "promised_lead_days", "order_month", "cat_code", "supplier_late_rate", "supplier_mean_delay", "supplier_pos_seen",
             "supplier_recent_late_rate", "supplier_recent_pos_seen", "item_late_rate", "item_pos_seen"]
 RECENT_DAYS = 30
+DELAY_PARAMS = {"objective": "binary", "learning_rate": 0.05, "num_leaves": 31, "min_data_in_leaf": 50, "feature_fraction": 0.8, "bagging_fraction": 0.8, "bagging_freq": 1, "verbosity": -1, "deterministic": True, "force_row_wise": True}
+DELAY_ROUNDS = 300
+
+
+def fit_delay_model(rows, seed):
+    """Fit the delay-risk model the agent's tools use."""
+    return lgb.train({**DELAY_PARAMS, "seed": seed}, lgb.Dataset(rows[FEATURES].to_numpy(dtype=float), rows.delayed.to_numpy(), feature_name=FEATURES), DELAY_ROUNDS)
 
 
 def recent_supplier(orders, origin):

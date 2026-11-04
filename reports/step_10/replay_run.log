@@ -1,0 +1,24 @@
+to run: 21 of 21
+models ready in 15s; GPU in use 0.69 GB
+baseline reorder_point: 71,500 rows, unmet 4,566, ordered 132,616, expedites 0, 2s, peak GPU 1.26 GB
+baseline forecast_driven: 71,500 rows, unmet 3,403, ordered 133,230, expedites 0, 78s, peak GPU 1.26 GB
+baseline policy_layer: 71,500 rows, unmet 1,183, ordered 135,918, expedites 719, 640s, peak GPU 1.26 GB
+baseline agent: 71,500 rows, unmet 1,151, ordered 136,176, expedites 694, 1324s, peak GPU 1.26 GB
+baseline agent_conflict: 71,500 rows, unmet 1,151, ordered 136,176, expedites 694, 1329s, peak GPU 1.26 GB
+baseline agent_conflict_decline_review: 71,500 rows, unmet 2,304, ordered 134,870, expedites 628, 1347s, peak GPU 1.26 GB
+baseline agent_conflict_weak_expedite: 71,500 rows, unmet 2,211, ordered 135,162, expedites 756, 1468s, peak GPU 1.26 GB
+lean_policy reorder_point: 71,500 rows, unmet 9,134, ordered 127,580, expedites 0, 2s, peak GPU 1.26 GB
+lean_policy forecast_driven: 71,500 rows, unmet 7,025, ordered 130,010, expedites 0, 79s, peak GPU 1.26 GB
+lean_policy policy_layer: 71,500 rows, unmet 2,610, ordered 134,360, expedites 1,854, 756s, peak GPU 1.26 GB
+lean_policy agent: 71,500 rows, unmet 2,376, ordered 135,366, expedites 1,805, 1568s, peak GPU 1.26 GB
+lean_policy agent_conflict: 71,500 rows, unmet 2,376, ordered 135,366, expedites 1,805, 1396s, peak GPU 1.26 GB
+lean_policy agent_conflict_decline_review: 71,500 rows, unmet 4,334, ordered 133,240, expedites 1,666, 1475s, peak GPU 1.26 GB
+lean_policy agent_conflict_weak_expedite: 71,500 rows, unmet 4,826, ordered 132,582, expedites 1,928, 1517s, peak GPU 1.26 GB
+supplier_disruption reorder_point: 71,500 rows, unmet 6,035, ordered 131,790, expedites 0, 2s, peak GPU 1.26 GB
+supplier_disruption forecast_driven: 71,500 rows, unmet 4,713, ordered 132,070, expedites 0, 79s, peak GPU 1.26 GB
+supplier_disruption policy_layer: 71,500 rows, unmet 2,096, ordered 135,384, expedites 834, 722s, peak GPU 1.26 GB
+supplier_disruption agent: 71,500 rows, unmet 1,749, ordered 136,408, expedites 794, 1355s, peak GPU 1.26 GB
+supplier_disruption agent_conflict: 71,500 rows, unmet 1,749, ordered 136,408, expedites 794, 1338s, peak GPU 1.26 GB
+supplier_disruption agent_conflict_decline_review: 71,500 rows, unmet 2,732, ordered 135,660, expedites 737, 1345s, peak GPU 1.26 GB
+supplier_disruption agent_conflict_weak_expedite: 71,500 rows, unmet 3,365, ordered 135,120, expedites 866, 1605s, peak GPU 1.26 GB
+done

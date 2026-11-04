@@ -18,10 +18,11 @@ from src.agent.tools import build_toolbox
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 parser = argparse.ArgumentParser()
-parser.add_argument("--cases", choices=["dev", "test"], required=True)
+parser.add_argument("--cases", choices=["dev", "test", "replay"], required=True)
 parser.add_argument("--limit", type=int, default=None)
 parser.add_argument("--per-category", type=int, default=None)
 parser.add_argument("--hide-suggestion", action="store_true")
+parser.add_argument("--conflict-rule", action="store_true", help="Send a gap of 30 points or more between the stockout models to a person. Off keeps the Step 8 baseline.")
 parser.add_argument("--model", default="smollm")
 parser.add_argument("--name", default="smollm_untuned")
 args = parser.parse_args()
@@ -30,9 +31,9 @@ DATA = Path("data/processed/agent")
 OUT = DATA / "traces" / args.name / args.cases
 OUT.mkdir(parents=True, exist_ok=True)
 cases = pd.read_parquet(DATA / f"{args.cases}_cases.parquet")
-scores = pd.read_parquet(DATA / "delay_scores.parquet")
+scores = pd.read_parquet(DATA / ("replay_delay_scores.parquet" if args.cases == "replay" else "delay_scores.parquet"))
 delay = scores[scores.period == args.cases].set_index("po_id").delay_risk.to_dict()
-orders = pd.read_parquet("data/simulated/purchase_orders.parquet")
+orders = pd.read_parquet(DATA / "replay_orders.parquet" if args.cases == "replay" else "data/simulated/purchase_orders.parquet")
 box, keyed = build_toolbox(cases, orders, delay, prefix=args.cases)
 keyed[["case_id", "scenario", "id", "origin", "reference", "ultrabert"]].to_parquet(OUT / "key.parquet", index=False)
 chosen = keyed if args.limit is None else keyed.head(args.limit)
@@ -51,7 +52,7 @@ torch.cuda.reset_peak_memory_stats()
 started = time.time()
 for number, case_id in enumerate(pending, 1):
     try:
-        trace = run_case(llm, box, case_id, hidden=hidden)
+        trace = run_case(llm, box, case_id, hidden=hidden, conflict_rule=args.conflict_rule)
     except (torch.cuda.OutOfMemoryError, ValueError) as error:
         torch.cuda.empty_cache()
         trace = {"case_id": case_id, "status": "error", "error": f"{type(error).__name__}: {str(error)[:200]}", "turns": [], "tool_calls": [], "evidence": {}, "input_tokens": 0, "output_tokens": 0, "malformed_calls": 0, "invalid_submissions": 0, "seconds": None, "recommendation": None,

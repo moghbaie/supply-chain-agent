@@ -5,14 +5,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import torch
 
 from src.escalation.cases import CATEGORIES, build_cases
 from src.escalation.ultrabert import FineTunedClassifier
-from src.supplier.inbound import FEATURES
+from src.supplier.inbound import FEATURES, fit_delay_model
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 pd.set_option("display.width", 170, "display.max_columns", 30)
@@ -20,12 +19,7 @@ SEED, DEV_PER_CATEGORY, TEST_PER_CATEGORY = 42, 10, 50
 DEV_FIRST_ORIGIN = pd.Timestamp("2015-10-01")
 OUT = Path("data/processed/agent")
 OUT.mkdir(parents=True, exist_ok=True)
-PARAMS = {"objective": "binary", "learning_rate": 0.05, "num_leaves": 31, "min_data_in_leaf": 50, "feature_fraction": 0.8, "bagging_fraction": 0.8, "bagging_freq": 1, "verbosity": -1, "deterministic": True, "force_row_wise": True, "seed": SEED}
 SCORES = [f"p_{c}" for c in CATEGORIES]
-
-
-def fitted(rows):
-    return lgb.train(PARAMS, lgb.Dataset(rows[FEATURES].to_numpy(dtype=float), rows.delayed.to_numpy(), feature_name=FEATURES), 300)
 
 
 def stratified(frame, per_category):
@@ -38,7 +32,7 @@ test_fit = purchase[purchase.split.isin(["train", "validation"]) & purchase.know
 scores = []
 for name, fit, target in [("dev", train_fit, ~purchase.known_before_validation), ("test", test_fit, ~purchase.known_before_test)]:
     rows = purchase[target]
-    scores.append(pd.DataFrame({"po_id": rows.po_id, "period": name, "delay_risk": fitted(fit).predict(rows[FEATURES].to_numpy(dtype=float))}))
+    scores.append(pd.DataFrame({"po_id": rows.po_id, "period": name, "delay_risk": fit_delay_model(fit, SEED).predict(rows[FEATURES].to_numpy(dtype=float))}))
     print(f"{name}: fit {len(fit):,} orders, last receipt {fit.receipt_date.max().date()}; scored {len(rows):,} orders, first order {rows.order_date.min().date()}, mean risk {scores[-1].delay_risk.mean():.4f}, actual late {rows.delayed.mean():.4f}")
 pd.concat(scores, ignore_index=True).to_parquet(OUT / "delay_scores.parquet", index=False)
 

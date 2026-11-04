@@ -19,7 +19,7 @@ A research project that tests whether an LLM agent coordinating specialized mode
 | 7 | Escalation classification | Approved |
 | 8 | Untuned agent baseline | Approved |
 | 9 | Fine-tune the reasoning LLM | Skipped by decision |
-| 10 | End-to-end replay against baselines | **In progress, no final results yet** |
+| 10 | End-to-end replay against baselines | Finished, awaiting approval |
 
 Each finished step has its method, data, results, tests and limitations in `reports/step_XX/summary.md`. The original plan is in [`sca_plan.md`](sca_plan.md).
 
@@ -81,7 +81,25 @@ The main findings so far:
 - **It still misses most severe cases.** Critical recall of 0.41 was accepted as a known limit.
 - **The LLM added no independent decision.** In Step 8, SmolLM3-3B chose the same category as UltraBERT on all 100 test cases.
 - **Its explanations are unreliable.** 35 of the 100 had a detectable factual error, including 5 of the 24 monitor cases, which no person would review.
-- **The LLM is slow.** It takes about 82 seconds per case on the 4 GB GPU, so Step 10 runs it on a sample only.
+- **The LLM is slow.** It takes about 80 seconds per case on the 4 GB GPU, so Step 10 runs it on a sample only.
+
+### End-to-end replay (Step 10)
+
+Simulated test period, 500 series. Total cost excludes the purchase price of units and review time. The agent runs here use code and models only, with the LLM reviewed on a separate sample.
+
+| Run | Baseline: unmet units | Baseline: total cost | Lean policy: unmet units | Lean policy: total cost | Disruption: unmet units | Disruption: total cost |
+|---|---:|---:|---:|---:|---:|---:|
+| Reorder point | 4,566 | $27,675 | 9,134 | $29,268 | 6,035 | $28,551 |
+| Forecast-driven | 3,403 | **$26,687** | 7,025 | **$27,698** | 4,713 | **$27,376** |
+| Policy rule | 1,183 | $48,568 | 2,610 | $79,249 | 2,096 | $52,925 |
+| Agent | 1,151 | $48,424 | 2,376 | $78,069 | 1,749 | $51,776 |
+
+- **The agent has the best service, and forecast-driven is the cheapest.** Expediting makes up 47% to 68% of the agent's cost.
+- **The agent pays off only if lost sales cost much more than assumed:** about $8 to $11 above the counted margin per unit, or $1.13 to $1.95 with no expedite fee.
+- **The agent is not clearly better than the simple policy rule,** and it raises about 1.6 to 1.8 times as many cases for people to act on.
+- **The LLM chose UltraBERT's category on 99 of 100 sampled cases.** Both changes to a final result came from errors.
+
+These results depend on assumptions, including how much time an expedite saves. See [`reports/step_10/summary.md`](reports/step_10/summary.md).
 
 ## Setup
 
@@ -130,9 +148,14 @@ python scripts/build_agent_data.py           # agent cases and delay scores
 python scripts/run_agent.py --cases test --per-category 25
 python scripts/score_agent.py
 python scripts/run_replay.py                 # Step 10 replay; resumes if interrupted
+python scripts/score_replay.py
+python scripts/build_replay_sample.py        # the cases for the LLM sample
+python scripts/run_agent.py --cases replay --conflict-rule
+python scripts/score_llm_sample.py
+python scripts/build_demo.py                 # the results page, reports/step_10/demo.html
 ```
 
-The full replay takes about 6 hours on this hardware. To try a short run that saves nothing, use `python scripts/run_replay.py --scenarios baseline --variants reorder_point --last-day 30`.
+The full replay takes about 6 hours on this hardware, and the 100-case LLM sample about 2.2 hours. To try a short run that saves nothing, use `python scripts/run_replay.py --scenarios baseline --variants reorder_point --last-day 30`.
 
 To run the tests:
 
@@ -140,7 +163,7 @@ To run the tests:
 python -m pytest
 ```
 
-Tests read the local data and model outputs, so run them after the steps above. No test calls a hosted API. The suite last passed in full at Step 8 (357 of 357). The Step 10 tests have not been written yet.
+Tests read the local data and model outputs, so run them after the steps above. No test calls a hosted API. The full suite last passed at Step 10 (469 of 469).
 
 ## Repository layout
 
@@ -173,7 +196,7 @@ reports/    one folder per step, with a summary and saved results
 - All inventory results come from one simulator, so they say nothing direct about real supply chains.
 - The escalation categories are hindsight definitions written for this project, not expert labels.
 - The policy passages the agent can search were written for this project, not taken from a real company.
-- The Step 10 replay simulates the person who approves actions, and the time saved by expediting is an assumption. Early runs show results are sensitive to both.
+- The Step 10 replay simulates the person who approves actions, and the time saved by expediting and the expedite fee are assumptions. Results are sensitive to these.
 
 ## License
 

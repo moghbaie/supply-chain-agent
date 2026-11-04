@@ -1,0 +1,18 @@
+delay model on the saved test orders: 10,311 orders, largest gap from saved scores 0.00e+00
+baseline: 26,394 orders in the book, 3,385 replay orders scored, mean delay risk 0.1528, late 0.1306
+lean_policy: 39,581 orders in the book, 5,387 replay orders scored, mean delay risk 0.1436, late 0.1160
+supplier_disruption: 26,347 orders in the book, 3,369 replay orders scored, mean delay risk 0.1894, late 0.1730
+population {'monitor': 23457, 'expedite_recommendation': 3219, 'reorder_recommendation': 2925, 'human_review': 399}
+sample 100 {'reorder_recommendation': 25, 'monitor': 25, 'human_review': 25, 'expedite_recommendation': 25} {'lean_policy': 43, 'baseline': 29, 'supplier_disruption': 28} series 96 origins 2016-01-04 2016-05-16
+conflict moved in sample 18 suggested {'expedite_recommendation': 43, 'reorder_recommendation': 25, 'monitor': 25, 'human_review': 7}
+           scenario     origin                              id  on_hand  on_order  stockout_risk  stockout_risk_lightgbm               suggested                   final
+        lean_policy 2016-03-07     FOODS_3_291_WI_3_evaluation       11         0          0.100                   0.079  reorder_recommendation  reorder_recommendation
+           baseline 2016-02-29     FOODS_3_080_WI_1_evaluation      226       150          0.007                   0.008                 monitor                 monitor
+        lean_policy 2016-03-14     FOODS_3_043_CA_3_evaluation       23         0          0.006                   0.016                 monitor                 monitor
+           baseline 2016-04-18     FOODS_2_027_TX_2_evaluation        0        54          0.820                   0.490 expedite_recommendation            human_review
+supplier_disruption 2016-04-18     FOODS_3_154_WI_2_evaluation       71       588          0.860                   0.769            human_review            human_review
+        lean_policy 2016-01-25     FOODS_3_526_CA_3_evaluation        0        60          0.985                   0.973            human_review            human_review
+        lean_policy 2016-03-14 HOUSEHOLD_1_344_TX_3_evaluation        3       108          0.836                   0.942 expedite_recommendation expedite_recommendation
+        lean_policy 2016-04-04 HOUSEHOLD_1_477_TX_3_evaluation       12         0          0.038                   0.048  reorder_recommendation  reorder_recommendation
+        lean_policy 2016-05-16     FOODS_3_785_CA_4_evaluation       24        60          0.637                   0.516 expedite_recommendation expedite_recommendation
+           baseline 2016-03-07     FOODS_1_218_WI_3_evaluation      178       378          0.051                   0.275 expedite_recommendation expedite_recommendation
