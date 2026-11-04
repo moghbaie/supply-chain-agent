@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supply Chain Agent Replay</title>
+<style>
+/* Layout: a results sheet on top, then one item's review traced down a numbered rail, like a stock audit file. */
+:root {
+  --bg: #f3f5f6; --panel: #ffffff; --ink: #14202a; --ink-2: #4b5a66; --ink-3: #6d7a85; --line: #d6dde2; --soft: #e9eef1;
+  --accent: #0f6a78; --accent-soft: #d9edf0; --warn: #9a5b00; --warn-soft: #fbeed4; --bad: #b3312f; --bad-soft: #fbe3e2; --good: #17693f; --good-soft: #dff2e6;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --display: Bahnschrift, "DIN Alternate", "Segoe UI", system-ui, sans-serif; --body: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif; --mono: "Cascadia Mono", Consolas, ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10171c; --panel: #182229; --ink: #eaf0f3; --ink-2: #b4c0c8; --ink-3: #8b99a3; --line: #2d3b45; --soft: #212d35;
+  --accent: #5cc0cf; --accent-soft: #173a42; --warn: #eeb65c; --warn-soft: #3b2c12; --bad: #f08c8a; --bad-soft: #421e1e; --good: #6dd19a; --good-soft: #17352a;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #10171c; --panel: #182229; --ink: #eaf0f3; --ink-2: #b4c0c8; --ink-3: #8b99a3; --line: #2d3b45; --soft: #212d35;
+  --accent: #5cc0cf; --accent-soft: #173a42; --warn: #eeb65c; --warn-soft: #3b2c12; --bad: #f08c8a; --bad-soft: #421e1e; --good: #6dd19a; --good-soft: #17352a;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; line-height: 1.2; }
+h1 { font-size: clamp(28px, 4vw, 40px); } h2 { font-size: 24px; } h3 { font-size: 16px; }
+p { margin: 0; max-width: 70ch; }
+.muted { color: var(--ink-2); } .small { font-size: 13px; } .mono { font-family: var(--mono); font-size: 13px; }
+.num { font-variant-numeric: tabular-nums; }
+section { display: grid; gap: 16px; min-width: 0; }
+.head { display: grid; gap: 10px; }
+.tag { font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+nav { display: flex; gap: 6px 16px; flex-wrap: wrap; font-size: 14px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; min-width: 0; }
+.verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.verdict > div { background: var(--panel); padding: 16px; display: grid; gap: 4px; align-content: start; }
+.verdict b { font: 600 19px/1.25 var(--display); }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; counter-reset: stage; }
+.flow > div { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 4px; align-content: start; counter-increment: stage; }
+.flow h3::before { content: counter(stage) "  "; color: var(--accent); font-family: var(--mono); font-size: 13px; }
+.seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.seg button, .btn { font: 600 13px/1 var(--body); padding: 9px 12px; border-radius: 5px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.bar-row { display: grid; grid-template-columns: minmax(120px, 230px) minmax(0, 1fr) 76px; gap: 10px; align-items: center; padding-block: 5px; font-size: 13.5px; }
+.bar-track { display: flex; gap: 2px; height: 20px; min-width: 0; }
+.bar-track span { display: block; height: 100%; min-width: 0; }
+.bar-track span:first-child { border-radius: 3px 0 0 3px; } .bar-track span:last-child { border-radius: 0 3px 3px 0; }
+.val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; }
+.table-box { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th { font-weight: 600; text-align: right; color: var(--ink-2); border-bottom: 1px solid var(--line); padding: 7px 8px; white-space: nowrap; }
+td { text-align: right; padding: 7px 8px; border-bottom: 1px solid var(--soft); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr.best td { font-weight: 600; background: var(--accent-soft); }
+.sliders { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 24px; }
+.sliders label { display: grid; gap: 4px; font-size: 13.5px; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.note { padding: 11px 13px; border-radius: 5px; background: var(--soft); font-size: 14px; }
+.pick { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+select { font: 14px var(--body); padding: 8px; border-radius: 5px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); max-width: 100%; }
+.rail { display: grid; gap: 0; counter-reset: step; }
+.step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; counter-increment: step; }
+.step::before { content: counter(step); font: 600 13px/28px var(--mono); width: 28px; height: 28px; text-align: center; border-radius: 50%; background: var(--accent); color: var(--panel); }
+.step > div { border-left: 1px solid var(--line); margin-left: -32px; padding: 0 0 24px 32px; display: grid; gap: 8px; min-width: 0; }
+.step:last-child > div { padding-bottom: 0; border-left-color: transparent; }
+.step h3 small { font: 400 13px var(--body); color: var(--ink-3); margin-left: 6px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 10px 16px; }
+.facts div { display: grid; }
+.facts span { font-size: 12.5px; color: var(--ink-3); } .facts b { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12.5px; font-weight: 600; background: var(--soft); color: var(--ink); }
+.pill.good { background: var(--good-soft); color: var(--good); } .pill.warn { background: var(--warn-soft); color: var(--warn); } .pill.bad { background: var(--bad-soft); color: var(--bad); }
+blockquote { margin: 0; padding: 10px 13px; background: var(--soft); border-radius: 5px; max-width: 75ch; font-size: 14.5px; overflow-wrap: anywhere; }
+ul.plain { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 14px; }
+.calls { display: flex; flex-wrap: wrap; gap: 4px; font: 12px var(--mono); color: var(--ink-2); }
+.calls span { background: var(--soft); padding: 2px 6px; border-radius: 3px; }
+.mini-bar { display: grid; grid-template-columns: 175px minmax(0, 1fr) 50px; gap: 8px; align-items: center; font-size: 13px; }
+.mini-bar > div { background: var(--soft); height: 10px; border-radius: 2px; overflow: hidden; } .mini-bar i { display: block; height: 100%; background: var(--s1); }
+svg text { fill: var(--ink-2); font: 11.5px var(--body); }
+.chart { width: 100%; height: auto; display: block; }
+@media (max-width: 560px) { .bar-row { grid-template-columns: minmax(0, 1fr) 70px; } .bar-row .bar-track { grid-column: 1 / -1; grid-row: 2; } .mini-bar { grid-template-columns: 110px minmax(0, 1fr) 46px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <span class="tag">Research only. Inventory, suppliers and costs are simulated</span>
+    <h1>Supply Chain Agent Replay</h1>
+    <p class="muted">The whole pipeline run on unseen test weeks, 1 Jan to 22 May 2016. 500 items, 3 scenarios, 7 ways of ordering. Demand and prices come from M5 retail data. Nothing here places a real order.</p>
+    <nav><a href="#verdict">Result</a><a href="#pipeline">Pipeline</a><a href="#trace">Follow one case</a><a href="#results">Step 10 numbers</a><a href="#llm">LLM sample</a><a href="#limits">Limits</a></nav>
+  </header>
+
+  <section id="verdict" class="verdict" aria-label="Main results">
+    <div><span class="muted small">Best service</span><b>The agent</b><span class="small muted">Cuts unmet demand 71% to 75% against the reorder point.</span></div>
+    <div><span class="muted small">Lowest cost</span><b>Forecast-driven ordering</b><span class="small muted">Cheapest in all 3 scenarios. The agent costs 75% to 167% more than the reorder point.</span></div>
+    <div><span class="muted small">Against a simple rule</span><b>No clear agent win</b><span class="small muted">Cost is not clearly different, and it raises 1.6 to 1.8 times as many cases.</span></div>
+    <div><span class="muted small">What the LLM adds</span><b>Almost nothing</b><span class="small muted">It chose UltraBERT's category on 99 of 100 cases. Both changed results came from errors.</span></div>
+  </section>
+
+  <section id="pipeline">
+    <div class="head"><h2>The pipeline</h2><p class="muted">Each Monday, every item goes through these stages. Results shown are from each model's own test period.</p></div>
+    <div class="flow">
+      <div><h3>Inventory simulator</h3><span class="small muted">M5 demand and prices, with simulated stock, suppliers and delays.</span><span class="small">Observed demand, synthetic everything else</span></div>
+      <div><h3>Demand forecast</h3><span class="small muted">Timestral-28M, 28 days ahead.</span><span class="small">Pinball 0.580, against LightGBM 0.592 and seasonal naive 0.627</span></div>
+      <div><h3>Stockout risk</h3><span class="small muted">TabPFN v2 and LightGBM, next 14 days.</span><span class="small">PR-AUC 0.649 and 0.685, against a days-of-cover rule at 0.498</span></div>
+      <div><h3>Supplier delay risk</h3><span class="small muted">LightGBM, one score per open order.</span><span class="small">PR-AUC 0.336, against the supplier's past rate at 0.312</span></div>
+      <div><h3>Escalation suggestion</h3><span class="small muted">Fine-tuned UltraBERT picks a category.</span><span class="small">Macro-F1 0.492, with critical recall 0.41</span></div>
+      <div><h3>Reasoning LLM</h3><span class="small muted">SmolLM3-3B calls the tools and writes an explanation.</span><span class="small">Untuned, about 80 seconds per case</span></div>
+      <div><h3>Code checks</h3><span class="small muted">Overrides, the conflict rule and a check on cited numbers.</span><span class="small">Run after the model, which cannot skip them</span></div>
+      <div><h3>Person approves</h3><span class="small muted">Every action other than monitor needs approval.</span><span class="small">Simulated here, and nothing is really ordered</span></div>
+    </div>
+  </section>
+
+  <section id="trace">
+    <div class="head"><h2>Follow one case through the pipeline</h2><p class="muted">These are the 100 cases the LLM really reviewed, with its actual tool results and words. Pick any one.</p></div>
+    <div class="panel" style="display:grid;gap:18px">
+      <div class="pick">
+        <label for="filter" class="small">Final category</label>
+        <select id="filter"></select>
+        <label for="case" class="small">Case</label>
+        <select id="case"></select>
+        <button class="btn" id="next" type="button">Next case</button>
+      </div>
+      <div id="rail" class="rail"></div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="head"><h2>Step 10 results</h2><p class="muted">Each run faces the same demand, prices, closed days, starting stock and supplier delay draws. Total cost excludes the purchase price of units and review time.</p></div>
+    <div class="seg" id="scenario" role="group" aria-label="Scenario"></div>
+    <div class="panel" style="display:grid;gap:12px">
+      <h3>Total cost by part</h3>
+      <div class="legend" id="cost-legend"></div>
+      <div id="cost-bars"></div>
+      <div class="sliders">
+        <label for="fee">Fee per expedite: <b class="num" id="fee-v"></b><input type="range" id="fee" min="0" max="50" step="1" value="25"></label>
+        <label for="pen">Extra cost per lost unit, beyond margin: <b class="num" id="pen-v"></b><input type="range" id="pen" min="0" max="20" step="0.25" value="0"></label>
+      </div>
+      <p class="note" id="cost-note"></p>
+      <p class="small muted">Decisions never see these costs, so changing them needs no rerun. The defaults are $25 and $0. Both are assumptions, not measurements.</p>
+    </div>
+    <div class="two">
+      <div class="panel" style="display:grid;gap:8px"><h3>Unmet demand, units</h3><div id="unmet-bars"></div></div>
+      <div class="panel" style="display:grid;gap:8px"><h3>Cases needing a person's action, of 10,000</h3><div id="work-bars"></div><p class="small muted">The routine runs raise no cases. Reviewer time is not costed.</p></div>
+    </div>
+    <div class="panel table-box"><table id="table"></table></div>
+    <div class="panel table-box" style="display:grid;gap:8px"><h3>Are the gaps clear? Series bootstrap, 95% interval</h3><table id="diffs"></table><p class="small muted">Shaded intervals exclude zero. Negative favors the first-named run.</p></div>
+    <p class="note">The conflict rule changes no outcome when everything is approved, so "Agent" and "Agent with conflict rule" match. It matters only when a person can decline, as in the decline run. Human-review items are high volume, so declining about 1% to 2% of cases raises unmet demand sharply.</p>
+  </section>
+
+  <section id="llm">
+    <div class="head"><h2>LLM sample</h2><p class="muted">100 replayed cases, 25 per category. The LLM reviewed saved states afterward and did not drive the replay, so the costs above do not reflect its choices.</p></div>
+    <div class="two">
+      <div class="panel" style="display:grid;gap:10px"><h3>Effect on decisions</h3><div class="facts" id="llm-facts"></div><p class="small muted">Both changes moved monitor to human review: one read a 0.4% risk as 40%, and one never gave a valid answer.</p></div>
+      <div class="panel table-box" style="display:grid;gap:8px"><h3>Explanation audit</h3><table id="audit"></table><p class="small muted">Narrow rules, so these counts are a lower bound. Cases can break more than one.</p></div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="head"><h2>What this does not show</h2></div>
+    <div class="panel"><ul class="plain">
+      <li><b>One simulator.</b> Supplier delays, inventory and costs are assumptions, so this measures no real savings.</li>
+      <li><b>Expediting is assumed to halve the remaining wait.</b> With a 25% cut instead, the agent's unmet demand nearly doubles on baseline.</li>
+      <li><b>A lost sale counts only its margin.</b> No lost customers or penalties are included, which favors the cheaper runs.</li>
+      <li><b>The approving person is simulated.</b> A real reviewer might decline weak cases, which was not tested beyond the sensitivity runs.</li>
+      <li><b>The agent sits on the reorder-point routine.</b> It can only add to it. Combining it with forecast-driven ordering was not tested.</li>
+      <li><b>The LLM is untuned,</b> since Step 9 was skipped, and critical recall stays low at 0.41.</li>
+      <li><b>Tests:</b> 469 of 469 passed. All 21 runs were not repeated end to end. Full report: <span class="mono">reports/step_10/summary.md</span>.</li>
+    </ul></div>
+  </section>
+</div>
+<script>
+const DATA = /*DATA*/null;
+const LABEL = {monitor: "Monitor", reorder_recommendation: "Reorder", expedite_recommendation: "Expedite", human_review: "Human review"};
+const PILL = {monitor: "", reorder_recommendation: "warn", expedite_recommendation: "warn", human_review: "bad"};
+const $ = id => document.getElementById(id);
+const esc = text => String(text ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const whole = n => Math.round(n).toLocaleString("en-US");
+const money = n => "$" + whole(n);
+const pill = c => `<span class="pill ${PILL[c] || ""}">${esc(LABEL[c] || c)}</span>`;
+const PARTS = [["holding", "Holding", "--s1"], ["lost", "Lost sales", "--s2"], ["shipping", "Shipping", "--s3"], ["expedite", "Expedite", "--s4"]];
+let scenario = DATA.scenarios[0].key;
+
+function costOf(run, fee, penalty) {
+  return {holding: run.holding, lost: run.lost_margin + penalty * run.unmet, shipping: run.shipping, expedite: run.expedite_shipping + fee * run.expedites};
+}
+function total(parts) { return parts.holding + parts.lost + parts.shipping + parts.expedite; }
+
+function drawResults() {
+  const fee = +$("fee").value, penalty = +$("pen").value;
+  $("fee-v").textContent = "$" + fee;
+  $("pen-v").textContent = "$" + penalty.toFixed(2);
+  const runs = DATA.runs[scenario];
+  const costs = runs.map(run => costOf(run, fee, penalty));
+  const top = Math.max(...costs.map(total));
+  const cheapest = Math.min(...costs.map(total));
+  $("cost-bars").innerHTML = runs.map((run, i) => {
+    const parts = costs[i];
+    const segments = PARTS.filter(([k]) => parts[k] > 0).map(([k, name, color]) => `<span style="width:${100 * parts[k] / top}%;background:var(${color})" title="${name}: ${money(parts[k])}"></span>`).join("");
+    return `<div class="bar-row"><span>${esc(run.label)}</span><div class="bar-track">${segments}</div><span class="val">${money(total(parts))}</span></div>`;
+  }).join("");
+  const agent = runs.find(r => r.key === "agent_conflict"), rival = runs.find(r => r.key === "forecast_driven");
+  const gap = total(costOf(agent, fee, penalty)) - total(costOf(rival, fee, penalty));
+  $("cost-note").innerHTML = gap > 0 ? `At these costs the agent costs <b>${money(gap)} more</b> than forecast-driven ordering.` : `At these costs the agent costs <b>${money(-gap)} less</b> than forecast-driven ordering.`;
+  const bars = (key, format) => {
+    const biggest = Math.max(...runs.map(r => r[key]), 1);
+    return runs.map(r => `<div class="bar-row"><span>${esc(r.label)}</span><div class="bar-track"><span style="width:${100 * r[key] / biggest}%;background:var(--s1);border-radius:3px" title="${format(r[key])}"></span></div><span class="val">${format(r[key])}</span></div>`).join("");
+  };
+  $("unmet-bars").innerHTML = bars("unmet", whole);
+  $("work-bars").innerHTML = bars("action_cases", whole);
+  $("table").innerHTML = `<thead><tr><th>Run</th><th>Stockout days %</th><th>Unmet units</th><th>Fill %</th><th>Holding</th><th>Lost sales</th><th>Shipping</th><th>Expedite</th><th>Total</th><th>Expedites</th><th>Human review</th><th>Under 10% risk</th></tr></thead><tbody>` + runs.map((r, i) => {
+    const parts = costs[i];
+    return `<tr class="${total(parts) === cheapest ? "best" : ""}"><td>${esc(r.label)}</td><td>${r.stockout_pct.toFixed(2)}</td><td>${whole(r.unmet)}</td><td>${r.fill_pct.toFixed(1)}</td><td>${money(parts.holding)}</td><td>${money(parts.lost)}</td><td>${money(parts.shipping)}</td><td>${money(parts.expedite)}</td><td>${money(total(parts))}</td><td>${whole(r.expedites)}</td><td>${whole(r.human_review)}</td><td>${whole(r.weak)}</td></tr>`;
+  }).join("") + "</tbody>";
+  $("diffs").innerHTML = `<thead><tr><th>Comparison</th><th>Measure</th><th>Difference</th><th>95% interval</th></tr></thead><tbody>` + DATA.differences[scenario].map(d => `<tr><td>${esc(d.label)}</td><td>${d.measure}</td><td>${whole(d.difference)}</td><td style="${d.clear ? "background:var(--accent-soft);font-weight:600" : ""}">${whole(d.low)} to ${whole(d.high)}</td></tr>`).join("") + "</tbody>";
+  document.querySelectorAll("#scenario button").forEach(b => b.setAttribute("aria-pressed", b.dataset.key === scenario));
+}
+
+function historyChart(item) {
+  const days = item.days, width = 720, height = 170, left = 36, right = 8, top = 10, bottom = 26;
+  const plot = width - left - right, base = height - bottom;
+  const peak = Math.max(1, ...days.map(d => Math.max(d.on_hand, d.unmet)));
+  const y = v => base - (base - top) * v / peak;
+  const step = plot / days.length;
+  const originIndex = days.findIndex(d => d.date === item.origin);
+  let marks = "";
+  [0, Math.round(peak / 2), peak].forEach(v => { marks += `<line x1="${left}" x2="${width - right}" y1="${y(v)}" y2="${y(v)}" stroke="var(--soft)"/><text x="${left - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`; });
+  days.forEach((d, i) => {
+    const x = left + i * step, w = Math.max(step - 2, 2);
+    marks += `<rect x="${x}" y="${y(d.on_hand)}" width="${w}" height="${Math.max(base - y(d.on_hand), 0)}" rx="1.5" fill="var(--s1)"><title>${d.date}: ${d.on_hand} on hand, ${d.unmet} unmet, ${d.received} received</title></rect>`;
+    if (d.unmet) marks += `<rect x="${x}" y="${y(d.unmet)}" width="${w}" height="${Math.max(base - y(d.unmet), 0)}" rx="1.5" fill="var(--s2)" stroke="var(--panel)"><title>${d.date}: ${d.unmet} unmet</title></rect>`;
+    if (d.received) marks += `<circle cx="${x + w / 2}" cy="${y(d.on_hand) - 6}" r="4" fill="var(--s3)" stroke="var(--panel)" stroke-width="1.5"><title>${d.date}: ${d.received} received</title></circle>`;
+  });
+  const lineX = left + originIndex * step - 1;
+  marks += `<line x1="${lineX}" x2="${lineX}" y1="${top - 4}" y2="${base}" stroke="var(--ink)" stroke-dasharray="3 3"/><text x="${lineX}" y="${height - 8}" text-anchor="middle" font-weight="600">Review</text>`;
+  marks += `<text x="${left}" y="${height - 8}">${days[0].date}</text><text x="${width - right}" y="${height - 8}" text-anchor="end">${days[days.length - 1].date}</text>`;
+  return `<svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Stock on hand and unmet demand around the review date">${marks}</svg><div class="legend"><span><i style="background:var(--s1)"></i>On hand at day's end</span><span><i style="background:var(--s2)"></i>Unmet units</span><span><i style="background:var(--s3);border-radius:50%"></i>Delivery received</span></div>`;
+}
+
+const facts = pairs => `<div class="facts">${pairs.map(([k, v]) => `<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>`;
+const na = (v, suffix = "") => v === null || v === undefined ? "Unknown" : v + suffix;
+
+function approval(item, choice) {
+  const box = $("decision");
+  if (!box) return;
+  if (item.final === "monitor") { box.innerHTML = "No approval needed, and no action is taken."; return; }
+  const approved = item.person_action === "expedite" ? "expedite the soonest open order" : "place a new order";
+  box.innerHTML = choice === "approve" ? `Approved: the simulator would <b>${approved}</b>. No real order is placed.` : choice === "decline" ? "Declined: nothing happens, and the routine carries on. No real order is placed." : `The replay used a simulated approval. Its action: <b>${approved}</b>.`;
+}
+
+function drawCase() {
+  const item = DATA.cases.find(c => c.case_id === $("case").value);
+  if (!item) return;
+  const ev = item.evidence, stock = ev.get_inventory_status || {}, fc = ev.get_demand_forecast || {}, risk = ev.get_stockout_risk || {}, po = ev.get_open_orders || {}, sug = ev.get_escalation_suggestion || {};
+  const orders = po.open_orders || [];
+  const probs = Object.entries(sug.probabilities_percent || {});
+  const flags = item.flags.length ? item.flags.map(f => `<li><span class="pill warn">Flag</span> ${esc(f)}</li>`).join("") : '<li><span class="pill good">Clean</span> No check fired.</li>';
+  const problems = item.problems.length ? item.problems.map(p => `<li><span class="pill bad">Audit</span> ${esc(p.replaceAll("_", " "))}</li>`).join("") : '<li><span class="pill good">Audit</span> No rule broken. Rules are narrow, so this does not prove the text is right.</li>';
+  const changed = item.final !== item.code_final;
+  $("rail").innerHTML = [
+    ["Item at this review", `${item.scenario_label}, ${item.origin}`, `<p class="mono">${esc(item.id)}</p><p class="small muted">The LLM sees only an anonymous case ID, ${esc(item.case_id)}, never the item name or scenario.</p>` + facts([["On hand", na(stock.on_hand_units)], ["On order", na(stock.on_order_units)], ["Days of cover", na(stock.days_of_cover)], ["Sales per day, 28 days", na(stock.sales_per_day_last_28_days)], ["Sold-out days, 28 days", na(stock.sold_out_days_last_28_days)], ["Value band", na(stock.value_band)]])],
+    ["Demand forecast", "Timestral-28M", facts([["Next 14 days", na(fc.forecast_units_next_14_days, " units")], ["Low estimate", na(fc.low_estimate_units)], ["High estimate", na(fc.high_estimate_units)]])],
+    ["Stockout risk, next 14 days", "TabPFN v2 and LightGBM", facts([["TabPFN", na(risk.tabpfn_risk_percent, "%")], ["LightGBM", na(risk.lightgbm_risk_percent, "%")], ["Gap", na(risk.models_differ_by_points, " points")]]) + (risk.models_differ_by_points >= 30 ? '<p><span class="pill bad">Models conflict</span> <span class="small">A gap of 30 points or more goes to human review.</span></p>' : "")],
+    ["Open orders and delay risk", "LightGBM", orders.length ? `<div class="table-box"><table><thead><tr><th>Order</th><th>Units</th><th>Days to promised date</th><th>Delay risk</th></tr></thead><tbody>${orders.map((o, i) => `<tr><td>${i + 1}</td><td>${o.units}</td><td>${o.days_until_promised}</td><td>${na(o.delay_risk_percent, "%")}</td></tr>`).join("")}</tbody></table></div><p class="small muted">Supplier late rate: ${na(po.supplier_late_percent_long_run, "%")} long run, ${na(po.supplier_late_percent_last_30_days, "%")} in the last 30 days.</p>` : '<p class="small">No open orders.</p>'],
+    ["Escalation suggestion", "Fine-tuned UltraBERT", `<p>${pill(item.ultrabert)}</p><div style="display:grid;gap:4px">${probs.map(([k, v]) => `<div class="mini-bar"><span>${esc(LABEL[k] || k)}</span><div><i style="width:${v}%"></i></div><span class="num" style="text-align:right">${v}%</span></div>`).join("")}</div>`],
+    ["Reasoning LLM", `SmolLM3-3B, ${item.turns} turns, ${item.seconds === null ? "unknown" : Math.round(item.seconds)} s`, `<div class="calls">${item.calls.map(c => `<span>${esc(c)}</span>`).join("")}</div><p>Its choice: ${item.model ? pill(item.model) : '<span class="pill bad">No valid answer</span>'} <span class="small muted">${item.model === item.ultrabert ? "Same as UltraBERT." : ""} Uncertainty: ${esc(item.uncertainty || "not given")}.</span></p>${item.explanation ? `<blockquote>${esc(item.explanation)}</blockquote>` : ""}<ul class="plain">${problems}</ul>`],
+    ["Code checks", "run after the model", `<ul class="plain">${flags}</ul><p>Final: ${pill(item.final)} ${changed ? `<span class="small muted">The code-only pipeline said ${esc(LABEL[item.code_final])}. The LLM's run changed the result.</span>` : '<span class="small muted">Same as the code-only pipeline.</span>'}</p>`],
+    ["Person approves", item.final === "monitor" ? "not needed" : "simulated", `${item.final === "monitor" ? "" : '<div class="seg"><button class="btn" type="button" id="yes">Approve</button><button class="btn" type="button" id="no">Decline</button></div>'}<p id="decision" class="note"></p>`],
+    ["What happened in the replay", "code-only run, with approval", historyChart(item) + `<p class="small muted">Unmet units in the 14 days after review: <b>${item.unmet_after}</b> in this run, ${item.unmet_after_routine} in the plain reorder-point run. Earlier actions also shape this run's stock. The replay used the code-only result${changed ? `, ${esc(LABEL[item.code_final])}, not the LLM's final result` : ""}.</p>`],
+  ].map(([title, sub, body]) => `<div class="step"><div><h3>${esc(title)}<small>${esc(sub)}</small></h3>${body}</div></div>`).join("");
+  approval(item, null);
+  if ($("yes")) { $("yes").onclick = () => approval(item, "approve"); $("no").onclick = () => approval(item, "decline"); }
+}
+
+function fillCases() {
+  const wanted = $("filter").value;
+  const list = DATA.cases.filter(c => wanted === "all" || c.final === wanted);
+  $("case").innerHTML = list.map(c => `<option value="${esc(c.case_id)}">${esc(c.case_id)}: ${esc(LABEL[c.final])}, ${esc(c.scenario_label)}, ${esc(c.origin)}</option>`).join("");
+  drawCase();
+}
+
+function start() {
+  $("scenario").innerHTML = DATA.scenarios.map(s => `<button type="button" data-key="${s.key}" aria-pressed="false">${esc(s.label)}</button>`).join("");
+  $("scenario").onclick = event => { if (event.target.dataset.key) { scenario = event.target.dataset.key; drawResults(); } };
+  $("cost-legend").innerHTML = PARTS.map(([, name, color]) => `<span><i style="background:var(${color})"></i>${name}</span>`).join("");
+  $("fee").oninput = $("pen").oninput = drawResults;
+  $("llm-facts").innerHTML = DATA.llm.facts.map(([k, v]) => `<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("");
+  $("audit").innerHTML = `<thead><tr><th>Rule broken</th><th>Cases</th></tr></thead><tbody>${DATA.llm.audit.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join("")}</tbody>`;
+  $("filter").innerHTML = '<option value="all">All 100</option>' + Object.entries(LABEL).map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+  $("filter").onchange = fillCases;
+  $("case").onchange = drawCase;
+  $("next").onclick = () => { const box = $("case"); box.selectedIndex = (box.selectedIndex + 1) % box.options.length; drawCase(); };
+  fillCases();
+  const first = DATA.cases.find(c => c.case_id === DATA.start_case);
+  if (first) { $("case").value = first.case_id; drawCase(); }
+  drawResults();
+}
+start();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 from src.agent.tools import REQUIRED_TOOLS
-from src.escalation.policy import apply_overrides, requires_approval
+from src.escalation.policy import MODEL_DISAGREEMENT, apply_overrides, requires_approval
 
 LOW_RISK_PERCENT = 10.0
 ALWAYS_ALLOWED_NUMBERS = {14.0, 28.0, 30.0}
@@ -36,7 +36,7 @@ def unsupported_numbers(explanation, evidence):
     return missing
 
 
-def review(category, explanation, evidence, risks, open_orders, required=REQUIRED_TOOLS):
+def review(category, explanation, evidence, risks, open_orders, required=REQUIRED_TOOLS, conflict_rule=False):
     """Return the final category, whether a person must approve, and a flag for each problem found."""
     flags = []
     missing_tools = sorted(required - set(evidence))
@@ -52,6 +52,12 @@ def review(category, explanation, evidence, risks, open_orders, required=REQUIRE
     if reason[0]:
         flags.append(f"override:{reason[0]}")
     if missing_tools or (bad_numbers and final == "monitor"):
+        final = "human_review"
+    if conflict_rule and len(known_risks) < 2:
+        flags.append("conflict:stockout risk unavailable")
+        final = "human_review"
+    elif conflict_rule and max(known_risks) - min(known_risks) >= 100 * MODEL_DISAGREEMENT:
+        flags.append("conflict:stockout models conflict")
         final = "human_review"
     if final not in ("monitor", "human_review") and known_risks and max(known_risks) < LOW_RISK_PERCENT:
         flags.append("weak_evidence:action with both stockout risks under 10 percent")

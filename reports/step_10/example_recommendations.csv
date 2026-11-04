@@ -1,0 +1,13 @@
+scenario,origin,id,on_hand,on_order,cover_days,open_pos,fc_mean_14,stockout_risk,stockout_risk_lightgbm,suggested,final,reason,action,done
+baseline,2016-01-04,FOODS_1_002_CA_4_evaluation,17,0,107.08056916384704,0.0,2.2226254665851597,0.0010485037,0.0009721207657203559,monitor,monitor,,none,False
+baseline,2016-01-04,FOODS_1_018_TX_3_evaluation,38,222,4.302649337381949,1.0,123.64474961459636,0.114421256,0.42501083231446385,expedite_recommendation,human_review,stockout models conflict,expedite,True
+baseline,2016-01-04,FOODS_1_018_WI_1_evaluation,44,114,5.847052918643881,1.0,105.35221907019617,0.4725805,0.36884258865155556,expedite_recommendation,expedite_recommendation,,expedite,True
+baseline,2016-01-04,FOODS_1_121_CA_3_evaluation,30,0,43.999409041258396,0.0,9.545582751035692,0.003852082,0.025897395571509205,reorder_recommendation,reorder_recommendation,,order,True
+lean_policy,2016-01-04,FOODS_1_002_CA_4_evaluation,11,0,62.898912145717205,0.0,2.448373028188944,0.0028740827,0.0019579615476318425,monitor,monitor,,none,False
+lean_policy,2016-01-04,FOODS_1_006_TX_2_evaluation,3,24,5.698885955619765,2.0,7.369861465394497,0.22157559,0.5158817229052007,expedite_recommendation,expedite_recommendation,,expedite,True
+lean_policy,2016-01-04,FOODS_1_034_CA_3_evaluation,10,0,25.212158355473363,0.0,5.552876434698701,0.033305954,0.09414894292583242,reorder_recommendation,reorder_recommendation,,order,True
+lean_policy,2016-01-04,FOODS_1_218_WI_3_evaluation,55,408,4.0449372287123815,2.0,190.36142131805417,0.608822,0.21643134450760115,expedite_recommendation,human_review,stockout models conflict,expedite,True
+supplier_disruption,2016-01-04,FOODS_1_002_CA_4_evaluation,17,0,103.02207410251442,0.0,2.3101845121383673,0.0011375691,0.0011912509385712969,monitor,monitor,,none,False
+supplier_disruption,2016-01-04,FOODS_1_006_TX_2_evaluation,10,30,19.16702117130126,1.0,7.304212728142738,0.033253167,0.1738311455640353,expedite_recommendation,expedite_recommendation,,expedite,True
+supplier_disruption,2016-01-04,FOODS_1_121_CA_3_evaluation,36,0,52.78015463901559,0.0,9.549043640494347,0.0031022204,0.024237386183343413,reorder_recommendation,reorder_recommendation,,order,True
+supplier_disruption,2016-01-04,FOODS_2_342_CA_3_evaluation,68,114,12.074448153215545,1.0,78.84418301522733,0.12403634,0.5119493875194575,expedite_recommendation,human_review,stockout models conflict,expedite,True

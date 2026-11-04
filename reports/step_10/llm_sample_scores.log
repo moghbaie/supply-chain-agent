@@ -1,0 +1,55 @@
+cases 100; status {'submitted': 99, 'failed': 1}; orders placed 0; scenarios {'lean_policy': 43, 'baseline': 29, 'supplier_disruption': 28}
+LLM chose UltraBERT's category: 99 of 100
+final equals the code-only result: 98 of 100
+
+CONFUSION, code-only (rows) against LLM agent final (columns)
+ final                    expedite_recommendation  human_review  monitor  reorder_recommendation
+code_final                                                                                     
+expedite_recommendation                       25             0        0                       0
+human_review                                   0            25        0                       0
+monitor                                        0             2       23                       0
+reorder_recommendation                         0             0        0                      25
+
+CASES WHERE THE FINAL RESULT CHANGED: 2
+     case_id            scenario ultrabert   model code_final        final                                flags
+replay-0024 supplier_disruption   monitor monitor    monitor human_review             unsupported_numbers:40.0
+replay-0067         lean_policy   monitor     NaN    monitor human_review agent_failed:no valid recommendation
+
+FLAGS
+ flags
+weak_evidence          23
+conflict               19
+unsupported_numbers     4
+agent_failed            1
+
+EXPLANATIONS: any rule broken 41; factual rule broken 26; distinct 96
+problems
+cites_no_numbers                                     22
+says_high_risk_but_both_models_under_20               9
+says_no_open_orders_but_one_exists                    8
+says_it_conflicts_with_the_suggestion_it_followed     5
+stockout_risk_number_not_from_either_model            4
+says_delayed_but_nothing_overdue                      1
+
+BY FINAL CATEGORY
+                          size  sum
+final                             
+expedite_recommendation    25   10
+human_review               27    7
+monitor                    23    1
+reorder_recommendation     25    8
+
+final monitor with a factual error, which no person reviews: 1 of 23
+
+RUN COST: seconds median 73, mean 80, 95th 122, max 184; total 7957; turns mean 6.1; tokens mean 8156 in, 261 out; peak GPU 2.23 GB
+errors: malformed calls 29, invalid submissions 4, search_policy calls 0
+
+FIRST TWO EXPLANATIONS PER FINAL CATEGORY
+[replay-0006 lean_policy expedite_recommendation] The evidence suggests a high risk of stockout, with forecast demand indicating a need for expedited action. The open orders are approaching their promised dates, and the supplier's late rates are relatively low. The fine-tuned UltraBERT model recommends expedite as the most likely category.
+[replay-0008 lean_policy expedite_recommendation] The evidence suggests a high risk of stockout, with forecast demand indicating a need for expedited action. The open order is due in 5 days, but the forecast suggests a need for 87 units, which is higher than the current on-hand stock of 24 units. The supplier's late rate is 14.5%, which is higher than the long-run rate of 14.5% and the last 30 days rate of 13.4%. The fine-tuned UltraBERT model suggests an expedite recommendation with 67.2% probability.
+[replay-0003 baseline human_review] The evidence suggests a high risk of stockout (82%) and open orders with significant delay risk (18% and 22.3% for the first two orders). The fine-tuned UltraBERT model recommends an expedite recommendation with 84% probability.
+[replay-0004 supplier_disruption human_review] The evidence conflicts with the tool's suggestion to reorder, as the stockout risk is high and the forecast demand is lower than the on-hand units. The open orders are also pending, and the supplier's late rates are high. The fine-tuned UltraBERT model suggests a human review is needed.
+[replay-0001 baseline monitor] The evidence suggests a monitor category is appropriate. The inventory is sufficient, the demand forecast indicates a high value band, and there is no stockout risk. The open orders are on schedule, and the supplier's late rates are not a concern.
+[replay-0002 lean_policy monitor] The monitor category is suggested with 53.1% probability, indicating a low risk of stockout and sufficient inventory.
+[replay-0000 lean_policy reorder_recommendation] The evidence suggests a stockout risk of 82% and a forecast demand of 8.8 units over the next 14 days. The inventory is currently at 11 units, with 17.5 days of cover. The open orders have a delay risk of 8.5% and the supplier's late rates are 4.8% long run and 6.4% last 30 days.
+[replay-0007 lean_policy reorder_recommendation] The evidence suggests a stockout risk with a high demand forecast, and there are no open orders to expedite. The suggested category is reorder recommendation with 70.6% probability.

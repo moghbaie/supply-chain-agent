@@ -1,0 +1,75 @@
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 46%]
+........................................................................ [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 92%]
+.....................................                                    [100%]
+============================== warnings summary ===============================
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007
+  C:\Users\Mehrnoosh\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1007: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    if ismodule(module) and hasattr(module, '__file__'):
+
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008
+  C:\Users\Mehrnoosh\AppData\Local\Programs\Python\Python312\Lib\inspect.py:1008: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    f = module.__file__
+
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:914
+  C:\Users\Mehrnoosh\AppData\Local\Programs\Python\Python312\Lib\inspect.py:914: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    if getattr(object, '__file__', None):
+
+..\..\AppData\Local\Programs\Python\Python312\Lib\inspect.py:915
+  C:\Users\Mehrnoosh\AppData\Local\Programs\Python\Python312\Lib\inspect.py:915: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    return object.__file__
+
+.venv\Lib\site-packages\torch\jit\_script.py:365: 14 warnings
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Lib\site-packages\torch\jit\_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/evaluation/test_delay_risk.py::test_olist_one_row_per_order
+tests/evaluation/test_delay_risk.py::test_later_deliveries_do_not_change_olist_features
+tests/evaluation/test_delay_risk.py::test_later_deliveries_do_not_change_olist_features
+tests/evaluation/test_kumo_olist.py::test_only_approved_columns_are_sent
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\src\supplier\olist.py:74: Pandas4Warning: Series.dt.weekday is deprecated and will be removed in a future version. Use Series.dt.day_of_week instead.
+    orders["purchase_weekday"] = orders.order_purchase_timestamp.dt.weekday
+
+tests/evaluation/test_forecasting.py::test_training_origins_finish_before_cutoff
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\tests\evaluation\test_forecasting.py:105: Pandas4Warning: DatetimeIndex.weekday is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_week instead.
+    assert (origins.weekday == 0).all()
+
+tests/evaluation/test_stockout.py::test_constant_baseline_has_no_skill
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\src\stockout\evaluation.py:14: RuntimeWarning: Mean of empty slice
+    gap += len(chunk) * abs(probabilities[chunk].mean() - labels[chunk].mean())
+
+tests/evaluation/test_stockout.py::test_constant_baseline_has_no_skill
+tests/integration/test_simulation_outputs.py::test_selection_ignores_data_after_check_end
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\.venv\Lib\site-packages\numpy\_core\_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+    ret = ret.dtype.type(ret / rcount)
+
+tests/integration/test_simulation_outputs.py::test_selection_ignores_data_after_check_end
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\src\simulation\demand.py:46: RuntimeWarning: Mean of empty slice
+    row[(dates >= start) & through_check].mean() for row, start in zip(matrix, first_sale)]
+
+tests/integration/test_simulation_outputs.py: 36 warnings
+tests/unit/test_simulation_engine.py: 20 warnings
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\src\simulation\engine.py:51: Pandas4Warning: DatetimeIndex.weekday is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_week instead.
+    weekdays = pd.DatetimeIndex(dates).weekday
+
+tests/unit/test_simulation_engine.py::test_orders_only_on_review_day
+  C:\Users\Mehrnoosh\Documents\supply-chain-agent\tests\unit\test_simulation_engine.py:62: Pandas4Warning: DatetimeIndex.weekday is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_week instead.
+    weekdays = pd.date_range(MONDAY, periods=100).weekday
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+469 passed, 96 warnings in 205.42s (0:03:25)

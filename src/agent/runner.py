@@ -59,7 +59,7 @@ def _check_submission(arguments, seen, required=REQUIRED_TOOLS):
         return {"ok": False, "error": "invalid recommendation: " + "; ".join(f"{'.'.join(map(str, e['loc']))}: {e['msg']}" for e in error.errors())}
 
 
-def _finish(trace, submission, required=REQUIRED_TOOLS):
+def _finish(trace, submission, required=REQUIRED_TOOLS, conflict_rule=False):
     """Apply the checks in code. Without a valid submission the case goes to a person, and the model's answer stays empty."""
     risk = trace["evidence"].get("get_stockout_risk", {})
     orders = trace["evidence"].get("get_inventory_status", {}).get("open_orders")
@@ -68,11 +68,11 @@ def _finish(trace, submission, required=REQUIRED_TOOLS):
         trace["review"] = {"final_category": "human_review", "approval_required": True, "order_placed": False, "flags": ["agent_failed:no valid recommendation"]}
         return trace
     trace["recommendation"] = submission
-    trace["review"] = review(submission["category"], submission["explanation"], trace["evidence"], [risk.get("tabpfn_risk_percent"), risk.get("lightgbm_risk_percent")], orders, required)
+    trace["review"] = review(submission["category"], submission["explanation"], trace["evidence"], [risk.get("tabpfn_risk_percent"), risk.get("lightgbm_risk_percent")], orders, required, conflict_rule)
     return trace
 
 
-def run_case(llm, box, case_id, max_turns=MAX_TURNS, hidden=()):
+def run_case(llm, box, case_id, max_turns=MAX_TURNS, hidden=(), conflict_rule=False):
     """Review one case and return a full trace. A run that does not finish goes to a person, flagged as failed."""
     schemas = tool_schemas(hidden)
     required = REQUIRED_TOOLS - set(hidden)
@@ -115,4 +115,4 @@ def run_case(llm, box, case_id, max_turns=MAX_TURNS, hidden=()):
             trace["status"] = "submitted"
             break
     trace["seconds"] = round(time.time() - started, 2)
-    return _finish(trace, submission, required)
+    return _finish(trace, submission, required, conflict_rule)
