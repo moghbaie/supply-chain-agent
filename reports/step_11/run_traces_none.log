@@ -1,0 +1,113 @@
+source traces, judge none, orders 1: 100 explanations, 741 claims in 489 clauses
+
+CLAIMS BY KIND AND VERDICT
+ verdict      contradicted  misattributed  not_checked  supported  unverified  wrong_value  all
+kind                                                                                          
+number                  0             12            0        421           2            7  442
+open_orders            10              0            0         78           0            0   88
+qualitative             0              0          194          0           0            0  194
+value_band              0              0            0         17           0            0   17
+all                    10             12          194        516           2            7  741
+
+explanations with a factual error: judge 27 (code layer 27), Step 8 rules 35
+
+PER EXPLANATION, where either finds an error
+   case_id                   final                                                                  error_claims                                                                             step8_rules
+test-0001            human_review                                                    wrong_value: 20 (stockout)                                                                                        
+test-0002                 monitor                                    contradicted: no open orders (open_orders)                                                      says_no_open_orders_but_one_exists
+test-0003  reorder_recommendation                                                misattributed: 67.7 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0004            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0006 expedite_recommendation                           contradicted: open orders are delayed (open_orders)                                                        says_delayed_but_nothing_overdue
+test-0007  reorder_recommendation                                             misattributed: 37.5 (late_recent)                                                                                        
+test-0008                 monitor                              contradicted: an open order exists (open_orders)                                             describes_an_open_order_that_does_not_exist
+test-0011  reorder_recommendation                        wrong_value: 68 (stockout) | wrong_value: 0 (forecast)                                              stockout_risk_number_not_from_either_model
+test-0012  reorder_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0013 expedite_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0014  reorder_recommendation                                                misattributed: 81.3 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0017  reorder_recommendation                                                   wrong_value: 0.0 (forecast)                                                                                        
+test-0018 expedite_recommendation                           contradicted: open orders are delayed (open_orders)                                                        says_delayed_but_nothing_overdue
+test-0020            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0022            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0023 expedite_recommendation                           contradicted: open orders are delayed (open_orders)                                                        says_delayed_but_nothing_overdue
+test-0025                 monitor                                                  wrong_value: 1 (order_units)                                                                                        
+test-0030                 monitor                                    contradicted: no open orders (open_orders)                                                      says_no_open_orders_but_one_exists
+test-0034  reorder_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0038  reorder_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0039            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0040 expedite_recommendation                                                misattributed: 59.4 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0041            human_review                                                   wrong_value: 100 (lightgbm)                                                                                        
+test-0042 expedite_recommendation                                               misattributed: 19.1 (late_rate)                                                                                        
+test-0045  reorder_recommendation                              contradicted: an open order exists (open_orders)                                             describes_an_open_order_that_does_not_exist
+test-0057 expedite_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0058  reorder_recommendation                                                misattributed: 62.4 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0059            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0062                 monitor                                             misattributed: 0.8 (prob_monitor)                                                                                        
+test-0063                 monitor                                    contradicted: no open orders (open_orders)                                                      says_no_open_orders_but_one_exists
+test-0064                 monitor                                                                                                                               says_high_risk_but_both_models_under_20
+test-0070 expedite_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0072  reorder_recommendation                                                misattributed: 79.5 (stockout)     says_high_risk_but_both_models_under_20; stockout_risk_number_not_from_either_model
+test-0074            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0079 expedite_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0081 expedite_recommendation                                                                                                                               says_high_risk_but_both_models_under_20
+test-0082                 monitor                                              misattributed: 3.5 (late_recent)                                                                                        
+test-0087  reorder_recommendation wrong_value: 70 (stockout) | contradicted: an open order exists (open_orders) describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model
+test-0088  reorder_recommendation                                                misattributed: 76.5 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0092            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0093  reorder_recommendation                                                misattributed: 80.7 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0110  reorder_recommendation                              contradicted: an open order exists (open_orders)                                             describes_an_open_order_that_does_not_exist
+test-0112  reorder_recommendation                                                misattributed: 61.5 (stockout)                                              stockout_risk_number_not_from_either_model
+
+Step 8 rule hits with no code-layer error: 16
+  case_id                                       step8_rules error_claims
+test-0004 says_it_conflicts_with_the_suggestion_it_followed             
+test-0012           says_high_risk_but_both_models_under_20             
+test-0013           says_high_risk_but_both_models_under_20             
+test-0020 says_it_conflicts_with_the_suggestion_it_followed             
+test-0022 says_it_conflicts_with_the_suggestion_it_followed             
+test-0034           says_high_risk_but_both_models_under_20             
+test-0038           says_high_risk_but_both_models_under_20             
+test-0039 says_it_conflicts_with_the_suggestion_it_followed             
+test-0057           says_high_risk_but_both_models_under_20             
+test-0059 says_it_conflicts_with_the_suggestion_it_followed             
+test-0064           says_high_risk_but_both_models_under_20             
+test-0070           says_high_risk_but_both_models_under_20             
+test-0074 says_it_conflicts_with_the_suggestion_it_followed             
+test-0079           says_high_risk_but_both_models_under_20             
+test-0081           says_high_risk_but_both_models_under_20             
+test-0092 says_it_conflicts_with_the_suggestion_it_followed             
+code-layer errors no Step 8 rule found: 8 explanations (test-0001, test-0007, test-0017, test-0025, test-0041, test-0042, test-0062, test-0082)
+errors on a final monitor case, which no person reviews: 7 (test-0002, test-0008, test-0025, test-0030, test-0062, test-0063, test-0082)
+
+FLAGGED CLAIMS
+   case_id        kind                    text        group          actual       verdict                                                            detail
+test-0001      number                      20     stockout         0.2;0.2   wrong_value                                                                  
+test-0002 open_orders          no open orders          NaN                  contradicted                                       1 listed, 8.0 units overdue
+test-0003      number                    67.7     stockout         3.1;3.9 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0006 open_orders open orders are delayed          NaN                  contradicted                                       2 listed, 0.0 units overdue
+test-0007      number                    37.5  late_recent            41.5 misattributed                    value of orders.supplier_late_percent_long_run
+test-0008 open_orders    an open order exists          NaN                  contradicted                                       0 listed, 0.0 units overdue
+test-0011      number                      68     stockout         2.9;4.1   wrong_value                                                                  
+test-0011      number                       0     forecast             2.6   wrong_value                                                                  
+test-0014      number                    81.3     stockout         4.8;7.9 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0017      number                     0.0     forecast             2.4   wrong_value                                                                  
+test-0018 open_orders open orders are delayed          NaN                  contradicted                                       2 listed, 0.0 units overdue
+test-0023 open_orders open orders are delayed          NaN                  contradicted                                       2 listed, 0.0 units overdue
+test-0025      number                       1  order_units 8.0;8.0;0.0;8.0   wrong_value                                                                  
+test-0030 open_orders          no open orders          NaN                  contradicted                                       1 listed, 0.0 units overdue
+test-0040      number                    59.4     stockout        6.2;12.2 misattributed value of suggestion.probabilities_percent.expedite_recommendation
+test-0041      number                     100     lightgbm             1.0   wrong_value                                                                  
+test-0042      number                    19.1    late_rate        34.5;9.7 misattributed                 value of orders.open_orders[0].delay_risk_percent
+test-0045 open_orders    an open order exists          NaN                  contradicted                                       0 listed, 0.0 units overdue
+test-0058      number                    62.4     stockout         3.9;2.7 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0062      number                     0.8 prob_monitor            75.5 misattributed            value of suggestion.probabilities_percent.human_review
+test-0063 open_orders          no open orders          NaN                  contradicted                                       1 listed, 0.0 units overdue
+test-0072      number                    79.5     stockout        13.0;7.4 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0082      number                     3.5  late_recent             3.1 misattributed                    value of orders.supplier_late_percent_long_run
+test-0087      number                      70     stockout         0.7;0.5   wrong_value                                                                  
+test-0087 open_orders    an open order exists          NaN                  contradicted                                       0 listed, 0.0 units overdue
+test-0088      number                    76.5     stockout        2.5;14.5 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0093      number                    80.7     stockout         6.1;8.7 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+test-0110 open_orders    an open order exists          NaN                  contradicted                                       0 listed, 0.0 units overdue
+test-0112      number                    61.5     stockout         2.3;2.7 misattributed  value of suggestion.probabilities_percent.reorder_recommendation
+
+wrote claims_traces_none.csv, explanations_traces_none.csv, claims_to_label_traces_none.csv (129 claims, judge verdict hidden) to reports\step_11

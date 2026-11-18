@@ -1,0 +1,10 @@
+explanations 100
+clauses 528, median 5 per explanation
+numbers stated 442; bound to a named field 440 (99.5%)
+explanations with no number 16
+open-order claims checked by code 88; value-band claims 17
+clauses sent to the LLM judge 194, in 89 explanations
+
+UNBOUND NUMBERS (still checked against every tool result)
+  test-0012 '18'     in: which is lower than the medium value band of 18 units
+  test-0082 '14'     in: The inventory is in the low value band (14 units) and has a days of cover of 42.3 days
