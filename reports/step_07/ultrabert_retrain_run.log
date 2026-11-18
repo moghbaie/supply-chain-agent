@@ -1,0 +1,51 @@
+W1104 09:47:19.553000 66580 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+W1104 09:47:21.347000 66580 .venv\Lib\site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+train 16,000, last origin 2015-09-14, mix {'monitor': 12002, 'expedite_recommendation': 3199, 'human_review': 423, 'reorder_recommendation': 376}
+selection 8,250, first origin 2015-10-05, mix {'monitor': 7694, 'expedite_recommendation': 464, 'human_review': 54, 'reorder_recommendation': 38}
+class weights {'monitor': 0.33, 'reorder_recommendation': 10.0, 'expedite_recommendation': 1.25, 'human_review': 9.46}
+Loading weights:   0%|          | 0/218 [00:00<?, ?it/s]Loading weights:  11%|#1        | 24/218 [00:00<00:00, 203.06it/s]Loading weights: 100%|##########| 218/218 [00:00<00:00, 1071.05it/s]
+[transformers] [1mUltrabertForSequenceClassification LOAD REPORT[0m from: dmis-lab/UltraBERT-150M
+Key                 | Status     | 
+--------------------+------------+-
+cls.weight          | UNEXPECTED | 
+head.linear1.weight | UNEXPECTED | 
+head.linear2.weight | UNEXPECTED | 
+classifier.weight   | MISSING    | 
+classifier.bias     | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  epoch 0 batch 250/2000, loss 1.571, lr 5.95e-06, 443s
+  epoch 0 batch 500/2000, loss 0.912, lr 1.22e-05, 886s
+  epoch 0 batch 750/2000, loss 0.845, lr 1.85e-05, 1331s
+  epoch 0 batch 1000/2000, loss 0.911, lr 1.95e-05, 2483s
+  epoch 0 batch 1250/2000, loss 0.764, lr 1.88e-05, 2930s
+  epoch 0 batch 1500/2000, loss 0.820, lr 1.81e-05, 3371s
+  epoch 0 batch 1750/2000, loss 0.757, lr 1.74e-05, 3813s
+  epoch 0 batch 2000/2000, loss 0.693, lr 1.67e-05, 4254s
+epoch 0: selection macro-F1 0.3923, 4778s, {'monitor': 6335, 'expedite_recommendation': 1143, 'human_review': 405, 'reorder_recommendation': 367}
+  epoch 1 batch 250/2000, loss 0.712, lr 1.60e-05, 442s
+  epoch 1 batch 500/2000, loss 0.745, lr 1.53e-05, 883s
+  epoch 1 batch 750/2000, loss 0.692, lr 1.46e-05, 1325s
+  epoch 1 batch 1000/2000, loss 0.736, lr 1.39e-05, 1767s
+  epoch 1 batch 1250/2000, loss 0.718, lr 1.32e-05, 2217s
+  epoch 1 batch 1500/2000, loss 0.704, lr 1.25e-05, 2666s
+  epoch 1 batch 1750/2000, loss 0.662, lr 1.18e-05, 3114s
+  epoch 1 batch 2000/2000, loss 0.680, lr 1.11e-05, 3555s
+epoch 1: selection macro-F1 0.4628, 4081s, {'monitor': 6037, 'expedite_recommendation': 1450, 'reorder_recommendation': 671, 'human_review': 92}
+  epoch 2 batch 250/2000, loss 0.648, lr 1.05e-05, 463s
+  epoch 2 batch 500/2000, loss 0.686, lr 9.76e-06, 937s
+  epoch 2 batch 750/2000, loss 0.606, lr 9.07e-06, 1379s
+  epoch 2 batch 1000/2000, loss 0.614, lr 8.37e-06, 1823s
+  epoch 2 batch 1250/2000, loss 0.636, lr 7.68e-06, 2268s
+  epoch 2 batch 1500/2000, loss 0.711, lr 6.98e-06, 4456s
+  epoch 2 batch 1750/2000, loss 0.705, lr 6.29e-06, 4953s
+  epoch 2 batch 2000/2000, loss 0.596, lr 5.59e-06, 5514s
+epoch 2: selection macro-F1 0.4688, 6230s, {'monitor': 6276, 'expedite_recommendation': 1312, 'reorder_recommendation': 553, 'human_review': 109}
+  epoch 3 batch 250/2000, loss 0.611, lr 4.90e-06, 650s
+  epoch 3 batch 500/2000, loss 0.627, lr 4.21e-06, 1319s
+  epoch 3 batch 750/2000, loss 0.645, lr 3.51e-06, 2016s
+  epoch 3 batch 1000/2000, loss 0.622, lr 2.82e-06, 2525s
+  epoch 3 batch 1250/2000, loss 0.620, lr 2.12e-06, 2971s
+  epoch 3 batch 1500/2000, loss 0.593, lr 1.43e-06, 10744s
