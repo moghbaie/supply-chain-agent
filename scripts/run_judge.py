@@ -10,6 +10,7 @@ import argparse
 import json
 import random
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,8 +66,13 @@ def main():
 
     cases = load(args.source)
     claims, explanations = [], []
-    for case_id, explanation, evidence, final in cases:
+    started = time.time()
+    for position, (case_id, explanation, evidence, final) in enumerate(cases, 1):
         found = judge_explanation(case_id, explanation, evidence, llm=llm, orders=args.orders)
+        if llm is not None:
+            asked = sum(c.kind == "qualitative" for c in found)
+            minutes = (time.time() - started) / 60
+            print(f"  [{position}/{len(cases)}] {case_id}: {asked} qualitative claims; {minutes:.1f} min so far, about {minutes / position * (len(cases) - position):.0f} min left", flush=True)
         claims += [c.row() for c in found]
         rules = [name for name in audit(explanation, evidence) if name != "cites_no_numbers"]
         explanations.append({**summarize(case_id, found), "final": final, "step8_rules": "; ".join(rules), "step8_error": bool(rules), "explanation": explanation})
