@@ -103,6 +103,15 @@ Important: M5 and Olist are unrelated companies and must not be joined as if the
 - Tests: integration, recovery, policy compliance, regression and stress cases.
 - Gate: reproducible end-to-end results with explicit limitations and human approval for purchases.
 
+### Step 11. Claim-level explanation judge
+- Split each agent explanation into claims and bind each stated number to the tool-result field it describes. Check number, open-order and value-band claims in code; check qualitative claims with a local LLM judge from a different model family than the agent (default Qwen3-4B).
+- The LLM judge sees one claim at a time with the evidence and the project's definitions, never the whole explanation or the agent's category.
+- Fix verdict rules before inspecting results: whole numbers within 1, decimals within 0.051; only decimals can be misattributed; horizons ("next 14 days") are not claims.
+- Measure position bias by rerunning the LLM judge with tool results in several orders.
+- Print: claims and verdicts per explanation, errors compared with the Step 8 audit, binding coverage on all 100 explanations, errors earlier checks miss, and verdicts that change with order.
+- Tests: claim splitting, number binding, tolerances, missing fields, reproduction of the Step 8 audit input, strict parsing of judge replies, and agreement scoring.
+- Gate: finds every number and open-order error the Step 8 rules find, binds at least 95% of stated numbers, and reports LLM verdicts only after agreement with hand labels (all flagged claims plus a random sample of the rest) is measured.
+
 ## Standard step report
 Every step must produce `reports/step_XX/summary.md` with:
 - Objective and implementation completed

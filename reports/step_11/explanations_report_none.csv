@@ -1,0 +1,11 @@
+case_id,claims,errors,has_error,code_error,error_claims,final,step8_rules,step8_error
+test-0000,6,0,False,False,,expedite_recommendation,,False
+test-0001,13,1,True,True,wrong_value: 20 (stockout),human_review,,False
+test-0002,10,1,True,True,contradicted: no open orders (open_orders),monitor,says_no_open_orders_but_one_exists,True
+test-0003,9,1,True,True,misattributed: 67.7 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0004,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0005,10,0,False,False,,reorder_recommendation,,False
+test-0006,5,1,True,True,contradicted: open orders are delayed (open_orders),expedite_recommendation,says_delayed_but_nothing_overdue,True
+test-0007,8,1,True,True,misattributed: 37.5 (late_recent),reorder_recommendation,,False
+test-0041,12,1,True,True,wrong_value: 100 (lightgbm),human_review,,False
+test-0087,7,2,True,True,wrong_value: 70 (stockout) | contradicted: an open order exists (open_orders),reorder_recommendation,describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model,True

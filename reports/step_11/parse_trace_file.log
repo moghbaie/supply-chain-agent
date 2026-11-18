@@ -1,0 +1,13 @@
+complete traces 10, each with all 5 tool results; explanations listed 100
+  test-0000 final=expedite_recommendation  audit=-                                                       saved=-                                                       same
+  test-0001 final=human_review             audit=-                                                       saved=-                                                       same
+  test-0002 final=monitor                  audit=says_no_open_orders_but_one_exists                      saved=says_no_open_orders_but_one_exists                      same
+  test-0003 final=reorder_recommendation   audit=stockout_risk_number_not_from_either_model              saved=stockout_risk_number_not_from_either_model              same
+  test-0004 final=human_review             audit=says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers saved=says_it_conflicts_with_the_suggestion_it_followed; cites_no_numbers same
+  test-0005 final=reorder_recommendation   audit=-                                                       saved=-                                                       same
+  test-0006 final=expedite_recommendation  audit=says_delayed_but_nothing_overdue                        saved=says_delayed_but_nothing_overdue                        same
+  test-0007 final=reorder_recommendation   audit=-                                                       saved=-                                                       same
+  test-0041 final=human_review             audit=-                                                       saved=-                                                       same
+  test-0087 final=reorder_recommendation   audit=describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model saved=describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model same
+Step 8 audit on parsed evidence equals the saved audit: 10 of 10
+parsed evidence equals the local JSON trace evidence: 10 of 10

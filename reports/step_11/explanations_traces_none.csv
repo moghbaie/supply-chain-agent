@@ -1,0 +1,101 @@
+case_id,claims,errors,has_error,code_error,error_claims,final,step8_rules,step8_error
+test-0000,6,0,False,False,,expedite_recommendation,,False
+test-0001,13,1,True,True,wrong_value: 20 (stockout),human_review,,False
+test-0002,10,1,True,True,contradicted: no open orders (open_orders),monitor,says_no_open_orders_but_one_exists,True
+test-0003,9,1,True,True,misattributed: 67.7 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0004,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0005,10,0,False,False,,reorder_recommendation,,False
+test-0006,5,1,True,True,contradicted: open orders are delayed (open_orders),expedite_recommendation,says_delayed_but_nothing_overdue,True
+test-0007,8,1,True,True,misattributed: 37.5 (late_recent),reorder_recommendation,,False
+test-0008,9,1,True,True,contradicted: an open order exists (open_orders),monitor,describes_an_open_order_that_does_not_exist,True
+test-0009,16,0,False,False,,monitor,,False
+test-0010,7,0,False,False,,expedite_recommendation,,False
+test-0011,6,2,True,True,wrong_value: 68 (stockout) | wrong_value: 0 (forecast),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0012,8,0,False,False,,reorder_recommendation,says_high_risk_but_both_models_under_20,True
+test-0013,5,0,False,False,,expedite_recommendation,says_high_risk_but_both_models_under_20,True
+test-0014,6,1,True,True,misattributed: 81.3 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0015,9,0,False,False,,monitor,,False
+test-0016,5,0,False,False,,expedite_recommendation,,False
+test-0017,8,1,True,True,wrong_value: 0.0 (forecast),reorder_recommendation,,False
+test-0018,5,1,True,True,contradicted: open orders are delayed (open_orders),expedite_recommendation,says_delayed_but_nothing_overdue,True
+test-0019,13,0,False,False,,expedite_recommendation,,False
+test-0020,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0021,6,0,False,False,,monitor,,False
+test-0022,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0023,5,1,True,True,contradicted: open orders are delayed (open_orders),expedite_recommendation,says_delayed_but_nothing_overdue,True
+test-0024,11,0,False,False,,human_review,,False
+test-0025,15,1,True,True,wrong_value: 1 (order_units),monitor,,False
+test-0026,7,0,False,False,,expedite_recommendation,,False
+test-0027,5,0,False,False,,expedite_recommendation,,False
+test-0028,12,0,False,False,,human_review,,False
+test-0029,12,0,False,False,,expedite_recommendation,,False
+test-0030,9,1,True,True,contradicted: no open orders (open_orders),monitor,says_no_open_orders_but_one_exists,True
+test-0031,6,0,False,False,,monitor,,False
+test-0032,6,0,False,False,,expedite_recommendation,,False
+test-0033,6,0,False,False,,expedite_recommendation,,False
+test-0034,12,0,False,False,,reorder_recommendation,says_high_risk_but_both_models_under_20,True
+test-0035,4,0,False,False,,expedite_recommendation,,False
+test-0036,4,0,False,False,,reorder_recommendation,,False
+test-0037,4,0,False,False,,monitor,,False
+test-0038,8,0,False,False,,reorder_recommendation,says_high_risk_but_both_models_under_20,True
+test-0039,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0040,3,1,True,True,misattributed: 59.4 (stockout),expedite_recommendation,stockout_risk_number_not_from_either_model,True
+test-0041,12,1,True,True,wrong_value: 100 (lightgbm),human_review,,False
+test-0042,11,1,True,True,misattributed: 19.1 (late_rate),expedite_recommendation,,False
+test-0043,9,0,False,False,,monitor,,False
+test-0044,6,0,False,False,,human_review,,False
+test-0045,6,1,True,True,contradicted: an open order exists (open_orders),reorder_recommendation,describes_an_open_order_that_does_not_exist,True
+test-0046,9,0,False,False,,monitor,,False
+test-0047,9,0,False,False,,monitor,,False
+test-0048,7,0,False,False,,expedite_recommendation,,False
+test-0049,4,0,False,False,,monitor,,False
+test-0050,5,0,False,False,,expedite_recommendation,,False
+test-0051,9,0,False,False,,reorder_recommendation,,False
+test-0052,9,0,False,False,,monitor,,False
+test-0053,11,0,False,False,,human_review,,False
+test-0054,9,0,False,False,,reorder_recommendation,,False
+test-0055,14,0,False,False,,expedite_recommendation,,False
+test-0056,8,0,False,False,,expedite_recommendation,,False
+test-0057,7,0,False,False,,expedite_recommendation,says_high_risk_but_both_models_under_20,True
+test-0058,9,1,True,True,misattributed: 62.4 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0059,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0060,2,0,False,False,,reorder_recommendation,,False
+test-0061,7,0,False,False,,expedite_recommendation,,False
+test-0062,11,1,True,True,misattributed: 0.8 (prob_monitor),monitor,,False
+test-0063,12,1,True,True,contradicted: no open orders (open_orders),monitor,says_no_open_orders_but_one_exists,True
+test-0064,13,0,False,False,,monitor,says_high_risk_but_both_models_under_20,True
+test-0065,7,0,False,False,,expedite_recommendation,,False
+test-0066,13,0,False,False,,monitor,,False
+test-0067,7,0,False,False,,reorder_recommendation,,False
+test-0068,5,0,False,False,,expedite_recommendation,,False
+test-0069,13,0,False,False,,human_review,,False
+test-0070,7,0,False,False,,expedite_recommendation,says_high_risk_but_both_models_under_20,True
+test-0071,9,0,False,False,,expedite_recommendation,,False
+test-0072,9,1,True,True,misattributed: 79.5 (stockout),reorder_recommendation,says_high_risk_but_both_models_under_20; stockout_risk_number_not_from_either_model,True
+test-0073,8,0,False,False,,reorder_recommendation,,False
+test-0074,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0075,4,0,False,False,,expedite_recommendation,,False
+test-0076,4,0,False,False,,monitor,,False
+test-0077,6,0,False,False,,expedite_recommendation,,False
+test-0078,6,0,False,False,,expedite_recommendation,,False
+test-0079,4,0,False,False,,expedite_recommendation,says_high_risk_but_both_models_under_20,True
+test-0080,10,0,False,False,,monitor,,False
+test-0081,4,0,False,False,,expedite_recommendation,says_high_risk_but_both_models_under_20,True
+test-0082,11,1,True,True,misattributed: 3.5 (late_recent),monitor,,False
+test-0083,4,0,False,False,,reorder_recommendation,,False
+test-0084,8,0,False,False,,reorder_recommendation,,False
+test-0085,4,0,False,False,,expedite_recommendation,,False
+test-0086,9,0,False,False,,reorder_recommendation,,False
+test-0087,7,2,True,True,wrong_value: 70 (stockout) | contradicted: an open order exists (open_orders),reorder_recommendation,describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model,True
+test-0088,7,1,True,True,misattributed: 76.5 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0090,3,0,False,False,,monitor,,False
+test-0091,7,0,False,False,,expedite_recommendation,,False
+test-0092,2,0,False,False,,human_review,says_it_conflicts_with_the_suggestion_it_followed,True
+test-0093,8,1,True,True,misattributed: 80.7 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True
+test-0094,9,0,False,False,,monitor,,False
+test-0095,6,0,False,False,,reorder_recommendation,,False
+test-0096,7,0,False,False,,reorder_recommendation,,False
+test-0097,6,0,False,False,,expedite_recommendation,,False
+test-0098,6,0,False,False,,monitor,,False
+test-0110,6,1,True,True,contradicted: an open order exists (open_orders),reorder_recommendation,describes_an_open_order_that_does_not_exist,True
+test-0112,11,1,True,True,misattributed: 61.5 (stockout),reorder_recommendation,stockout_risk_number_not_from_either_model,True

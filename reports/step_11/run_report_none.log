@@ -1,0 +1,42 @@
+source report, judge none, orders 1: 10 explanations, 82 claims in 55 clauses
+
+CLAIMS BY KIND AND VERDICT
+ verdict      contradicted  misattributed  not_checked  supported  wrong_value  all
+kind                                                                              
+number                  0              2            0         51            3   56
+open_orders             3              0            0          7            0   10
+qualitative             0              0           15          0            0   15
+value_band              0              0            0          1            0    1
+all                     3              2           15         59            3   82
+
+explanations with a factual error: judge 7 (code layer 7), Step 8 rules 5
+
+PER EXPLANATION, where either finds an error
+   case_id                   final                                                                  error_claims                                                                             step8_rules
+test-0001            human_review                                                    wrong_value: 20 (stockout)                                                                                        
+test-0002                 monitor                                    contradicted: no open orders (open_orders)                                                      says_no_open_orders_but_one_exists
+test-0003  reorder_recommendation                                                misattributed: 67.7 (stockout)                                              stockout_risk_number_not_from_either_model
+test-0004            human_review                                                                                                                     says_it_conflicts_with_the_suggestion_it_followed
+test-0006 expedite_recommendation                           contradicted: open orders are delayed (open_orders)                                                        says_delayed_but_nothing_overdue
+test-0007  reorder_recommendation                                             misattributed: 37.5 (late_recent)                                                                                        
+test-0041            human_review                                                   wrong_value: 100 (lightgbm)                                                                                        
+test-0087  reorder_recommendation wrong_value: 70 (stockout) | contradicted: an open order exists (open_orders) describes_an_open_order_that_does_not_exist; stockout_risk_number_not_from_either_model
+
+Step 8 rule hits with no code-layer error: 1
+  case_id                                       step8_rules error_claims
+test-0004 says_it_conflicts_with_the_suggestion_it_followed             
+code-layer errors no Step 8 rule found: 3 explanations (test-0001, test-0007, test-0041)
+errors on a final monitor case, which no person reviews: 1 (test-0002)
+
+FLAGGED CLAIMS
+   case_id        kind                    text       group  actual       verdict                                                           detail
+test-0001      number                      20    stockout 0.2;0.2   wrong_value                                                                 
+test-0002 open_orders          no open orders         NaN          contradicted                                      1 listed, 8.0 units overdue
+test-0003      number                    67.7    stockout 3.1;3.9 misattributed value of suggestion.probabilities_percent.reorder_recommendation
+test-0006 open_orders open orders are delayed         NaN          contradicted                                      2 listed, 0.0 units overdue
+test-0007      number                    37.5 late_recent    41.5 misattributed                   value of orders.supplier_late_percent_long_run
+test-0041      number                     100    lightgbm     1.0   wrong_value                                                                 
+test-0087      number                      70    stockout 0.7;0.5   wrong_value                                                                 
+test-0087 open_orders    an open order exists         NaN          contradicted                                      0 listed, 0.0 units overdue
+
+wrote claims_report_none.csv, explanations_report_none.csv, claims_to_label_report_none.csv (82 claims, judge verdict hidden) to reports\step_11
